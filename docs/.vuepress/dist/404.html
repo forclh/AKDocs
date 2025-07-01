@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.20" />
+    <style>
+      :root {
+        --vp-c-bg: #fff;
+      }
+
+      [data-theme='dark'] {
+        --vp-c-bg: #1b1b1f;
+      }
+
+      html,
+      body {
+        background-color: var(--vp-c-bg);
+      }
+    </style>
+    <script>
+      const useChoice = localStorage.getItem('vuepress-color-scheme')
+      const systemStatus =
+        'matchMedia' in window
+          ? window.matchMedia('(prefers-color-scheme: dark)').matches
+          : false
+
+      if (useChoice === 'light') {
+        document.documentElement.dataset.theme = 'light'
+      } else if (useChoice === 'dark' || systemStatus) {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
+    <title>阿卡不拉</title><meta name="description" content="阿卡的文档">
+    <link rel="preload" href="/assets/style-ORE_5ZRQ.css" as="style"><link rel="stylesheet" href="/assets/style-ORE_5ZRQ.css">
+    <link rel="modulepreload" href="/assets/app-Sk8-M9RE.js"><link rel="modulepreload" href="/assets/404.html-B8kAcYng.js">
+    <link rel="prefetch" href="/assets/get-started.html-BtIaXsLE.js" as="script"><link rel="prefetch" href="/assets/index.html-zCckpsJ_.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="vp-theme-container" vp-container data-v-dbeb03e7><main class="page" data-v-dbeb03e7><div vp-content data-v-dbeb03e7><h1 data-v-dbeb03e7>404</h1><blockquote data-v-dbeb03e7>That&#39;s a Four-Oh-Four.</blockquote><a class="route-link" href="/" data-v-dbeb03e7>Take me home</a></div></main></div><!--[--><!----><!--]--><!--]--></div>
+    <script type="module" src="/assets/app-Sk8-M9RE.js" defer></script>
+  </body>
+</html>
