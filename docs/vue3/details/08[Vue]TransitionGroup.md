@@ -66,7 +66,7 @@ TransitionGroup 仍然是 Vue 里面一个内置的组件。作用：用于解�
 
 答案：因为这里对项目的新增和移除都是针对的 li 元素，但是 Transition 下面是 ul，ul 是一直存在的。
 
-并且 Transition 下面只能有一个根元素。如果存放多个根元素，会报错：<Transition> expects exactly one child element or component.
+并且 Transition 下面只能有一个根元素。如果存放多个根元素，会报错：Transition expects exactly one child element or component.
 
 此时就可以使用 TransitionGroup 来解决这个问题。代码重构如下：
 

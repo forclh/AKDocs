@@ -18,7 +18,7 @@
     - 如果对不同的路由的过渡有需求，那么可以通过以下的设置来做：
         - meta：设置元数据，上面记录过渡的方式
         - RouterView 插槽，通过插槽拿到 route，从而拿到元数据里面的过渡方式
-        - <Transition>组件设置不同的 name 值从而应用不同的过渡方式
+        - `<Transition>`组件设置不同的 name 值从而应用不同的过渡方式
         ```html
         <router-view v-slot="{ Component, route }">
             <Transition :name="route.meta.transition || 'fade'" mode="out-in">

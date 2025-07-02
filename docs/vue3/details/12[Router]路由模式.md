@@ -22,7 +22,7 @@ https://www.example.com:80/path/to/myfile.html?key1=value1&key2=value2#anchor
 <div id="target">i am target place</div>
 ```
 
-在上面代码中，点击 <a> 链接，文档会滚动到 id.target 的 div 的位置。
+在上面代码中，点击 `<a>` 链接，文档会滚动到 id.target 的 div 的位置。
 
 Hash 另一个重要特性：**Hash 的变化不会请求服务器**
 

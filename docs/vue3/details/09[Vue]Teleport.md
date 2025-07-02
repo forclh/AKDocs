@@ -63,8 +63,8 @@
 
 这里的渲染结构其实是不太合适的。
 
-1. position: fixed 能够相对于浏览器窗口放置有一个条件，那就是不能有任何祖先元素设置了 transform、perspective 或者 filter 样式属性。也就是说如果我们想要用 CSS transform 为祖先节点 <div class=“outer”> 设置动画，就会不小心破坏模态框的布局！
-2. 这个模态框的 z-index 受限于它的容器元素。如果有其他元素与 <div class=“outer”> 重叠并有更高的 z-index，则它会覆盖住我们的模态框。
+1. position: fixed 能够相对于浏览器窗口放置有一个条件，那就是不能有任何祖先元素设置了 transform、perspective 或者 filter 样式属性。也就是说如果我们想要用 CSS transform 为祖先节点 `<div class=“outer”>` 设置动画，就会不小心破坏模态框的布局！
+2. 这个模态框的 z-index 受限于它的容器元素。如果有其他元素与 `<div class=“outer”>` 重叠并有更高的 z-index，则它会覆盖住我们的模态框。
 
 总结起来，就是**模态框的样式会受到所在位置的祖级元素的影响**。
 
