@@ -25,7 +25,7 @@ export default defineUserConfig({
         sidebar: [
             {
                 text: "Vue3",
-                collapsible: false,
+                collapsible: true,
                 children: [
                     {
                         text: "快速入门",
@@ -128,6 +128,22 @@ export default defineUserConfig({
                             "40[vite]环境变量与模式.md",
                             "41[vite]CLI.md",
                             "42[vite]Vite插件.md",
+                        ],
+                    },
+                ],
+            },
+            {
+                text: "笔面试",
+                collapsible: true,
+                children: [
+                    {
+                        text: "Vue3",
+                        prefix: "/interview/vue3",
+                        collapsible: true,
+                        children: [
+                            "01Vue3整体变化",
+                            "02Vue3响应式变化",
+                            "03nextTick实现原理",
                         ],
                     },
                 ],
