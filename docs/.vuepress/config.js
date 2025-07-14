@@ -178,7 +178,6 @@ export default defineUserConfig({
                             "18CSS3遮罩.md",
                         ],
                     },
-
                     {
                         text: "JavaScript",
                         prefix: "/interview/js",
@@ -210,6 +209,22 @@ export default defineUserConfig({
                             "23函数柯里化.md",
                             "24Node的事件循环.md",
                             "25尺寸和位置",
+                        ],
+                    },
+                    {
+                        text: "浏览器",
+                        prefix: "interview/browser",
+                        collapsible: true,
+                        children: [
+                            "00浏览器面试题汇总.md",
+                            "01浏览器的渲染流程.md",
+                            "02资源提示关键词.md",
+                            "03浏览器的组成部分.md",
+                            "04IndexedDB.md",
+                            "05File API.md",
+                            "06浏览器缓存.md",
+                            "07跨标签页通信.md",
+                            "08WebWorker.md",
                         ],
                     },
                     {
