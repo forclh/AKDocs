@@ -1,8 +1,8 @@
-# 【Vite】构建生产版本
+# 【Vite】构建生产版本 👌
 
 ## **构建工具**
 
-不同于 **依赖预构建** 用到的 esbuild，生产构建使用的工具是 rollup. 因为 rollup 提供了一些特性和优势，特别适合用于生产环境的代码打包和优化。
+不同于 **依赖预构建** 用到的 esbuild，生产构建使用的工具是 [rollup](https://www.rollupjs.com/). 因为 rollup 提供了一些特性和优势，特别适合用于生产环境的代码打包和优化。
 
 **1. 代码分割和动态导入**
 
@@ -10,7 +10,7 @@ rollup 支持高级的**代码分割**和**动态导入**功能，这对于现�
 
 **2. Tree Shaking**
 
-虽然 esbuild 也支持 tree shaking，但 rollup 的 tree shaking 能力通常被认为更为强大和精准。rollup 能够更有效地识别并剔除未使用的代码，这对于减少最终生产包的体积至关重要。
+虽然 esbuild 也支持 tree shaking，但 rollup 的 tree shaking 能力通常被认为更为强大和精准。rollup 能够更有效地识别并剔除未使用的代码，这对于**减少最终生产包的体积**至关重要。
 
 **3. 插件生态**
 
@@ -31,17 +31,17 @@ rollup 提供了**更细粒度的控制输出格式和结构的功能**，这对
 
 ## **自定义构建**
 
-如果仅仅是要把项目构建为生产版本，那非常简单，直接 npm run build 即可，背后运行的是 vite build：
+如果仅仅是要把项目构建为生产版本，那非常简单，直接 `npm run build` 即可，背后运行的是 `vite build`
 
-```jsx
+```js
 "scripts": {
   "build": "vite build",
 },
 ```
 
-不过构建生产版本时经常有一些自定义的需求，此时在配置文件里面的 build 配置项进行配置，一个基本的格式如下：
+不过构建生产版本时经常有一些自定义的需求，此时在配置文件里面的 build [配置项](https://cn.vite.dev/config/build-options.html)进行配置，一个基本的格式如下：
 
-```jsx
+```js
 export default defineConfig({
     build: {
         // 构建相关的配置
@@ -57,7 +57,7 @@ export default defineConfig({
 
 **例子 1：默认设置**
 
-**build.target 的默认值是 ‘modules’，这意味着构建出来的产物适用于现代支持 ESM 的浏览器**，对应的浏览器版本：
+**`build.target` 的默认值是 `modules`，这意味着构建出来的产物适用于现代支持 ESM 的浏览器**，对应的浏览器版本：
 
 -   Edge 88+
 -   Firefox 78+
@@ -66,7 +66,7 @@ export default defineConfig({
 
 **例子 2：指定 ES 版本**
 
-```jsx
+```js
 export default defineConfig({
     build: {
         target: "es2015",
@@ -76,7 +76,7 @@ export default defineConfig({
 
 **例子 3：支持特定浏览器版本**
 
-```jsx
+```js
 export default defineConfig({
     build: {
         target: "chrome58",
@@ -86,7 +86,7 @@ export default defineConfig({
 
 **例子 4：多目标设置**
 
-```jsx
+```js
 export default defineConfig({
     build: {
         target: ["es2020", "firefox78", "chrome87"],
@@ -96,8 +96,8 @@ export default defineConfig({
 
 **注意事项**
 
--   **esbuild** 虽然很快，但可能不支持某些复杂的或尚未广泛采用的 JS 特性。**如果遇到了这一类 esbuild 不支持的特性，那么需要是 Babel 来做一个补充编译。**
--   更改 **build.target 会影响构建的输出大小和性能**
+-   **esbuild** 虽然很快（编译过程是 esbuild 做的），但可能不支持某些复杂的或尚未广泛采用的 JS 特性。**如果遇到了这一类 esbuild 不支持的特性，那么需要是 Babel 来做一个补充编译。**
+-   更改 **`build.target` 会影响构建的输出大小和性能**
 
 ### **2. outDir**
 
@@ -109,7 +109,7 @@ export default defineConfig({
 
 ### **4. cssMinify**
 
-build.cssMinify 配置项允许你单独控制 **CSS 文件的最小化压缩方式，独立于 JS 的压缩设置**。这个选项在优化构建输出时非常有用，尤其是当你需要精确控制 CSS 和 JS 压缩策略时。下面来举一些例子：
+`build.cssMinify` 配置项允许你单独控制 **CSS 文件的最小化压缩方式，独立于 JS 的压缩设置**。这个选项在优化构建输出时非常有用，尤其是当你需要精确控制 CSS 和 JS 压缩策略时。下面来举一些例子：
 
 **例子 1：默认行为**
 
@@ -117,7 +117,7 @@ build.cssMinify 配置项允许你单独控制 **CSS 文件的最小化压缩方
 
 **例子 2：使用 Lightning CSS 压缩 CSS**
 
-```jsx
+```js
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -129,7 +129,7 @@ export default defineConfig({
 
 **例子 3：禁用 CSS 压缩**
 
-```jsx
+```js
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -141,7 +141,7 @@ export default defineConfig({
 
 **例子 4：独立配置 JS 和 CSS 压缩**
 
-```jsx
+```js
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -154,7 +154,7 @@ export default defineConfig({
 
 ### **5. minify**
 
-build.minify 用于控制构建过程中的 JS 代码压缩和混淆，这个设置对于优化生产环境的代码尺寸和性能至关重要。
+`build.minify` 用于控制构建过程中的 **JS 代码压缩和混淆**，这个设置对于优化生产环境的代码尺寸和性能至关重要。
 
 **默认使用 esbuild 来进行压缩**，它比 terser 快 20-40 倍，压缩率只差 1%-2%
 
@@ -166,7 +166,7 @@ terser 提供了更细致的控制和稍微更好的压缩率，尽管它的速�
 npm install terser -D
 ```
 
-```jsx
+```js
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -180,9 +180,9 @@ export default defineConfig({
 
 构建后是否生成 source map 文件。
 
--   如果为 true，将会创建一个独立的 source map 文件
--   如果为 ‘inline’，source map 将作为一个 data URI 附加在输出文件中。
--   ‘hidden’ 的工作原理与 true 相似，只是 bundle 文件中相应的注释将不被保留。
+-   如果为 `true`，将会创建一个独立的 source map 文件
+-   如果为 `inline`，source map 将作为一个 data URI 附加在输出文件中。
+-   `hidden` 的工作原理与 `true` 相似，只是 bundle 文件中相应的**注释将不被保留**。
 
 ### **7. rollupOptions**
 
@@ -198,7 +198,7 @@ rollupOptions 配置项对应是一个对象，该对象和 rollup 配置文件�
 
 配置如下：
 
-```jsx
+```js
 import { defineConfig } from 'vite';
 import image from '@rollup/plugin-image'; // 假设这是一个用于处理图像的 Rollup 插件
 
@@ -211,9 +211,9 @@ export default defineConfig({
       external: ['some-external-lib'] // 指定some-external-lib为外部依赖，不会被打包进去
       output: {
       	globals: {
-      		'some-external-lib': 'SomeExternalLib'
-    		}
+      	  'some-external-lib': 'SomeExternalLib'
     	}
+      }
     }
   }
 })
@@ -225,14 +225,14 @@ export default defineConfig({
 
 -   类型：string
 -   默认值：/
--   描述：用于配置开发环境和生产环境的基本公共路径，有效值包括：
+-   描述：用于**配置开发环境和生产环境的基本公共路径**，有效值包括：
     -   绝对 URL 路径名，例如 /foo/
     -   完整 URL，例如 https://bar.com/foo/（开发环境中不会使用 origin 部分，因此其值与 /foo/ 相同）
     -   空字符串或 ./（用于嵌入式部署）
 
 举例：
 
-```jsx
+```js
 my-project/
 ├── public/
 │   └── index.html
@@ -245,7 +245,7 @@ my-project/
 
 配置文件：
 
-```jsx
+```js
 // vite.config.js
 import { defineConfig } from "vite";
 
@@ -305,9 +305,9 @@ dist/index.html，要访问静态资源，也需要添加公共路径：
 
 ## **库模式**
 
-库模式指的是将应用打包成一个依赖库，方便其他应用来使用。这里可以在 **lib 配置项**里面进行配置：
+库模式指的是**将应用打包成一个依赖库**，方便其他应用来使用。这里可以在 **`lib` 配置项**里面进行配置：
 
-```jsx
+```js
 // vite.config.js
 import { resolve } from "path";
 import { defineConfig } from "vite";
@@ -327,7 +327,7 @@ export default defineConfig({
     - 普通应用：一般是 index.html，所有的资源从这个入口 HTML 文件开始加载。
     - **库模式：入口文件通常是一个 JS 文件**，因为库通常是作为一个资源被其他项目引用
 2. 输出格式
-    - 普通应用：通过只针对特定的**运行环境（大多数浏览器支持即可）**进行打包
+    - 普通应用：通过只针对特定的**运行环境**（大多数浏览器支持即可）进行打包
     - **库模式：往往需要支持多种模块系统，包括 UMD、ESM、CommonJS 这些类型。**
 3. 外部依赖
     - 普通应用：将所有的依赖打包到一个或者多个文件里面
@@ -350,7 +350,7 @@ my-lib/
 
 接下来我们要将其打包成一个库，配置文件如下：
 
-```jsx
+```js
 // vite.config.js
 import { resolve } from "path";
 import { defineConfig } from "vite";
@@ -374,13 +374,13 @@ export default defineConfig({
 });
 ```
 
--   entry: 指定库的**入口文件**
--   name：指定你的库在 UMD 或者 IIFE 环境下的**全局变量**的名称
--   fileName: 最终生成的文件的文件名
--   external：排除哪些外部依赖
--   globals：外部依赖在 UMD 或者 IIFE 格式下全局变量的名称
+-   `entry`: 指定库的**入口文件**
+-   `name`：指定你的库在 UMD 或者 IIFE 环境下的**全局变量**的名称
+-   `fileName`: 最终生成的文件的文件名
+-   `external`：排除哪些外部依赖
+-   `globals`：外部依赖在 UMD 或者 IIFE 格式下全局变量的名称
 
-配置文件完成后，就可以通过 vite build 进行库模式的构建
+配置文件完成后，就可以通过 `vite build` 进行库模式的构建
 
 ```
 my-lib/
@@ -393,7 +393,7 @@ my-lib/
 
 构建出来的产物是多种格式，因为要应对不同的环境下使用这个库。
 
-最后还有一个非常重要的步骤：需要在 package.json 里面去配置不同环境的入口文件：
+最后还有一个非常重要的步骤：**需要在 package.json 里面去配置不同环境的入口文件**
 
 ```json
 {
