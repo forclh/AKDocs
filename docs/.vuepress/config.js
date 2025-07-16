@@ -257,6 +257,12 @@ export default defineUserConfig({
                         ],
                     },
                     {
+                        text: "工程化",
+                        prefix: "/interview/engineering",
+                        collapsible: true,
+                        children: ["01CMJ和ESM.md", "02npx.md", "03ESLint.md"],
+                    },
+                    {
                         text: "Vue2",
                         prefix: "/interview/vue2",
                         collapsible: true,
