@@ -1,8 +1,8 @@
-# 【Vite】配置文件
+# 【Vite】配置文件 👌
 
 在 Vite 中，配置文件**项目根目录下**的 vite.config.js 文件，最基本的格式为：
 
-```jsx
+```js
 export default {
     // 配置选项
 };
@@ -14,11 +14,11 @@ export default {
 vite --config my-config.js
 ```
 
-Vite 提供了一个工具函数 defineConfig，通过它可以**方便的获取类型提示**，这对于使用 TS 编写配置尤其有用。
+Vite 提供了一个工具函数 `defineConfig`，通过它可以**方便的获取类型提示**，这对于使用 TS 编写配置尤其有用。
 
 所以一般 Vite 配置文件的基本格式为：
 
-```jsx
+```js
 export default defineConfig({
     // 配置选项
 });
@@ -26,20 +26,22 @@ export default defineConfig({
 
 在 Vite 中，配置大致分为这么几类：
 
-1. 普通配置：设置项目的基本选项，别名、根目录、插件….
-2. 开发服务器配置：开发服务器的功能，开发服务器的端口、代理、CORS….
-3. 构建配置：构建生产版本时候的配置，输出目录、压缩、CSS 代码拆分….
-4. 预览配置：配置预览服务器的行为，端口、主机名…
-5. 依赖优化配置：针对依赖预打包做一些配置，比如可以新增包或者排除包
+1. 普通配置：设置项目的基本选项，别名、根目录、插件…
+2. 开发服务器配置：**开发服务器的功能**，开发服务器的端口、代理、CORS…
+3. 构建配置：构建生产版本时候的配置，输出目录、压缩、CSS 代码拆分…（TODO：链接文章）
+4. 预览配置：配置**预览服务器**的行为，端口、主机名…
+5. 依赖优化配置：针对[依赖预构建](./38[vite]依赖预构建.md)做一些，比如可以新增包或者排除包
 6. SSR 配置：服务器端渲染相关配置
 7. Worker 配置：Web Worker 相关配置
 
+这章主要介绍普通配置和开发服务器配置的常用选项。
+
 ## 普通配置
 
-### **1. root**
+### 1. root
 
--   类型：string
--   默认值：process.cwd( ) ，默认就是**项目根目录**
+-   类型：`string`
+-   默认值：`process.cwd( )` ，默认就是**项目根目录**
 -   描述：**index.html 所在位置**，可以是绝对路径，也可以是相对于当前工作目录的路径。
 
 例如：
@@ -56,7 +58,7 @@ my-project/
 
 这个时候就可以使用 root 来进行配置：
 
-```jsx
+```js
 // vite.config.js
 import { defineConfig } from "vite";
 
@@ -65,10 +67,10 @@ export default defineConfig({
 });
 ```
 
-### **2. define**
+### 2. define
 
--   类型：Record<string, any>
--   描述：**定义全局常量替换**。在开发过程中，这些条目将被定义为全局变量，被定义为全局变量后，意味着不需要通过 import 来导入，直接使用；在构建过程中会被静态替换。
+-   类型：`Record<string, any>`
+-   描述：**定义全局常量替换**。在开发过程中，这些条目将被定义为全局变量，被定义为全局变量后，意味着不需要通过 import 来导入，直接使用；在**构建过程中会被静态替换**。
     ```jsx
     export default defineConfig({
         define: {
@@ -78,17 +80,19 @@ export default defineConfig({
     });
     ```
 
-> 注意：Vite 使用 esbuild 的 define 进行替换，因此值表达式必须是包含 JSON 可序列化的值（null、boolean、number、string、array、object）的字符串或单个标识符。对于非字符串值，Vite 会自动将其转换为 JSON 字符串。
+> 注意：Vite 使用 esbuild 的 define 进行替换，因此值表达式必须是包含 **JSON 可序列化的值**（null、boolean、number、string、array、object）的字符串或单个标识符。对于非字符串值，Vite 会自动将其转换为 JSON 字符串。
 
-### **3. resolve**
+> JSON 可序列化指一个数据结构（如对象、数组等）能够被安全地转换为 JSON 格式字符串，且转换后的字符串可通过 `JSON.parse()` 完整还原为原始数据
+
+### 3. resolve
 
 resolve 对应的值是一个**对象**，对象里面对应了好几项配置。
 
-**alias**
+#### 3.1 alias
 
 用于配置**路径别名**，这样可以简化模块路径引用。
 
-```jsx
+```js
 // vite.config.js
 import { defineConfig } from "vite";
 import path from "path";
@@ -109,7 +113,7 @@ export default defineConfig({
 
 之后在代码中就可以通过别名来指定目录：
 
-```jsx
+```js
 // src/main.js
 import { createApp } from "vue";
 import App from "./App.vue";
@@ -119,9 +123,9 @@ import { helperFunction } from "@utils/helpers"; // 使用 '@utils' alias
 createApp(App).mount("#app");
 ```
 
-**extensions**
+#### 3.2 extensions
 
-在导入时省略文件扩展名时，尝试的文件扩展名列表。
+在**导入时省略文件扩展名**时，尝试的**文件扩展名列表**。
 
 > 注意，不推荐对自定义导入类型（如 .vue）省略扩展名，因为这可能会干扰 IDE 和类型支持。
 
@@ -129,7 +133,7 @@ createApp(App).mount("#app");
 
 可以自定义扩展名的顺序，比如优先匹配 ts 类型：
 
-```jsx
+```js
 // vite.config.js
 import { defineConfig } from "vite";
 
@@ -140,11 +144,11 @@ export default defineConfig({
 });
 ```
 
-### **4. CSS**
+### 4. CSS
 
 CSS 配置项对应的值同样是一个**对象**，一个基本的格式如下：
 
-```jsx
+```js
 // vite.config.js
 import { defineConfig } from "vite";
 
@@ -155,13 +159,13 @@ export default defineConfig({
 });
 ```
 
-下面是一个常见的配置项：
+#### 4.1 [postcss](https://www.postcss.com.cn/)
 
-**postcss**：该配置项用于**配置 PostCSS 的行为**，可以是**内联的 PostCSS 配置**，也可以是**自定义目录**。
+该配置项用于**配置 PostCSS 的行为**，可以是**内联的 PostCSS 配置**，也可以是**自定义目录**。
 
 内联 PostCSS 配置：
 
-```jsx
+```js
 // vite.config.js
 import { defineConfig } from "vite";
 import autoprefixer from "autoprefixer";
@@ -170,7 +174,7 @@ import cssnano from "cssnano";
 export default defineConfig({
     css: {
         postcss: {
-            // 在这里配置 postcss 相关信息，例如用哪个插件....
+            // 在这里配置 postcss 相关内容，例如用哪个插件....
             plugins: [autoprefixer(), cssnano()],
         },
     },
@@ -190,7 +194,7 @@ my-project/
 
 这个时候直接指定 postcss 的目录就可以了：
 
-```jsx
+```js
 // vite.config.js
 import { defineConfig } from "vite";
 
@@ -201,16 +205,20 @@ export default defineConfig({
 });
 ```
 
-**preprocessorOptions**：该配置项用于为 **CSS 预处理器**指定配置，**文件扩展名**用于**作为键**来设置选项。每个预处理器支持的选项可以在它们各自的文档中找到：
+#### 4.2 preprocessorOptions
+
+该配置项用于为 **CSS 预处理器**指定配置，**文件扩展名**用于**作为键**来设置选项。每个预处理器支持的选项可以在它们各自的文档中找到：
+
+> CSS 预处理器是一种扩展 CSS 功能的工具，它允许开发者使用类编程语言的特性（变量、嵌套、函数等）编写样式代码，最终编译成标准的 CSS 文件。其核心目标是解决原生 CSS 在大型项目中难以维护的问题。
 
 -   [Sass/Scss](https://sass-lang.com/documentation/js-api/interfaces/legacystringoptions/) 支持的配置选项
 -   [Less](https://lesscss.org/usage/#less-options) 支持的配置选项
 -   styl/stylus - 目前仅支持 [define](https://stylus-lang.com/docs/js.html#define-name-node)，可以作为对象传递。
 
-```jsx
+```js
 export default defineConfig({
     css: {
-        // 配置 css 预处理器
+        // 配置 css 预处理器（一般情况下一个项目只用一个预处理器，这里只是演示）
         preprocessorOptions: {
             less: {
                 math: "parens-division",
@@ -226,9 +234,11 @@ export default defineConfig({
 });
 ```
 
-**preprocessorOptions[extension].additionalData**：当你想要为 CSS 预处理器（如 SCSS、SASS、Less 等）添加全局样式、变量、或混合器时，该选项非常有用。
+##### 4.2.1 preprocessorOptions[extension].additionalData
 
-```jsx
+当你想要为 CSS 预处理器（如 SCSS、SASS、Less 等）添加**全局样式、变量、或混合器**时，该选项非常有用。
+
+```js
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -243,7 +253,7 @@ export default defineConfig({
 });
 ```
 
-```jsx
+```js
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -258,11 +268,15 @@ export default defineConfig({
 });
 ```
 
-**preprocessorMaxWorkers**：如果启用了这个选项，那么 CSS 预处理器会尽可能在 worker 线程中运行。可以设置 number 值，也可以设置布尔值，例如设置成 true 的话表示 CPU 数量减 1.
+#### 4.2.2 preprocessorMaxWorkers
 
-**devSourcemap**：在开发过程中是否启用 source maps，默认值为 false.
+如果启用了这个选项，那么 CSS 预处理器会尽可能在 worker 线程中运行。可以设置 number 值，也可以设置布尔值，例如设置成 true 的话表示 CPU 数量减 1.
 
-```jsx
+#### 4.3 devSourcemap
+
+如果设置为 true，Vite 会**生成 source map**，并在浏览器中显示原始代码。
+
+```js
 export default defineConfig({
     css: {
         // 开启 source maps
@@ -271,7 +285,9 @@ export default defineConfig({
 });
 ```
 
-**transformer**：指定 CSS 处理的引擎，可以设置的值就两个，‘postcss’ 或者 ‘lightningcss’
+#### 4.4 transformer
+
+指定 CSS 处理的引擎，可以设置的值就两个，‘postcss’ 或者 ‘lightningcss’
 
 > lightingcss 就是 postcss 的 rust 版本。
 
@@ -289,9 +305,9 @@ export default defineConfig({
 });
 ```
 
-下面是一个常见的配置项：
+下面是一些常见的配置项：
 
-### **host**
+### 1. host
 
 指定服务器应该监听哪个 IP 地址，默认是 localhost.
 
@@ -299,23 +315,23 @@ export default defineConfig({
 
 默认： ‘localhost’
 
-思考 🤔 正常情况下就是 localhost 就好了呀，什么情况下还存在要修改 host 的情况呢？
+> 思考 🤔 正常情况下就是 localhost 就好了呀，什么情况下还存在要修改 host 的情况呢？
 
-答案：除了 localhost 以外，我们经常还需要设置为 0.0.0.0 或者 true，表示监听所有的网络接口请求。有些时候需要多设备来测试应用。
+> 答案：除了 localhost 以外，我们经常还需要设置为 0.0.0.0 或者 true，表示**监听所有的网络接口请求**。有些时候需要多设备来测试应用。
 
-### **port**
+### 2. port
 
 监听的端口号，默认是 5173.
 
-### **strictPort**
+### 3. strictPort
 
 如果设置为 true，Vite 将**严格使用指定的端口**。如果端口被占用，服务器启动将失败。
 
-### **proxy**
+### 4. proxy
 
 这个配置项非常常用，用于**配置代理服务器**。
 
-```jsx
+```js
 export default defineConfig({
     server: {
         proxy: {
@@ -327,7 +343,7 @@ export default defineConfig({
 
 对应的值也可以是对象的形式，对象形式能够包含更多的配置选项：
 
-```jsx
+```js
 export default defineConfig({
     server: {
         proxy: {
@@ -341,15 +357,15 @@ export default defineConfig({
 });
 ```
 
-### **open**
+### 5. open
 
 启动开发服务器时**是否自动在浏览器中打开应用**，默认值是 false.
 
-### **https**
+### 6. https
 
 是否启用 HTTPS。如果是一个对象，可以指定 **SSL 证书**和**私钥**的路径。
 
-```jsx
+```js
 export default defineConfig({
     server: {
         https: {
@@ -360,11 +376,11 @@ export default defineConfig({
 });
 ```
 
-### **watch**
+### 7. watch
 
-自定义文件监视器的选项。这对于开发过程中的热模块替换（HMR）非常关键。背后其实使用的是 chokidar，一个 Node.js 的文件系统监听库，它提供了多种可配置的监听选项。
+自定义文件监视器的选项。这对于开发过程中的**热模块替换（HMR）**非常关键。背后其实使用的是 chokidar（一个 Node.js 的文件系统监听库）它提供了多种可配置的监听选项。
 
-```jsx
+```js
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -381,7 +397,7 @@ export default defineConfig({
 
 watch 还支持更加细粒度的控制：
 
-```jsx
+```js
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -399,7 +415,7 @@ export default defineConfig({
 
 如果想要关闭文件监听，直接设置为 null 即可：
 
-```jsx
+```js
 import { defineConfig } from "vite";
 
 export default defineConfig({

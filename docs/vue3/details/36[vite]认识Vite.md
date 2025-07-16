@@ -34,8 +34,8 @@ Vite 也是相同的情况：
 
 1. 脚手架：可以搭建各种类型（Vue、React、Sevlte、Solid.js）的项目
 2. 构建：包含两个构建工具（TODO:为什么要包含两个构建工具？）
-    - esbuild：用于开发环境
-    - rollup：用于生产环境
+    - esbuild：用于**开发环境**。主要用于首次启动项目的依赖预构建。
+    - rollup：用于**生产环境**。
 
 ### Vite 核心原理
 
@@ -44,8 +44,19 @@ Vite 也是相同的情况：
     - 因为在启动 webpack 项目的时候，**webpack 会先对项目进行打包，然后运行的是打包后的文件**
       ![](https://xiejie-typora.oss-cn-chengdu.aliyuncs.com/2024-07-28-031130.png)
 2. Vite 是如何解决的？
-    - 完全**跳过打包步骤**，利用浏览器的 imports 机制，按需获取内容，即使项目规模的越来越大，启动时间基本不变，通过 HTTP 请求的方式来获取所需的模块（TODO:什么是浏览器的 imports 机制？）
+    - 完全**跳过打包步骤**，利用浏览器的 import 机制处理模块依赖关系，通过 HTTP 请求的方式来按需获取内容，即使项目规模的越来越大，启动时间基本不变。
       ![](https://xiejie-typora.oss-cn-chengdu.aliyuncs.com/2024-07-28-031211.png)
     - 浏览器针对 .vue 这样的模块文件，需要做编译，编译为 JS 文件再返回给浏览器
       ![](https://xiejie-typora.oss-cn-chengdu.aliyuncs.com/2021-11-07-124403.png)
     - 关于 Vite 中**热更新**的实现，底层实际上使用的是 **websocket** 来实现的。
+
+> 浏览器的 import 机制指的是现代浏览器原生支持的 ES 模块导入功能
+>
+> 1. **ES 模块语法**：使用`import`和`export`语句来导入和导出模块
+> 2. **原生支持**：现在所有主流浏览器都已经原生支持 ES 模块，通过`<script type="module">`标签来识别
+> 3. **按需加载**：浏览器会递归地加载依赖模块，只加载实际需要的代码
+>
+> Vite 的核心优势就是充分利用了浏览器的原生 ES 模块导入能力，同时进行以下处理：
+>
+> -   **依赖预构建**：将 CommonJS/UMD 格式的依赖转换为 ES 模块格式
+> -   **路径重写**：将裸模块导入（如`import React from 'vue'`）重写为合法的 URL 路径（如`/node_modules/.vite/deps/vue.js?v=bc2502ed`）
