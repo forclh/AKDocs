@@ -1,4 +1,6 @@
-# JWT
+# ✨JWT👌
+
+> 本文有配套案例
 
 ## 概述
 
@@ -19,25 +21,25 @@ JWT 全称`Json Web Token`，本质就是一个字符串
 
 它要解决的问题，就是在互联网环境中，提供**统一的、安全的**令牌格式
 
-因此，**jwt 只是一个令牌格式而已，你可以把它存储到 cookie，也可以存储到 localstorage，没有任何限制！**
+因此，**JWT 只是一个令牌格式而已，你可以把它存储到 cookie，也可以存储到 localstorage，没有任何限制！**
 
-同样的，对于传输，你可以使用任何传输方式来传输 jwt，一般来说，**我们会使用消息头来传输它**
+同样的，对于传输，你可以使用任何传输方式来传输 JWT，一般来说，**我们会使用消息头来传输它**
 
-比如，当登录成功后，服务器可以给客户端响应一个 jwt：
+比如，当登录成功后，服务器可以给客户端响应一个 JWT：
 
 ```
 HTTP/1.1 200 OK
 ...
-set-cookie:token=jwt令牌
-authentication:jwt令牌
+set-cookie:token=JWT令牌
+authentication:JWT令牌
 ...
 
-{..., token:jwt令牌}
+{..., token:JWT令牌}
 ```
 
-可以看到，jwt 令牌可以出现在响应的任何一个地方，客户端和服务器自行约定即可。
+可以看到，**JWT 令牌可以出现在响应的任何一个地方，客户端和服务器自行约定即可**。
 
-> 当然，它也可以出现在响应的多个地方，比如为了充分利用浏览器的 cookie，同时为了照顾其他设备，也可以让 jwt 出现在 set-cookie 和 authorization 或 body 中，尽管这会增加额外的传输量。
+> 当然，它也可以出现在响应的多个地方，比如为了充分利用浏览器的 cookie，同时为了照顾其他设备，也可以让 JWT 出现在 set-cookie 和 authorization 或 body 中，尽管这会增加额外的传输量。
 
 当客户端拿到令牌后，它要做的只有一件事：存储它。
 
@@ -45,12 +47,12 @@ authentication:jwt令牌
 
 当后续请求发生时，你只需要将它作为请求的一部分发送到服务器即可。
 
-**虽然 jwt 没有明确要求应该如何附带到请求中，但通常我们会使用如下的格式**：
+**虽然 JWT 没有明确要求应该如何附带到请求中，但通常我们会使用如下的格式**：
 
 ```
 GET /api/resources HTTP/1.1
 ...
-authorization: bearer jwt令牌
+authorization: bearer JWT令牌
 ...
 ```
 
@@ -62,7 +64,7 @@ authorization: bearer jwt令牌
 
 ## 令牌的组成
 
-为了保证令牌的安全性，jwt 令牌由三个部分组成，分别是：
+为了保证令牌的安全性，JWT 令牌由三个部分组成，分别是：
 
 1. header：令牌头部，**记录了整个令牌的类型和签名算法**
 2. payload：令牌负荷，记录了**保存的主体信息**，比如你要保存的用户信息就可以放到这里
@@ -70,7 +72,7 @@ authorization: bearer jwt令牌
 
 它们组合而成的完整格式是：`header.payload.signature`
 
-比如，一个完整的 jwt 令牌如下：
+比如，一个完整的 JWT 令牌如下：
 
 ```
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9.BCwUy3jnUQ_E6TqCayc7rCHkx-vxxdagUwPOWqwYCFc
@@ -86,7 +88,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9.BC
 
 ### header
 
-它是令牌头部，记录了整个令牌的类型和签名算法
+它是令牌头部，记录了整个**令牌的类型和签名算法**
 
 **它的格式是一个`json`对象**，如下：
 
@@ -111,7 +113,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9.BC
 
 浏览器提供了`btoa`函数，可以完成这个操作：
 
-```jsx
+```js
 window.btoa(
     JSON.stringify({
         alg: "HS256",
@@ -123,18 +125,16 @@ window.btoa(
 
 同样的，浏览器也提供了`atob`函数，可以对其进行解码：
 
-```jsx
+```js
 window.atob("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
 // 得到字符串：{"alg":"HS256","typ":"JWT"}
 ```
 
-> nodejs 中没有提供这两个函数，可以安装第三方库 atob 和 bota 搞定
->
-> 或者，手动搞定
+> nodejs 中没有提供这两个函数，可以安装第三方库 atob 和 bota 搞定或者手动搞定
 
 ### payload
 
-**这部分是 jwt 的主体信息，它仍然是一个 JSON 对象**，它可以包含以下内容：
+**这部分是 JWT 的主体信息，它仍然是一个 JSON 对象**，它可以包含以下内容：
 
 ```json
 {
@@ -148,21 +148,21 @@ window.atob("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
 }
 ```
 
-以上属性可以全写，也可以一个都不写，它只是一个规范，就算写了，也需要你在将来验证这个 jwt 令牌时手动处理才能发挥作用
+以上属性可以全写，也可以一个都不写，它只是一个规范，就算写了，也需要你在将来验证这个 JWT 令牌时手动处理才能发挥作用
 
 上述属性表达的含义分别是：
 
--   ss：发行该 jwt 的是谁，可以写公司名字，也可以写服务名称
--   iat：该 jwt 的发放时间，通常写当前时间的时间戳
--   exp：该 jwt 的到期时间，通常写时间戳
--   sub：该 jwt 是用于干嘛的
--   aud：该 jwt 是发放给哪个终端的，可以是终端类型，也可以是用户名称，随意一点
+-   ss：发行该 JWT 的是谁，可以写公司名字，也可以写服务名称
+-   iat：该 JWT 的发放时间，通常写当前时间的时间戳
+-   exp：该 JWT 的**到期时间**，通常写时间戳
+-   sub：该 JWT 是用于干嘛的
+-   aud：该 JWT 是发放给哪个终端的，可以是终端类型，也可以是用户名称，随意一点
 -   nbf：一个时间点，在该时间点到达之前，这个令牌是不可用的
--   jti：jwt 的唯一编号，设置此项的目的，主要是为了防止重放攻击（重放攻击是在某些场景下，用户使用之前的令牌发送到服务器，被服务器正确的识别，从而导致不可预期的行为发生）
+-   jti：JWT 的唯一编号，设置此项的目的，主要是为了防止重放攻击（重放攻击是在某些场景下，用户使用之前的令牌发送到服务器，被服务器正确的识别，从而导致不可预期的行为发生）
 
 可是到现在，看了半天，没有出现我想要写入的数据啊 😂
 
-当用户登陆成功之后，我可能需要把用户的一些信息写入到 jwt 令牌中，比如用户 id、账号等等（密码就算了 😳）
+当用户登陆成功之后，我可能需要把用户的一些信息写入到 JWT 令牌中，比如用户 id、账号等等（密码就算了 😳）
 
 其实很简单，**payload 这一部分只是一个 json 对象而已，你可以向对象中加入任何想要加入的信息**
 
@@ -175,11 +175,11 @@ window.atob("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
 }
 ```
 
-`foo: bar`是我们自定义的信息，`iat: 1587548215`是 jwt 规范中的信息
+`foo: bar`是我们自定义的信息，`iat: 1587548215`是 JWT 规范中的信息
 
 最终，payload 部分和 header 一样，**需要通过`base64 url`编码得到**：
 
-```jsx
+```js
 window.btoa(
     JSON.stringify({
         foo: "bar",
@@ -191,7 +191,7 @@ window.btoa(
 
 ### signature
 
-这一部分是 jwt 的签名，正是它的存在，保证了整个 jwt 不被篡改
+这一部分是 JWT 的签名，正是它的存在，保证了整个 JWT 不被篡改
 
 这部分的生成，是对**前面两个部分的编码结果，按照头部指定的方式进行加密**
 
@@ -199,7 +199,7 @@ window.btoa(
 
 则第三部分就是用对称加密算法`HS256`对字符串`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9`进行加密，当然你得指定一个秘钥，比如`shhhhh`
 
-```jsx
+```js
 HS256(
     `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9`,
     "shhhhh"
@@ -207,7 +207,7 @@ HS256(
 // 得到：BCwUy3jnUQ_E6TqCayc7rCHkx-vxxdagUwPOWqwYCFc
 ```
 
-最终，将三部分组合在一起，就得到了完整的 jwt
+最终，将三部分组合在一起，就得到了完整的 JWT
 
 ```
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9.BCwUy3jnUQ_E6TqCayc7rCHkx-vxxdagUwPOWqwYCFc
@@ -215,7 +215,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9.BC
 
 由于**签名使用的秘钥保存在服务器，这样一来，客户端就无法伪造出签名，因为它拿不到秘钥。**
 
-换句话说，之所以说无法伪造 jwt，就是因为第三部分的存在。
+换句话说，之所以说无法伪造 JWT，就是因为第三部分的存在。
 
 而**前面两部分并没有加密，只是一个编码结果而已，可以认为几乎是明文传输**
 
@@ -223,11 +223,11 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9.BC
 >
 > 甚至在某些网站，用户的基本信息可以被任何人查看
 >
-> 你要保证的，是不要**把敏感的信息存放到 jwt 中，比如密码**
+> 你要保证的，是不要**把敏感的信息存放到 JWT 中，比如密码**
 
-jwt 的`signature`可以保证令牌不被伪造，那如何保证令牌不被篡改呢？
+JWT 的`signature`可以保证令牌不被伪造，那如何保证令牌不被篡改呢？
 
-比如，某个用户登陆成功了，获得了 jwt，但他人为的篡改了`payload`，比如把自己的账户余额修改为原来的两倍，然后重新编码出`payload`发送到服务器，服务器如何得知这些信息被篡改过了呢？
+比如，某个用户登陆成功了，获得了 JWT，但他人为的篡改了`payload`，比如把自己的账户余额修改为原来的两倍，然后重新编码出`payload`发送到服务器，服务器如何得知这些信息被篡改过了呢？
 
 这就要说到令牌的验证了
 
@@ -243,7 +243,7 @@ jwt 的`signature`可以保证令牌不被伪造，那如何保证令牌不被�
 
 首先，服务器要验证这个令牌是否被篡改过，验证方式非常简单，**就是对`header+payload`用同样的秘钥和加密算法进行重新加密**
 
-**然后把加密的结果和传入 jwt 的`signature`进行对比**，如果完全相同，则表示前面两部分没有动过，就是自己颁发的，如果不同，肯定是被篡改过了。
+**然后把加密的结果和传入 JWT 的`signature`进行对比**，如果完全相同，则表示前面两部分没有动过，就是自己颁发的，如果不同，肯定是被篡改过了。
 
 ```
 传入的header.传入的payload.传入的signature
@@ -257,11 +257,11 @@ jwt 的`signature`可以保证令牌不被伪造，那如何保证令牌不被�
 
 ## 总结
 
-最后，总结一下 jwt 的特点：
+最后，总结一下 JWT 的特点：
 
--   **jwt 本质上是一种令牌格式**。它和终端设备无关，同样和服务器无关，甚至与如何传输无关，它只是规范了令牌的格式而已
--   jwt 由三部分组成：header、payload、signature。主体信息在 payload
--   jwt 难以被篡改和伪造。这是因为有第三部分的签名存在。
+-   **JWT 本质上是一种令牌格式**。它和终端设备无关，同样和服务器无关，甚至与如何传输无关，它只是规范了令牌的格式而已
+-   JWT 由三部分组成：header、payload、signature。主体信息在 payload
+-   JWT 难以被篡改和伪造。这是因为有第三部分的签名存在。
 
 ## 面试题
 
@@ -271,8 +271,8 @@ jwt 的`signature`可以保证令牌不被伪造，那如何保证令牌不被�
 >
 > token 分为三段，分别是 header、payload、signature
 >
-> 其中，header 标识签名算法和令牌类型；payload 标识主体信息，包含令牌过期时间、发布时间、发行者、主体内容等；signature 是使用特定的算法对前面两部分进行加密，得到的加密结果。
+> 其中，header 标识签名算法和令牌类型；payload 标识主体信息，包含**令牌过期时间**、发布时间、发行者、**主体内容**等；signature 是使用特定的算法对前面两部分进行加密，得到的加密结果。
 >
-> token 有防篡改的特点，如果攻击者改动了前面两个部分，就会导致和第三部分对应不上，使得 token 失效。而攻击者不知道加密秘钥，因此又无法修改第三部分的值。
+> token 有防篡改的特点，如果**攻击者改动了前面两个部分，就会导致和第三部分对应不上，使得 token 失效。而攻击者不知道加密秘钥，因此又无法修改第三部分的值。**
 >
 > 所以，在秘钥不被泄露的前提下，一个验证通过的 token 是值得被信任的。

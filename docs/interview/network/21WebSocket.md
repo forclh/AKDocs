@@ -1,4 +1,4 @@
-# WebSocket
+# ✨ WebSocket
 
 > WebSocket 协议（rfc6455）原文地址：
 >
