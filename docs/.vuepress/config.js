@@ -209,6 +209,19 @@ export default defineUserConfig({
                             "23函数柯里化.md",
                             "24Node的事件循环.md",
                             "25尺寸和位置",
+                            "26事件循环.md",
+                        ],
+                    },
+                    {
+                        text: "Promise",
+                        prefix: "/interview/promise",
+                        collapsible: true,
+                        children: [
+                            "00Promise面试题汇总.md",
+                            "01Promise基础.md",
+                            "02Promise的链式调用.md",
+                            "03Promise的静态方法.md",
+                            "04async和await.md",
                         ],
                     },
                     {
@@ -303,6 +316,47 @@ export default defineUserConfig({
                             "07事件绑定与更新.md",
                         ],
                     },
+                    {
+                        text: "Cypress",
+                        prefix: "interview/cypress",
+                        collapsible: true,
+                        children: ["Cypress面试核心.md"],
+                    },
+                    {
+                        text: "项目",
+                        prefix: "/interview/project",
+                        collapsible: true,
+                        children: [
+                            {
+                                text: "FOFA 实习项目",
+                                prefix: "/interview/project/fofa",
+                                collapsible: true,
+                                children: ["FOFA实习项目面试点.md"],
+                            },
+                            {
+                                text: "低代码问卷系统",
+                                prefix: "/interview/project/questionaire",
+                                collapsible: true,
+                                children: ["低代码问卷项目面试点.md"],
+                            },
+                            {
+                                text: "VR 全景看房",
+                                prefix: "/interview/project/vr-house-viewing",
+                                collapsible: true,
+                                children: ["VR全景看房项目面试点.md"],
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                text: "其他知识点",
+                prefix: "/other",
+                collapsible: true,
+                children: [
+                    "01前端项目打包流程与编译概念详解.md",
+                    "02懒加载.md",
+                    "03前端路由的核心原理.md",
                 ],
             },
         ],
