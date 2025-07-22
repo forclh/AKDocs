@@ -24,6 +24,12 @@ export default defineUserConfig({
 
         sidebar: [
             {
+                text: "CSS",
+                prefix: "/css/",
+                collapsible: true,
+                children: ["flex布局.md"],
+            },
+            {
                 text: "Vue3",
                 collapsible: true,
                 children: [
@@ -349,6 +355,40 @@ export default defineUserConfig({
                     },
                 ],
             },
+            {
+                text: "TS",
+                prefix: "/ts",
+                collapsible: true,
+                children: [
+                    {
+                        text: "快速入门",
+                        prefix: "/ts/quick-start",
+                        collapsible: true,
+                        children: [
+                            "01Playground.md",
+                            "02安装与运行.md",
+                            "03开发相关配置.md",
+                            "04TS常见类型.md",
+                        ],
+                    },
+                ],
+            },
+            {
+                text: "工具库",
+                prefix: "/lib",
+                collapsible: true,
+                children: [
+                    "00常用第三方工具库.md",
+                    "01JQuery.md",
+                    "02Lodash.md",
+                    "03Animate.css.md",
+                    "04Axios.md",
+                    "05MockJS.md",
+                    "06Moment.md",
+                    "07ECharts.md",
+                ],
+            },
+
             {
                 text: "其他知识点",
                 prefix: "/other",
