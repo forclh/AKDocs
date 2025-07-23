@@ -19,7 +19,7 @@ vue3、ts、three.js、gsap
 
 ### Q1: 请介绍一下 Three.js 的核心组件，以及它们在 VR 看房项目中的作用？
 
-[详细内容](./Q1-Three.js核心组件.md)
+[详细内容](./Q1-Three.js核心组件介绍.md)
 
 **参考答案：**
 
@@ -51,7 +51,7 @@ vue3、ts、three.js、gsap
 
 ### Q2: 如何实现第一人称视角的相机控制？需要注意哪些细节？
 
-[详细内容](./Q2-第一人称视角相机控制.md)
+[详细内容](./Q2-第一人称视角相机控制实现.md)
 
 **参考答案：**
 
@@ -65,32 +65,32 @@ vue3、ts、three.js、gsap
 
 ```js
 onMounted(() => {
-    if (container.value) {
-        container.value.appendChild(renderer.domElement);
-        // 渲染
-        render();
+  if (container.value) {
+    container.value.appendChild(renderer.domElement);
+    // 渲染
+    render();
 
-        // 自定义相机视角旋转动画
-        let mouseDown = false;
-        container.value.addEventListener(
-            "mousedown",
-            () => {
-                mouseDown = true;
-            },
-            false
-        );
-        container.value.addEventListener(
-            "mouseup",
-            () => {
-                mouseDown = false;
-            },
-            false
-        );
-        container.value.addEventListener("mouseout", () => {
-            mouseDown = false;
-        });
-        // 省略...
-    }
+    // 自定义相机视角旋转动画
+    let mouseDown = false;
+    container.value.addEventListener(
+      "mousedown",
+      () => {
+        mouseDown = true;
+      },
+      false
+    );
+    container.value.addEventListener(
+      "mouseup",
+      () => {
+        mouseDown = false;
+      },
+      false
+    );
+    container.value.addEventListener("mouseout", () => {
+      mouseDown = false;
+    });
+    // 省略...
+  }
 });
 ```
 
@@ -100,16 +100,16 @@ onMounted(() => {
 ```js
 // 鼠标移动事件处理
 container.value.addEventListener("mousemove", (e) => {
-    if (mouseDown) {
-        // 水平旋转：鼠标左右移动控制Y轴旋转
-        camera.rotation.y += e.movementX * 0.002;
+  if (mouseDown) {
+    // 水平旋转：鼠标左右移动控制Y轴旋转
+    camera.rotation.y += e.movementX * 0.002;
 
-        // 垂直旋转：鼠标上下移动控制X轴旋转
-        camera.rotation.x += e.movementY * 0.002;
+    // 垂直旋转：鼠标上下移动控制X轴旋转
+    camera.rotation.x += e.movementY * 0.002;
 
-        // 关键：设置旋转顺序为YXZ，符合第一人称视角直觉
-        camera.rotation.order = "YXZ";
-    }
+    // 关键：设置旋转顺序为YXZ，符合第一人称视角直觉
+    camera.rotation.order = "YXZ";
+  }
 });
 ```
 
@@ -126,28 +126,28 @@ container.value.addEventListener("mousemove", (e) => {
 // 使用GSAP实现平滑的房间切换动画
 // 客厅到阳台
 balconySprite.onClick(() => {
-    gsap.to(camera.position, {
-        x: 0,
-        y: 0,
-        z: -10, // 移动到阳台房间的位置
-        duration: 1, // 1秒的平滑过渡
-    });
+  gsap.to(camera.position, {
+    x: 0,
+    y: 0,
+    z: -10, // 移动到阳台房间的位置
+    duration: 1, // 1秒的平滑过渡
+  });
 });
 
 // 客厅到厨房
 kitchenSprite.onClick(() => {
-    gsap.to(camera.position, {
-        x: 1.5,
-        y: 0,
-        z: 10, // 移动到厨房房间的位置
-        duration: 1,
-    });
+  gsap.to(camera.position, {
+    x: 1.5,
+    y: 0,
+    z: 10, // 移动到厨房房间的位置
+    duration: 1,
+  });
 });
 ```
 
 ### Q4: 什么是射线投射？在 VR 看房项目中如何应用？
 
-[详细内容](./Q4-射线投射.md)
+[详细内容](./Q4-射线投射技术应用.md)
 
 **参考答案：**
 
@@ -173,58 +173,56 @@ const spriteList: THREE.Sprite[] = [];
 
 // 信息点悬停显示函数
 function tooltipShow(e: MouseEvent, spriteList: THREE.Sprite[]) {
-    e.preventDefault();
-    const pointer = new THREE.Vector2();
-    const raycaster = new THREE.Raycaster();
+  e.preventDefault();
+  const pointer = new THREE.Vector2();
+  const raycaster = new THREE.Raycaster();
 
-    // 1. 归一化鼠标坐标
-    pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  // 1. 归一化鼠标坐标
+  pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
 
-    // 2. 从相机位置发射射线
-    raycaster.setFromCamera(pointer, camera);
+  // 2. 从相机位置发射射线
+  raycaster.setFromCamera(pointer, camera);
 
-    // 3. 检测射线与所有信息点的相交
-    const intersects = raycaster.intersectObjects(spriteList);
+  // 3. 检测射线与所有信息点的相交
+  const intersects = raycaster.intersectObjects(spriteList);
 
-    // 4. 处理相交结果
-    if (intersects.length > 0) {
-        // 检查是否为信息点类型
-        if (intersects[0].object.userData.type === "information") {
-            // 计算提示框在屏幕上的位置
-            const element = e.target as HTMLElement;
-            const elementWidth = element.clientWidth / 2;
-            const elementHeight = element.clientHeight / 2;
+  // 4. 处理相交结果
+  if (intersects.length > 0) {
+    // 检查是否为信息点类型
+    if (intersects[0].object.userData.type === "information") {
+      // 计算提示框在屏幕上的位置
+      const element = e.target as HTMLElement;
+      const elementWidth = element.clientWidth / 2;
+      const elementHeight = element.clientHeight / 2;
 
-            // 将3D世界坐标转换为屏幕坐标
-            const worldVector = new THREE.Vector3(
-                intersects[0].object.position.x,
-                intersects[0].object.position.y,
-                intersects[0].object.position.z
-            );
-            const position = worldVector.project(camera);
+      // 将3D世界坐标转换为屏幕坐标
+      const worldVector = new THREE.Vector3(
+        intersects[0].object.position.x,
+        intersects[0].object.position.y,
+        intersects[0].object.position.z
+      );
+      const position = worldVector.project(camera);
 
-            // 计算提示框的屏幕位置
-            const left = Math.round(
-                (position.x + 1) * elementWidth -
-                    tooltipBox.value!.clientWidth / 2
-            );
-            const top = Math.round(
-                -(position.y - 1) * elementHeight -
-                    tooltipBox.value!.clientHeight / 2
-            );
+      // 计算提示框的屏幕位置
+      const left = Math.round(
+        (position.x + 1) * elementWidth - tooltipBox.value!.clientWidth / 2
+      );
+      const top = Math.round(
+        -(position.y - 1) * elementHeight - tooltipBox.value!.clientHeight / 2
+      );
 
-            // 更新提示框位置和内容
-            tooltipPosition.value = {
-                left: `${left}px`,
-                top: `${top}px`,
-            };
-            tooltipContent.value = intersects[0].object.userData;
-        } else {
-            // 如果不是信息点，隐藏提示框
-            handleTooltipHide(e);
-        }
+      // 更新提示框位置和内容
+      tooltipPosition.value = {
+        left: `${left}px`,
+        top: `${top}px`,
+      };
+      tooltipContent.value = intersects[0].object.userData;
+    } else {
+      // 如果不是信息点，隐藏提示框
+      handleTooltipHide(e);
     }
+  }
 }
 ```
 
@@ -272,10 +270,10 @@ function animate() {
 
 **最佳实践：**
 
--   将 Three.js 逻辑封装在独立的类中
--   在组件卸载时正确清理资源
--   使用 TypeScript 提供类型安全
--   合理管理动画循环
+- 将 Three.js 逻辑封装在独立的类中
+- 在组件卸载时正确清理资源
+- 使用 TypeScript 提供类型安全
+- 合理管理动画循环
 
 ### Q7: 如何处理 Three.js 场景的响应式布局？
 
@@ -285,31 +283,28 @@ function animate() {
 
 ```typescript
 class ResponsiveManager {
-    constructor(
-        renderer: THREE.WebGLRenderer,
-        camera: THREE.PerspectiveCamera
-    ) {
-        this.renderer = renderer;
-        this.camera = camera;
+  constructor(renderer: THREE.WebGLRenderer, camera: THREE.PerspectiveCamera) {
+    this.renderer = renderer;
+    this.camera = camera;
 
-        window.addEventListener("resize", this.onWindowResize.bind(this));
-    }
+    window.addEventListener("resize", this.onWindowResize.bind(this));
+  }
 
-    onWindowResize() {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
+  onWindowResize() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
-        // 更新相机宽高比
-        this.camera.aspect = width / height;
-        this.camera.updateProjectionMatrix();
+    // 更新相机宽高比
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
 
-        // 更新渲染器尺寸
-        this.renderer.setSize(width, height);
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    }
+    // 更新渲染器尺寸
+    this.renderer.setSize(width, height);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  }
 
-    dispose() {
-        window.removeEventListener("resize", this.onWindowResize.bind(this));
-    }
+  dispose() {
+    window.removeEventListener("resize", this.onWindowResize.bind(this));
+  }
 }
 ```
