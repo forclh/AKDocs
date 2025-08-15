@@ -24,10 +24,60 @@ export default defineUserConfig({
 
     sidebar: [
       {
+        text: "HTML",
+        prefix: "/html/",
+        collapsible: true,
+        children: [
+          {
+            text: "HTML基础",
+            prefix: "/html/base/",
+            collapsible: true,
+            children: [],
+          },
+          {
+            text: "HTML进阶",
+            prefix: "/html/advance/",
+            collapsible: true,
+            children: [
+              "01iframe元素.md",
+              "02表单元素.md",
+              "03美化表单元素.md",
+              "04表单练习.md",
+              "05表格元素.md",
+              "06其他元素.md",
+            ],
+          },
+        ],
+      },
+      {
         text: "CSS",
         prefix: "/css/",
         collapsible: true,
-        children: ["flex布局.md"],
+        children: [
+          {
+            text: "CSS基础",
+            prefix: "/css/base/",
+            collapsible: true,
+            children: ["01为网页添加样式.md"],
+          },
+          {
+            text: "CSS进阶",
+            prefix: "/css/advance/",
+            collapsible: true,
+            children: [
+              "01@规则.md",
+              "02web字体和图标.md",
+              "03块级格式化上下文.md",
+              "04布局.md",
+            ],
+          },
+          {
+            text: "CSS3",
+            prefix: "/css/css3/",
+            collapsible: true,
+            children: ["flex布局.md"],
+          },
+        ],
       },
       {
         text: "Vue3",
@@ -362,7 +412,7 @@ export default defineUserConfig({
         children: [
           {
             text: "快速入门",
-            prefix: "/ts/quick-start",
+            prefix: "/ts/01quick-start",
             collapsible: true,
             children: [
               "01Playground.md",
@@ -370,6 +420,18 @@ export default defineUserConfig({
               "03开发相关配置.md",
               "04TS常见类型.md",
               "05类型声明.md",
+            ],
+          },
+          {
+            text: "类型理解",
+            prefix: "/ts/02type-understanding",
+            collapsible: true,
+            children: [
+              "01一切从类型的理解开始.md",
+              "02any与unknown.md",
+              "03boolean与类型字面量.md",
+              "04number,bigint与string.md",
+              "05symbol.md",
             ],
           },
         ],
@@ -389,7 +451,20 @@ export default defineUserConfig({
           "07ECharts.md",
         ],
       },
-
+      {
+        text: "Demos",
+        prefix: "/demo",
+        collapsible: true,
+        children: [
+          {
+            text: "HTML+CSS+JS",
+            prefix: "/demo/html-css-js",
+            collapsible: true,
+            children: ["01文字滚动效果.md"],
+          },
+          "简易聊天室.md",
+        ],
+      },
       {
         text: "其他知识点",
         prefix: "/other",
