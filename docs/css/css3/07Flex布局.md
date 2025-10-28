@@ -283,7 +283,6 @@ Flex 布局基于两个轴线：**主轴（Main Axis）** 和 **交叉轴（Cros
       }
 
       .main {
-        flex-grow: 1;
         background-color: greenyellow;
         /* 此时需要设置外层容器的高度*/
         flex-grow: 1;
@@ -321,10 +320,18 @@ Flex 布局基于两个轴线：**主轴（Main Axis）** 和 **交叉轴（Cros
         display: flex;
       }
 
+      .center {
+        flex-grow: 1;
+        height: 300px;
+        background-color: greenyellow;
+        order: 1;
+      }
+
       .left {
         width: 100px;
         height: 100px;
         background-color: #fca;
+        order: 0;
       }
 
       .right {
@@ -332,13 +339,6 @@ Flex 布局基于两个轴线：**主轴（Main Axis）** 和 **交叉轴（Cros
         height: 100px;
         background-color: #fac;
         order: 2;
-      }
-
-      .center {
-        flex-grow: 1;
-        height: 300px;
-        background-color: greenyellow;
-        order: 1;
       }
     </style>
   </head>
