@@ -1,33 +1,39 @@
-# Props
+# ✨ Props 👌
 
-- Props
-- 自定义事件
-- 插槽
+[[TOC]]
 
-所谓 Props，其实就是外部在使用组件的时候，向组件传递数据。
+::: tip 要点速览
+
+- Props 是父组件向子组件传递数据的唯一入口，遵循单向数据流。
+- 在 `<script setup>` 中用 `defineProps()` 声明接收的属性；编译期宏、零运行开销。
+- 组件内使用驼峰命名；在模板（DOM）中对外传参用短横线命名。
+- 非字符串值必须用动态绑定（`:`）；布尔型支持省略值语法（`<Comp disabled />`）。
+- 对象/数组默认值必须使用工厂函数；提供类型、必填与自定义校验更稳健。
+- 不要在子组件直接修改 props；如需本地副本，复制到内部状态后再改。
+  :::
 
 ## 快速入门
 
-下面我们定义了一个 UserCard.vue 组件：
+示例组件 `UserCard.vue`：接收三个独立的 props 并渲染内容。
 
-```jsx
+```vue :collapsed-lines :collapsed-lines
 <template>
   <div class="user-card">
-    <img :src="user.avatarUrl" alt="用户头像" class="avatar" />
+    <img :src="avatarUrl" alt="用户头像" class="avatar" />
     <div class="user-info">
-      <h2>{{ user.name }}</h2>
-      <p>{{ user.email }}</p>
+      <h2>{{ name }}</h2>
+      <p>{{ email }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
-// defineProps 是一个宏，用于声明组件接收哪些 props
-const user = defineProps({
+// 宏：声明组件接收哪些 props（编译期展开）
+const { name, email, avatarUrl } = defineProps({
   name: String,
   email: String,
-  avatarUrl: String
-})
+  avatarUrl: String,
+});
 </script>
 
 <style scoped>
@@ -40,44 +46,45 @@ const user = defineProps({
   padding: 10px;
   margin: 10px 0;
 }
-
 .avatar {
   width: 60px;
   height: 60px;
   border-radius: 50%;
   margin-right: 15px;
 }
-
 .user-info h2 {
   margin: 0;
   font-size: 20px;
   color: #333;
 }
-
 .user-info p {
   margin: 5px 0 0;
   font-size: 16px;
   color: #666;
 }
 </style>
-
 ```
 
-在该组件中，接收 name、email 以及 avatrUrl 这三个 prop，使用 defineProps 来定义要接收的 props，defineProps 是一个宏，会在代码实际执行之前（编译）进行一个替换操作。
+父组件使用：
 
-之后 App.vue 作为父组件，在父组件中使用上面的 UserCard.vue 组件（子组件）
-
-```jsx
+```vue :collapsed-lines
 <template>
   <div class="app-container">
-    <!-- 父组件在使用 UserCard 这个组件的时候，向内部传递数据 -->
-    <UserCard name="张三" email="123@gamil.com" avatar-url="src/assets/yinshi.jpg" />
-    <UserCard name="莉丝" email="456@gamil.com" avatar-url="src/assets/jinzhu.jpeg" />
+    <UserCard
+      name="张三"
+      email="123@gamil.com"
+      avatar-url="src/assets/yinshi.jpg"
+    />
+    <UserCard
+      name="莉丝"
+      email="456@gamil.com"
+      avatar-url="src/assets/jinzhu.jpeg"
+    />
   </div>
 </template>
 
 <script setup>
-import UserCard from './components/UserCard.vue'
+import UserCard from "./components/UserCard.vue";
 </script>
 
 <style scoped>
@@ -87,59 +94,36 @@ import UserCard from './components/UserCard.vue'
   padding: 20px;
 }
 </style>
-
 ```
 
-## 使用细节
+::: warning 命名风格
 
-1. 命名方面
+- 组件内部 props 声明用驼峰：`greetingMessage`。
+- 组件外部传参（模板属性）用短横线：`greeting-message="hello"`。
+  :::
 
-组件内部在声明 props 的时候，推荐使用驼峰命名法：
+## 动态 Props（绑定状态）
 
-```jsx
+当父组件属性值来源于父组件自身的响应式状态时，应使用动态绑定：
+
+```vue :collapsed-lines
+<!-- 父组件模板 -->
+<UserCard :name="user.name" :email="user.email" :avatar-url="user.avatarUrl" />
+```
+
+也可以将对象整体作为一个 prop 传入：
+
+```vue :collapsed-lines
+<!-- 子组件：UserCard.vue 接收对象 prop -->
+<script setup>
 defineProps({
-  greetingMessage: String
-})
-```
+  user: { type: Object, required: true },
+});
+</script>
 
-```jsx
-<span>{{ greetingMessage }}</span>
-```
-
-不过父组件在使用子组件，给子组件传递属性的时候，推荐使用更加贴近 HTML 的书写风格：
-
-```jsx
-<MyComponent greeting-message="hello" />
-```
-
-1. 动态的 Props
-
-在上面的快速入门示例中，我们传递的都是静态的数据：
-
-```jsx
-<UserCard name="张三" email="123@gamil.com" avatar-url="src/assets/yinshi.jpg" />
-```
-
-所谓动态的 Props，指的就是父组件所传递的属性值是和父组件本身的状态绑定在一起的：
-
-UserCard.vue
-
-```jsx
-// defineProps 是一个宏，用于声明组件接收哪些 props
-defineProps({
-  user: {
-    type: Object,
-    required: true
-  }
-})
-```
-
-App.vue
-
-```jsx
+<!-- 父组件：按对象传入，并提供修改入口 -->
 <template>
   <div class="app-container">
-    <!-- 父组件在使用 UserCard 这个组件的时候，向内部传递数据 -->
     <UserCard :user="user" />
     <div class="input-group">
       <input type="text" placeholder="请输入新的名字" v-model="newName" />
@@ -149,21 +133,19 @@ App.vue
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import UserCard from './components/UserCard.vue'
-// 父组件所维护的一份数据
-const user = ref({
-  name: '张三',
-  email: '123@gamil.com',
-  avatarUrl: 'src/assets/yinshi.jpg'
-})
-const newName = ref('')
+import { ref } from "vue";
+import UserCard from "./components/UserCard.vue";
 
-// 根据用户输入的新名字
-// 更新 user 这个数据
+const user = ref({
+  name: "张三",
+  email: "123@gamil.com",
+  avatarUrl: "src/assets/yinshi.jpg",
+});
+const newName = ref("");
+
 function changeName() {
   if (newName.value.trim()) {
-    user.value.name = newName.value
+    user.value.name = newName.value;
   }
 }
 </script>
@@ -178,7 +160,6 @@ function changeName() {
   display: flex;
   margin-top: 20px;
 }
-
 input {
   flex: 1;
   padding: 10px;
@@ -187,7 +168,6 @@ input {
   border: 1px solid #ddd;
   border-radius: 5px;
 }
-
 button {
   padding: 10px 15px;
   background-color: #007bff;
@@ -197,113 +177,150 @@ button {
   cursor: pointer;
   font-size: 16px;
 }
-
 button:hover {
   background-color: #0056b3;
 }
 </style>
 ```
 
-还需要注意一个细节：如果想要向组件传递 **非字符串** 类型的值，例如 number、boolean、array… 必须通过动态 Props 的方式来传递，不然组件内部拿到的是一个字符串。
+::: tip 非字符串值必须动态绑定
 
-1. 单向数据流
+- `number`、`boolean`、`array`、`object` 等非字符串类型，必须使用 `:` 动态绑定，否则会变成字符串。
+- 布尔型简写：`<Comp disabled />` 等同于传 `true`；绑定变量用 `:disabled="isDisabled"`。
+  :::
 
-Props 会因为父组件传递的数据的更新而自身发生变化，这种数据的流向是从父组件流向子组件的，这个流向是单向的，这意味着你在子组件中不应该修改父组件传递下来的 Props 数据。
+## 单向数据流与局部副本
 
-如果你强行修改，Vue 会在控制台抛出警告：
+Props 由父组件驱动，子组件不应直接修改：
 
-```jsx
-const props = defineProps(['foo'])
-
-// ❌ 警告！prop 是只读的！
-props.foo = 'bar'
+```js
+const props = defineProps(["foo"]);
+// ❌ 警告！prop 是只读的
+props.foo = "bar";
 ```
 
-有些时候，我们期望子组件在局部保存一份父组件传递下来的数据，这种情况下，就在子组件中新定义一个子组件的数据存储 Props 上面的值即可。
+如需本地可变副本，复制到自身状态再修改：
 
-```jsx
-import {ref} from 'vue'
-// defineProps 是一个宏，用于声明组件接收哪些 props
-const prop = defineProps(['user', 'age'])
-// 在子组件中，使用 ref 创建一个响应式数据
-// 值为父组件传递过来的 props 值
-const age = ref(prop.age)
+```js
+import { ref } from "vue";
+const props = defineProps(["age"]);
+const localAge = ref(props.age);
+// 后续只改 localAge，不改 props
 ```
 
-还有一些时候，可能需要对父组件传递过来的数据进行二次计算，这个也是可以的，前提是在子组件内部自己创建一个计算属性，仅仅使用父组件传递的 props 值来做二次计算。
+也可以基于 props 派生只读的计算数据：
 
-```jsx
-const props = defineProps(['size'])
-
-// 该 prop 变更时计算属性也会自动更新
-const normalizedSize = computed(() => props.size.trim().toLowerCase())
+```js
+const props = defineProps(["size"]);
+const normalizedSize = computed(() => props.size.trim().toLowerCase());
 ```
 
-## 校验
+::: danger 常见误区
 
-子组件在声明 Props 的时候，是可以书写校验要求的，如果父组件在传递值的时候不符合 Props 值的要求，开发阶段 Vue 会在控制台给出警告信息。
+- 在子组件中直接写入 props 导致警告与数据来源混乱。
+- 复制 props 时忘记与源保持同步需求（按需选择副本或计算属性）。
+  :::
 
-```jsx
+## 校验与默认值
+
+在声明 props 时提供类型、必填、默认值和自定义校验：
+
+```js :collapsed-lines
 defineProps({
-  // 基础类型检查
-  // （给出 `null` 和 `undefined` 值则会跳过任何类型检查）
+  // 单一类型
   propA: Number,
-  // 多种可能的类型
+
+  // 多类型
   propB: [String, Number],
-  // 必传，且为 String 类型
-  propC: {
-    type: String,
-    required: true
-  },
-  // Number 类型的默认值
-  propD: {
-    type: Number,
-    default: 100
-  },
-  // 对象类型的默认值
+
+  // 必填
+  propC: { type: String, required: true },
+
+  // 基本类型默认值
+  propD: { type: Number, default: 100 },
+
+  // 对象默认值（必须用工厂函数）
   propE: {
     type: Object,
-    // 对象或数组的默认值
-    // 必须从一个工厂函数返回。
-    // 该函数接收组件所接收到的原始 prop 作为参数。
     default(rawProps) {
-      return { message: 'hello' }
-    }
+      return { message: "hello" };
+    },
   },
-  // 自定义类型校验函数
-  // 在 3.4+ 中完整的 props 作为第二个参数传入
+
+  // 自定义校验（3.4+ 第二个参数是完整 props）
   propF: {
     validator(value, props) {
-      // The value must match one of these strings
-      return ['success', 'warning', 'danger'].includes(value)
-    }
+      return ["success", "warning", "danger"].includes(value);
+    },
   },
-  // 函数类型的默认值
+
+  // 函数默认值（直接函数即可）
   propG: {
     type: Function,
-    // 不像对象或数组的默认，这不是一个
-    // 工厂函数。这会是一个用来作为默认值的函数
     default() {
-      return 'Default function'
-    }
-  }
+      return "Default function";
+    },
+  },
+});
 ```
 
-例如我们对上面的 UserCard.vue 添加一个自定义的校验规则：
+对 `UserCard.vue` 添加校验示例：
 
-```jsx
+```js
 defineProps({
   user: {
     type: Object,
     required: true,
-    // 自定义校验规则
     validator: (value) => {
-      return value.name && value.email && value.avatarUrl
-    }
+      return value && value.name && value.email && value.avatarUrl;
+    },
   },
-  age: {
-    type: [Number, String],
-    default: 18
-  }
-})
+  age: { type: [Number, String], default: 18 },
+});
 ```
+
+::: tip 校验提示
+
+- 校验在开发环境下给出警告，生产环境不会阻止渲染。
+- 默认值仅在父组件未传该 prop 时生效；`null`/`undefined` 会跳过类型检查。
+  :::
+
+## TypeScript（可选）
+
+在 `<script setup lang="ts">` 中，使用泛型与 `withDefaults` 更清晰：
+
+```ts
+type User = { name: string; email: string; avatarUrl: string };
+
+const props = withDefaults(
+  defineProps<{
+    user?: User;
+    size?: "sm" | "md" | "lg";
+  }>(),
+  {
+    size: "md",
+  }
+);
+
+// 直接解构保持响应性（仅限宏调用时的直接解构）
+const { user, size } = props;
+```
+
+::: warning 解构的响应性
+
+- 直接从 `defineProps(...)` 调用处解构，编译器会保留响应性(Vue 3.5+)。
+- 先赋值给 `const props = defineProps(...)` 再从 `props` 解构，将失去编译期增强，可能影响响应性；推荐直接解构。
+  :::
+
+## 小结与后续
+
+Props 是组件通信的第一步，接下来建议继续学习：
+
+1. 自定义事件（`emit`，子 → 父反馈）
+2. 插槽（结构与内容扩展）
+
+::: tip 学习建议
+
+- 先掌握命名、动态绑定、单向数据流与校验。
+- 然后配合事件与插槽完成常见父子通信与组合模式。
+  :::

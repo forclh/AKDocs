@@ -1,67 +1,66 @@
-# KeepAlive内置组件
+# ✨ KeepAlive 内置组件 👌
 
-在 Vue 中也提供了一些内置组件，例如：
+[[TOC]]
 
-- Transition
-- TransitionGroup
-- KeepAlive
-- Teleport
-- Suspense
+::: info 快速总览
 
-**component元素**
+- `KeepAlive` 是一个内置组件，用于“缓存不活动的组件实例”，避免重复销毁/创建。
+- 常配合 `<router-view v-slot="{ Component }">` 或 `<component :is="...">` 动态组件一起使用。
+- 关键 props：`include` / `exclude` 控制缓存范围，`max` 限制最大缓存数。
+- 相关钩子：`onActivated` / `onDeactivated` 可感知组件被激活/停用。
+  :::
 
-component **并非组件**，而是和 slot、template 等元素类似的一种特殊元素，这种元素是模板语法的一部分。但它们并非真正的组件，同时在模板编译期间会被编译掉。因此，它们通常在模板中用小写字母书写。
+::: tip component 元素
+`component` 并非真正组件，而是模板语法的特殊元素（类似 `slot` / `template`）。用于渲染动态组件，最终在编译阶段被移除。文档：https://cn.vuejs.org/api/built-in-special-elements.html#component
+:::
 
-component 用于渲染动态组件，具体渲染的组件取决于 is 属性
+## 基本使用
 
-文档地址：https://cn.vuejs.org/api/built-in-special-elements.html#component
+在 `App.vue` 中为路由视图开启缓存：
 
-**KeepAlive基本使用**
-
-KeepAlive 是一个**内置组件**，该组件的主要作用是**缓存组件的状态**。
-
-关键代码如下：
-
-App.vue
-
-```html
-<router-view v-slot="{ Component }">
-  <keep-alive>
-    <component :is="Component" />
-  </keep-alive>
-</router-view>
+```vue
+<!-- App.vue -->
+<template>
+  <router-view v-slot="{ Component }">
+    <keep-alive>
+      <component :is="Component" />
+    </keep-alive>
+  </router-view>
+</template>
 ```
 
-router-view 组件通过作用域插槽拿到一个和当前路由所匹配的组件，然后将这个组件用于 component 元素的 is 属性。
+上面通过 `<router-view>` 的作用域插槽拿到当前匹配的页面组件，并交给 `component` 的 `is` 属性进行渲染；外层包裹 `keep-alive` 后，切换路由时上一个页面组件会被“停用并缓存”，再次返回时无需重新创建。
 
-最为关键的就是 component 元素外边包裹了 keep-alive 内置组件，该组件让状态得以保留。
+::: danger 常见坑
 
-**KeepAlive相关细节**
+- 忘记包裹在动态组件或 `<router-view>` 外层，导致 `KeepAlive` 无效。
+- 切换到同一路由的不同 params 时，组件实例会复用（保持缓存），必要时通过 `:key` 或监听 `route` 实现响应更新。
+  :::
 
-KeepAlive 是一个内置组件，该组件的主要作用是缓存组件的状态。
+## 包含/排除（include/exclude）
 
-使用 KeepAlive 来保持组件状态的之后，可以使用**包含(include)/排除(exclude)**关键字来指定要缓存的组件，这两个 prop 的值都可以是一个以英文逗号分隔的字符串、一个正则表达式，或是包含这两种类型的一个数组：
+通过 `include` / `exclude` 指定哪些组件参与缓存。支持以逗号分隔的字符串、正则表达式、数组：
 
-```html
-<!-- 以英文逗号分隔的字符串 -->
-<KeepAlive include="a,b">
+```vue
+<!-- 逗号分隔字符串（注意无空格）-->
+<keep-alive include="A,B">
   <component :is="view" />
-</KeepAlive>
+</keep-alive>
 
-<!-- 正则表达式 (需使用 v-bind) -->
-<KeepAlive :include="/a|b/">
+<!-- 正则表达式（需使用 v-bind）-->
+<keep-alive :include="/A|B/">
   <component :is="view" />
-</KeepAlive>
+</keep-alive>
 
-<!-- 数组 (需使用 v-bind) -->
-<KeepAlive :include="['a', 'b']">
+<!-- 数组（需使用 v-bind）-->
+<keep-alive :include="['A', 'B']">
   <component :is="view" />
-</KeepAlive>
+</keep-alive>
 ```
 
-例如：
+也可与路由联用：
 
-```html
+```vue
 <router-view v-slot="{ Component }">
   <keep-alive include="Counter,Timer">
     <component :is="Component" />
@@ -69,11 +68,15 @@ KeepAlive 是一个内置组件，该组件的主要作用是缓存组件的状�
 </router-view>
 ```
 
-以英文逗号分隔的时候，注意中间不要添加空格。
+::: warning 名称匹配规则
+`include` / `exclude` 匹配的是组件的 `name` 选项（`export default { name: 'A' }` 或 `<script setup> defineOptions({ name: 'A' })`）。若未设置 `name`，匹配可能失败。
+:::
 
-还可以接收一个 max 属性，用于**指定最大缓存组件数**。如果缓存的实例数量即将超过指定的那个最大数量，则最久没有被访问的缓存实例将被销毁，以便为新的实例腾出空间。
+## 最大缓存数（max）
 
-```html
+当缓存实例数将超过 `max` 时，最久未访问的实例会被销毁：
+
+```vue
 <router-view v-slot="{ Component }">
   <keep-alive :max="3">
     <component :is="Component" />
@@ -81,3 +84,28 @@ KeepAlive 是一个内置组件，该组件的主要作用是缓存组件的状�
 </router-view>
 ```
 
+::: tip 缓存键与 `key`
+`KeepAlive` 使用“组件类型 + key”作为缓存键。为同一组件提供不同 `:key`，可以将它们当作不同缓存实例；反之复用同一实例。
+:::
+
+## 激活与停用钩子
+
+在被 `KeepAlive` 包裹的组件中使用：
+
+```js
+import { onActivated, onDeactivated } from "vue";
+
+onActivated(() => {
+  // 组件被重新激活（再次显示）
+});
+
+onDeactivated(() => {
+  // 组件被停用（从视图移除但仍缓存）
+});
+```
+
+::: tip 使用建议
+
+- 页面表单、计时器等有状态组件非常适合 KeepAlive。
+- 若需要在返回页面后刷新数据，可在 `onActivated` 中触发拉取。
+  :::
