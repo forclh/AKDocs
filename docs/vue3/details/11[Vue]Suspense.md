@@ -1,74 +1,89 @@
 # 【Vue】Suspense
 
-Suspense，本意是“悬而未决”的意思，这是 Vue3 新增的一个内置组件，主要用来在组件树中协调对异步依赖的处理。
+[[TOC]]
 
-假设有如下目录结构：
+::: tip 要点速览
+
+- 作用：统一管理组件树中的异步依赖的加载、错误与完成状态。
+- 依赖类型：异步 `setup`/顶层 `await` 组件；异步组件。
+- 插槽：`#default` 完成时显示，`#fallback` 挂起时显示；各仅一个直接子节点。
+- 边界：默认插槽内的所有依赖完成后才 resolve；嵌套边界可独立解析。
+- 配合：异步组件的 `suspensible` 控制是否参与挂起；与 `Transition/KeepAlive` 可组合。
+
+:::
+
+## 动机与定义
+
+在复杂页面中可能存在多个异步数据或异步组件，分别显示各自的加载与错误会造成割裂的体验。`Suspense` 提供一个边界，使我们能在顶层统一展示加载或回退内容，并在依赖全部就绪后一次性切换到完成态。
+
+示例结构：
 
 ```
 <Suspense>
 └─ <Dashboard>
-   ├─ <Profile>（内容一）
-   │  └─ <FriendStatus>（好友状态组件：有异步的setup方法）
-   └─ <Content>（内容二）
-      ├─ <ActivityFeed> （活动提要：异步组件）
-      └─ <Stats>（统计组件：异步组件）
+   ├─ <Profile>
+   │  └─ <FriendStatus>
+   └─ <Content>
+      ├─ <ActivityFeed>
+      └─ <Stats>
 ```
 
-在这个组件树中有多个嵌套组件，要渲染出它们，首先得解析一些异步资源。
+## 可等待的异步依赖
 
-每个异步组件需要处理自己的加载、报错和完成状态。在最坏的情况下，可能会在页面上看到三个旋转的加载状态，然后在不同的时间显示出内容。
+异步 `setup`/顶层 `await`：
 
-有了 `<Suspense>` 组件后，我们就可以在等待整个多层级组件树中的各个异步依赖获取结果时，**在顶层统一处理加载状态**。
+```vue
+<script setup>
+const res = await fetch("/api/posts");
+const posts = await res.json();
+</script>
 
-`<Suspense>` 可以等待的异步依赖有两种：
-
-1. 带有**异步 setup( ) 钩子的组件**。这也包含了使用 `<script setup>` 时有**顶层 await 表达式的组件**
-
-    ```jsx
-    export default {
-      async setup() {
-        const res = await fetch(...)
-        const posts = await res.json()
-        return {
-          posts
-        }
-      }
-    }
-    ```
-
-    ```html
-    <script setup>
-        const res = await fetch(...)
-        const posts = await res.json()
-    </script>
-
-    <template> {{ posts }} </template>
-    ```
-
-2. 异步组件
-
-在 `<Suspense>` 组件中有两个插槽，两个插槽都只允许**一个**直接子节点。
-
-1. #default：当所有的异步依赖都完成后，会进入**完成**状态，展示默认插槽内容。
-2. #fallback：如果有任何异步依赖未完成，则进入**挂起**状态，在挂起状态期间，**展示的是后备内容**。
-
-## **快速上手**
-
-```
-App.vue
-└─ Dashboard.vue
-   ├─ Profile.vue
-   │  └─ FriendStatus.vue（组件有异步的 setup）
-   └─ Content.vue
-      ├─ AsyncActivityFeed（异步组件）
-      │  └─ ActivityFeed.vue
-      └─ AsyncStats（异步组件）
-         └─ Stats.vue
+<template>{{ posts }}</template>
 ```
 
-实现效果：使用 Suspense 统一显示状态
+异步组件：
 
-🤔 思考：假设想要让 Profile 组件内容先显示出来，不等待 Content 组件的异步完成状态，该怎么做？
+```js
+import { defineAsyncComponent } from "vue";
+const AsyncStats = defineAsyncComponent(() => import("./Stats.vue"));
+```
+
+## 插槽与状态机
+
+`Suspense` 有两个插槽，且各自只允许一个直接子节点：
+
+- `#default`：当所有依赖完成后进入完成态，渲染默认内容。
+- `#fallback`：有任一依赖未完成时进入挂起态，渲染后备内容。
+
+```vue
+<Suspense>
+  <template #default>
+    <Dashboard />
+  </template>
+  <template #fallback>
+    <div class="loading">Loading...</div>
+  </template>
+</Suspense>
+```
+
+## 快速上手
+
+将页面根内容包裹在 `Suspense` 中以统一加载态：
+
+```vue
+<template>
+  <Suspense>
+    <template #default>
+      <Dashboard />
+    </template>
+    <template #fallback>
+      <div class="loading">Loading...</div>
+    </template>
+  </Suspense>
+</template>
+```
+
+提示：若希望某部分先显示而不阻塞整体，可为该部分建立内层 `Suspense` 边界，或在异步组件上设置 `suspensible: false`。
 
 ## **其他细节**
 
@@ -80,19 +95,19 @@ App.vue
 
 ```html
 <RouterView v-slot="{ Component }">
-    <template v-if="Component">
-        <Transition mode="out-in">
-            <KeepAlive>
-                <Suspense>
-                    <!-- 主要内容 -->
-                    <component :is="Component"></component>
+  <template v-if="Component">
+    <Transition mode="out-in">
+      <KeepAlive>
+        <Suspense>
+          <!-- 主要内容 -->
+          <component :is="Component"></component>
 
-                    <!-- 加载中状态 -->
-                    <template #fallback> 正在加载... </template>
-                </Suspense>
-            </KeepAlive>
-        </Transition>
-    </template>
+          <!-- 加载中状态 -->
+          <template #fallback> 正在加载... </template>
+        </Suspense>
+      </KeepAlive>
+    </Transition>
+  </template>
 </RouterView>
 ```
 
@@ -102,6 +117,6 @@ App.vue
 
 `<Suspense>` 组件会触发三个事件：
 
--   pending：在进入挂起状态时触发
--   resolve：在 default 插槽完成获取新内容时触发
--   fallback：显示后备内容的时候触发
+- pending：在进入挂起状态时触发
+- resolve：在 default 插槽完成获取新内容时触发
+- fallback：显示后备内容的时候触发

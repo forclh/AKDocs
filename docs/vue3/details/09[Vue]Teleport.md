@@ -1,96 +1,101 @@
 # 【Vue】Teleport
 
-这是 Vue 里面的一个内置组件。作用：将一个组件内部的一部分模板“传送”到该组件的 DOM 结构外层的位置去。
+[[TOC]]
 
-## **快速上手**
+::: tip 要点速览
 
-模态框：理想情况下，模态框的按钮和模态框本身是在同一个组件中，因为它们都与组件的开关状态有关。但这意味着该模态框将与按钮一起渲染在应用 DOM 结构里很深的地方。
+- 作用：将组件内的一段子树渲染到指定的目标节点（组件外层）。
+- 属性：`to` 指定目标（选择器或元素）；`disabled` 关闭传送保持原位。
+- 关系不变：只改变渲染位置，组件层级与响应性、事件绑定不变。
+- 场景：模态框、通知、全局浮层，避免祖先的 `transform/z-index` 影响定位。
+- 建议：目标容器使用 `body` 或专用 `#portal-root`，确保层叠上下文稳定。
 
-例如：
+:::
 
-```html
-<script setup>
-    import { ref } from "vue";
+## 动机与定义
 
-    const open = ref(false);
-</script>
+理想情况下，模态框的按钮与内容在同一组件中管理状态，但这会让模态框被渲染在应用 DOM 的深层，受祖先样式影响。`Teleport` 允许将这段模板“传送”到组件外层的指定位置，同时保持组件关系与响应性不变。
 
+## 快速上手
+
+不使用 Teleport：
+
+```vue :collapsed-lines
 <template>
-    <button @click="open = true">打开模态框</button>
-
-    <div v-if="open" class="modal">
-        <p>模态框内容</p>
-        <button @click="open = false">关闭</button>
-    </div>
+  <button @click="open = true">打开模态框</button>
+  <div v-if="open" class="modal">
+    <p>模态框内容</p>
+    <button @click="open = false">关闭</button>
+  </div>
 </template>
 
+<script setup>
+import { ref } from "vue";
+const open = ref(false);
+</script>
+
 <style scoped>
-    .modal {
-        position: fixed;
-        z-index: 999;
-        top: 20%;
-        left: 50%;
-        width: 300px;
-        margin-left: -150px;
-        border: 1px solid #ccc;
-        text-align: center;
-    }
-    .modal p {
-        padding: 10px;
-        margin: 0;
-        background-color: #f4f4f4;
-        text-align: center;
-    }
+.modal {
+  position: fixed;
+  z-index: 999;
+  top: 20%;
+  left: 50%;
+  width: 300px;
+  margin-left: -150px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+.modal p {
+  padding: 10px;
+  margin: 0;
+  background: #f4f4f4;
+  text-align: center;
+}
 </style>
 ```
 
-打开该模态框，观察渲染结构：
+渲染结构示例：
 
-```html
+```html :collapsed-lines
 <div id="app" data-v-app="">
-    <div class="outer">
-        <h1>Teleport示例</h1>
-        <div>
-            <button data-v-381af681="">打开模态框</button>
-            <div data-v-381af681="" class="modal">
-                <p data-v-381af681="">模态框内容</p>
-                <button data-v-381af681="">关闭</button>
-            </div>
-        </div>
+  <div class="outer">
+    <h1>Teleport示例</h1>
+    <div>
+      <button>打开模态框</button>
+      <div class="modal">
+        <p>模态框内容</p>
+        <button>关闭</button>
+      </div>
     </div>
+  </div>
+  <!-- 模态框仍在组件内部 -->
 </div>
 ```
 
-这里的渲染结构其实是不太合适的。
+问题：
 
-1. position: fixed 能够相对于浏览器窗口放置有一个条件，那就是不能有任何祖先元素设置了 transform、perspective 或者 filter 样式属性。也就是说如果我们想要用 CSS transform 为祖先节点 `<div class=“outer”>` 设置动画，就会不小心破坏模态框的布局！
-2. 这个模态框的 z-index 受限于它的容器元素。如果有其他元素与 `<div class=“outer”>` 重叠并有更高的 z-index，则它会覆盖住我们的模态框。
+- 若祖先设置了 `transform/perspective/filter`，`position: fixed` 的定位参考会改变，导致布局异常。
+- 模态框的 `z-index` 受限于所在层叠上下文，易被更高层覆盖。
 
-总结起来，就是**模态框的样式会受到所在位置的祖级元素的影响**。
+正确做法（使用 Teleport）：
 
-以前书写原生 HTML 的时候，模特框一般都是在最外层：
-
-```html
-<body>
-    <div class="container">
-        <!-- 其他代码 -->
-    </div>
-    <div class="modal"></div>
-</body>
-```
-
-这种场景就可以使用 Teleport
-
-```html
+```vue
 <Teleport to="body">
-    <div v-if="open" class="modal">
-        <p>模态框内容</p>
-        <button @click="open = false">关闭</button>
-    </div>
-</Teleport>
+  <div v-if="open" class="modal">
+    <p>模态框内容</p>
+    <button @click="open = false">关闭</button>
+  </div>
+ </Teleport>
 ```
 
-使用 to 属性来指定要渲染的位置。
+`to` 指定目标节点，可以是选择器或真实元素。
+
+## 相关细节
+
+- `to`：接收选择器字符串或 DOM 元素；目标需存在于客户端。
+- `disabled`：为 `true` 时不传送，内容保留在原组件位置。
+- 渲染关系：传送不改变父子组件关系与响应性；事件依旧按组件逻辑触发。
+- 目标选择：常用 `body` 或自建根节点（如 `#portal-root`），避免受业务容器影响。
 
 ## **实战案例**
 
