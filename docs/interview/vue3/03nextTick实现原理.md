@@ -4,10 +4,10 @@
 
 ```vue
 <template>
-    <div>
-        <p id="counter" ref="counterRef">{{ count }}</p>
-        <button @click="increment">增加计数</button>
-    </div>
+  <div>
+    <p id="counter" ref="counterRef">{{ count }}</p>
+    <button @click="increment">增加计数</button>
+  </div>
 </template>
 
 <script setup>
@@ -16,9 +16,9 @@ import { ref } from "vue";
 const count = ref(0);
 
 const increment = () => {
-    for (let i = 1; i <= 1000; i++) {
-        count.value = i;
-    }
+  for (let i = 1; i <= 1000; i++) {
+    count.value = i;
+  }
 };
 </script>
 ```
@@ -48,21 +48,21 @@ const count = ref(0);
 const counterRef = ref(1);
 
 const increment = () => {
-    count.value++;
+  count.value++;
 
-    Promise.resolve().then(() => {
-        console.log("最新的数据：", count.value);
-        console.log("通过DOM拿textContent数据：", counterRef.value.textContent);
-        console.log(
-            "通过DOM拿textContent数据：",
-            document.getElementById("counter").textContent
-        );
-        console.log("通过DOM拿innerHTML数据：", counterRef.value.innerHTML);
-        console.log(
-            "通过DOM拿innerHTML数据：",
-            document.getElementById("counter").innerHTML
-        );
-    });
+  Promise.resolve().then(() => {
+    console.log("最新的数据：", count.value);
+    console.log("通过DOM拿textContent数据：", counterRef.value.textContent);
+    console.log(
+      "通过DOM拿textContent数据：",
+      document.getElementById("counter").textContent
+    );
+    console.log("通过DOM拿innerHTML数据：", counterRef.value.innerHTML);
+    console.log(
+      "通过DOM拿innerHTML数据：",
+      document.getElementById("counter").innerHTML
+    );
+  });
 };
 ```
 
@@ -70,21 +70,21 @@ nextTick 帮我们做的就是上面的事情，将一个任务包装成一个�
 
 ```js
 const increment = () => {
-    count.value++;
+  count.value++;
 
-    nextTick(() => {
-        console.log("最新的数据：", count.value);
-        console.log("通过DOM拿textContent数据：", counterRef.value.textContent);
-        console.log(
-            "通过DOM拿textContent数据：",
-            document.getElementById("counter").textContent
-        );
-        console.log("通过DOM拿innerHTML数据：", counterRef.value.innerHTML);
-        console.log(
-            "通过DOM拿innerHTML数据：",
-            document.getElementById("counter").innerHTML
-        );
-    });
+  nextTick(() => {
+    console.log("最新的数据：", count.value);
+    console.log("通过DOM拿textContent数据：", counterRef.value.textContent);
+    console.log(
+      "通过DOM拿textContent数据：",
+      document.getElementById("counter").textContent
+    );
+    console.log("通过DOM拿innerHTML数据：", counterRef.value.innerHTML);
+    console.log(
+      "通过DOM拿innerHTML数据：",
+      document.getElementById("counter").innerHTML
+    );
+  });
 };
 ```
 
@@ -92,20 +92,20 @@ nextTick 返回的是一个 Promise
 
 ```js
 const increment = async () => {
-    count.value++;
+  count.value++;
 
-    await nextTick();
-    console.log("最新的数据：", count.value);
-    console.log("通过DOM拿textContent数据：", counterRef.value.textContent);
-    console.log(
-        "通过DOM拿textContent数据：",
-        document.getElementById("counter").textContent
-    );
-    console.log("通过DOM拿innerHTML数据：", counterRef.value.innerHTML);
-    console.log(
-        "通过DOM拿innerHTML数据：",
-        document.getElementById("counter").innerHTML
-    );
+  await nextTick();
+  console.log("最新的数据：", count.value);
+  console.log("通过DOM拿textContent数据：", counterRef.value.textContent);
+  console.log(
+    "通过DOM拿textContent数据：",
+    document.getElementById("counter").textContent
+  );
+  console.log("通过DOM拿innerHTML数据：", counterRef.value.innerHTML);
+  console.log(
+    "通过DOM拿innerHTML数据：",
+    document.getElementById("counter").innerHTML
+  );
 };
 ```
 
@@ -113,36 +113,33 @@ const increment = async () => {
 
 ```js
 export default {
-    data() {
-        return {
-            count: 1,
-            counterRef: null,
-        };
+  data() {
+    return {
+      count: 1,
+      counterRef: null,
+    };
+  },
+  methods: {
+    increment() {
+      this.count++;
+      this.$nextTick(() => {
+        // 在下一个 DOM 更新循环后执行的回调函数
+        console.log("最新数据为:", this.count);
+        console.log("拿到的DOM:", document.getElementById("counter"));
+        console.log("拿到的DOM:", this.$refs.counterRef);
+        console.log(
+          "通过DOM拿数据:",
+          document.getElementById("counter").textContent
+        );
+        console.log(
+          "通过DOM拿数据:",
+          document.getElementById("counter").innerHTML
+        );
+        console.log("通过DOM拿数据:", this.$refs.counterRef.textContent);
+        console.log("通过DOM拿数据:", this.$refs.counterRef.innerHTML);
+      });
     },
-    methods: {
-        increment() {
-            this.count++;
-            this.$nextTick(() => {
-                // 在下一个 DOM 更新循环后执行的回调函数
-                console.log("最新数据为:", this.count);
-                console.log("拿到的DOM:", document.getElementById("counter"));
-                console.log("拿到的DOM:", this.$refs.counterRef);
-                console.log(
-                    "通过DOM拿数据:",
-                    document.getElementById("counter").textContent
-                );
-                console.log(
-                    "通过DOM拿数据:",
-                    document.getElementById("counter").innerHTML
-                );
-                console.log(
-                    "通过DOM拿数据:",
-                    this.$refs.counterRef.textContent
-                );
-                console.log("通过DOM拿数据:", this.$refs.counterRef.innerHTML);
-            });
-        },
-    },
+  },
 };
 ```
 
@@ -193,19 +190,19 @@ Vue 的 nextTick 是如何实现的？
 
 参考答案：
 
-`nextTick` 的本质将**回调函数包装为一个微任务放入到微任务队列，这样浏览器在完成渲染任务后会优先执行微任务。**
+`nextTick` 的本质将<span style="color:red">**回调函数包装为一个微任务放入到微任务队列，这样浏览器在完成渲染任务后会优先执行微任务。**</span>
 
 `nextTick` 在 Vue2 和 Vue3 里的实现有一些不同：
 
 1.  Vue2 为了兼容旧浏览器，会根据不同的环境选择不同包装策略：
 
--   优先使用 Promise，因为它是现代浏览器中最有效的微任务实现。
+- 优先使用 Promise，因为它是现代浏览器中最有效的微任务实现。
 
--   如果不支持 Promise，则使用 MutationObserver，这是另一种微任务机制。
+- 如果不支持 Promise，则使用 MutationObserver，这是另一种微任务机制。
 
--   在 IE 环境下，使用 setImmediate，这是一种表现接近微任务的宏任务。
+- 在 IE 环境下，使用 setImmediate，这是一种表现接近微任务的宏任务。
 
--   最后是 setTimeout(fn, 0) 作为兜底方案，这是一个宏任务，但会在下一个事件循环中尽快执行。
+- 最后是 setTimeout(fn, 0) 作为兜底方案，这是一个宏任务，但会在下一个事件循环中尽快执行。
 
 2.  Vue3 则是只考虑现代浏览器环境，直接使用 Promise 来实现微任务的包装，这样做的好处在于代码更加简洁，性能更高，因为不需要处理多种环境的兼容性问题。
 

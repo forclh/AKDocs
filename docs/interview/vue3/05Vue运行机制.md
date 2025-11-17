@@ -1,12 +1,12 @@
-# Vue 运行机制
+# Vue 运行机制 ✨
 
 > 面试题：介绍一下 Vue3 内部的运行机制是怎样的？
 
 Vue3 整体可以分为几大核心模块：
 
--   响应式系统
--   编译器
--   渲染器
+- 响应式系统
+- 编译器
+- 渲染器
 
 ## 如何描述 UI
 
@@ -27,17 +27,17 @@ Vue3 整体可以分为几大核心模块：
 
 ```js
 const obj = {
-    tag: "h1",
-    props: {
-        id: "title",
-        onClick: handler,
+  tag: "h1",
+  props: {
+    id: "title",
+    onClick: handler,
+  },
+  children: [
+    {
+      tag: "span",
+      children: "hello",
     },
-    children: [
-        {
-            tag: "span",
-            children: "hello",
-        },
-    ],
+  ],
 };
 ```
 
@@ -59,7 +59,7 @@ const obj = {
 ```js
 let level = 1;
 const title = {
-    tag: `h${level}`,
+  tag: `h${level}`,
 };
 ```
 
@@ -69,9 +69,9 @@ const title = {
 
 ```vue
 <template>
-    <div>
-        <h1 :id="someId">Hello</h1>
-    </div>
+  <div>
+    <h1 :id="someId">Hello</h1>
+  </div>
 </template>
 ```
 
@@ -79,7 +79,7 @@ const title = {
 
 ```js
 function render() {
-    return h("div", [h("h1", { id: someId }, "Hello")]);
+  return h("div", [h("h1", { id: someId }, "Hello")]);
 }
 ```
 
@@ -91,9 +91,9 @@ function render() {
 
 可以看到，在编译器的内部，实际上又分为了：
 
--   **解析器**：负责将模板解析为对应的模板 AST（抽象语法树）
--   **转换器**：负责将模板 AST 转换为 JS AST
--   **生成器**：将 JS AST 生成对应的 JS 代码（渲染函数）
+- **解析器**：负责将模板解析为对应的模板 AST（抽象语法树）
+- **转换器**：负责将模板 AST 转换为 JS AST
+- **生成器**：将 JS AST 生成对应的 JS 代码（渲染函数）
 
 Vue3 的编译器，除了最基本的编译以外，还做了很多的优化：
 
@@ -113,11 +113,11 @@ Vue3 的编译器，除了最基本的编译以外，还做了很多的优化：
 
 ```js
 const vnode = {
-    tag: "div",
-    props: {
-        onClick: () => alert("hello"),
-    },
-    children: "点击",
+  tag: "div",
+  props: {
+    onClick: () => alert("hello"),
+  },
+  children: "点击",
 };
 ```
 
@@ -133,30 +133,30 @@ const vnode = {
 
 ```js
 function renderer(vnode, container) {
-    // 1. 创建元素
-    const el = document.createElement(vnode.tag);
-    // 2. 遍历 props，为元素添加属性
-    for (const key in vnode.props) {
-        if (/^on/.test(key)) {
-            // 如果 key 以 on 开头，说明它是事件
-            el.addEventListener(
-                key.substr(2).toLowerCase(), // 事件名称 onClick --->click
-                vnode.props[key] // 事件处理函数
-            );
-        } else {
-            // 不是事件则添加属性
-            el.setAttribute(key, vnode.props[key]);
-        }
+  // 1. 创建元素
+  const el = document.createElement(vnode.tag);
+  // 2. 遍历 props，为元素添加属性
+  for (const key in vnode.props) {
+    if (/^on/.test(key)) {
+      // 如果 key 以 on 开头，说明它是事件
+      el.addEventListener(
+        key.substr(2).toLowerCase(), // 事件名称 onClick --->click
+        vnode.props[key] // 事件处理函数
+      );
+    } else {
+      // 不是事件则添加属性
+      el.setAttribute(key, vnode.props[key]);
     }
-    // 3. 处理children
-    if (typeof vnode.children === "string") {
-        el.appendChild(document.createTextNode(vnode.children));
-    } else if (Array.isArray(vnode.children)) {
-        // 递归的调用 renderer
-        vnode.children.forEach((child) => renderer(child, el));
-    }
+  }
+  // 3. 处理children
+  if (typeof vnode.children === "string") {
+    el.appendChild(document.createTextNode(vnode.children));
+  } else if (Array.isArray(vnode.children)) {
+    // 递归的调用 renderer
+    vnode.children.forEach((child) => renderer(child, el));
+  }
 
-    container.appendChild(el);
+  container.appendChild(el);
 }
 ```
 
@@ -169,13 +169,13 @@ function renderer(vnode, container) {
 ```js
 // 这个函数就可以当作是一个组件
 const MyComponent = function () {
-    return {
-        tag: "div",
-        props: {
-            onClick: () => alert("hello"),
-        },
-        children: "click me",
-    };
+  return {
+    tag: "div",
+    props: {
+      onClick: () => alert("hello"),
+    },
+    children: "click me",
+  };
 };
 ```
 
@@ -183,7 +183,7 @@ vnode 的 tag 就不再局限于 html 元素，而是可以写作这个函数名
 
 ```js
 const vnode = {
-    tag: MyComponent,
+  tag: MyComponent,
 };
 ```
 
@@ -191,13 +191,13 @@ const vnode = {
 
 ```js
 function renderer(vnode, container) {
-    if (typeof vnode.tag === "string") {
-        // 说明 vnode 描述的是标签元素
-        mountElement(vnode, container);
-    } else if (typeof vnode.tag === "function") {
-        // 说明 vnode 描述的是组件
-        mountComponent(vnode, container);
-    }
+  if (typeof vnode.tag === "string") {
+    // 说明 vnode 描述的是标签元素
+    mountElement(vnode, container);
+  } else if (typeof vnode.tag === "function") {
+    // 说明 vnode 描述的是组件
+    mountComponent(vnode, container);
+  }
 }
 ```
 
@@ -205,27 +205,27 @@ function renderer(vnode, container) {
 
 ```js
 const MyComponent = {
-    render() {
-        return {
-            tag: "div",
-            props: {
-                onClick: () => alert("hello"),
-            },
-            children: "click me",
-        };
-    },
+  render() {
+    return {
+      tag: "div",
+      props: {
+        onClick: () => alert("hello"),
+      },
+      children: "click me",
+    };
+  },
 };
 ```
 
 ```js
 function renderer(vnode, container) {
-    if (typeof vnode.tag === "string") {
-        // 说明 vnode 描述的是标签元素
-        mountElement(vnode, container);
-    } else if (typeof vnode.tag === "object") {
-        // 说明 vnode 描述的是组件
-        mountComponent(vnode, container);
-    }
+  if (typeof vnode.tag === "string") {
+    // 说明 vnode 描述的是标签元素
+    mountElement(vnode, container);
+  } else if (typeof vnode.tag === "object") {
+    // 说明 vnode 描述的是组件
+    mountComponent(vnode, container);
+  }
 }
 ```
 
