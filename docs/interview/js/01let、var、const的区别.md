@@ -1,16 +1,28 @@
 # ✨ let、var、const 的区别
 
+[[TOC]]
+
+::: tip 要点速览
+
+- 作用域：var（函数/全局，无块级）；let/const（块级、函数、全局）。
+- 提升与 TDZ：var 声明提升并初始化为 undefined；let/const 存在暂时性死区无法提升变量，初始化前不可访问。
+- 重复声明：var 允许在同一作用域重复声明；let/const 在同一块作用域禁止重复声明。
+- 全局绑定：全局作用域的 var 会挂到 `window`；let/const 不会。
+- 赋值约束：const 声明必须初始化；绑定不可重新赋值，但对象内部属性可修改。
+
+:::
+
 ## 经典真题
 
--   _let const var_ 的区别？什么是块级作用域？如何用？
+- _let const var_ 的区别？什么是块级作用域？如何用？
 
 ## 声明变量关键字汇总
 
 在 _JavaScript_ 中，一共存在 _3_ 种**声明变量**的方式：
 
--   _var_
--   _let_
--   _const_
+- _var_
+- _let_
+- _const_
 
 之所以有 _3_ 种方式，这是由于历史原因造成的。最初声明变量的关键字就是 _var_，但是为了解决作用域的问题，所以后面新增了 _let_ 和 _const_ 的方式。
 
@@ -20,7 +32,7 @@
 
 _ES5_ 中的作用域有：**全局作用域、函数作用域**，_ES6_ 中新增了**块级作用域**。块作用域由 { } 包括，_if_ 语句和 _for_ 语句里面的 { } 也属于块作用域。
 
-关于作用域的更多内容，可以参阅《[[【JS】作用域和作用域链🌟]]》章节。
+关于作用域的更多内容，可以参阅《[作用域和作用域链](10作用域和作用域链.md)》章节。
 
 ### _var_ 关键字
 
@@ -29,7 +41,7 @@ _ES5_ 中的作用域有：**全局作用域、函数作用域**，_ES6_ 中新�
 ```js
 //Global Scope
 {
-    var a = 10;
+  var a = 10;
 }
 console.log(a); //10
 ```
@@ -42,10 +54,10 @@ console.log(a); //10
 //Global Scope
 var a = 10;
 function checkscope() {
-    //Local Scope
-    var b = 20;
-    console.log(a); //10
-    console.log(b); //20
+  //Local Scope
+  var b = 20;
+  console.log(a); //10
+  console.log(b); //20
 }
 checkscope();
 console.log(b); //ReferenceError: b is not defined
@@ -72,9 +84,9 @@ var a = 10;
 // 函数声明也存在提升现象，但是函数表达式不存在
 checkscope();
 function checkscope() {
-    //Local Scope
-    console.log(a); //undefined
-    var a;
+  //Local Scope
+  console.log(a); //undefined
+  var a;
 }
 ```
 
@@ -108,10 +120,10 @@ console.log(a); //20
 
 checkscope();
 function checkscope() {
-    //Local Scope
-    var b = 10;
-    var b = 20;
-    console.log(b); //20
+  //Local Scope
+  var b = 10;
+  var b = 20;
+  console.log(b); //20
 }
 ```
 
@@ -123,8 +135,8 @@ function checkscope() {
 
 ```js
 {
-    //Block Scope
-    let a = 10;
+  //Block Scope
+  let a = 10;
 }
 console.log(a); //ReferenceError: a is not defined
 ```
@@ -135,9 +147,9 @@ console.log(a); //ReferenceError: a is not defined
 
 ```js
 {
-    //Block Scope
-    console.log(a); //ReferenceError: Cannot access 'a' before initialization
-    let a = 10;
+  //Block Scope
+  console.log(a); //ReferenceError: Cannot access 'a' before initialization
+  let a = 10;
 }
 ```
 
@@ -147,20 +159,20 @@ console.log(a); //ReferenceError: a is not defined
 
 ```js
 {
-    // Block Scope
-    console.log(a); // ReferenceError: Cannot access 'a' before initialization
-    let a = 20;
+  // Block Scope
+  console.log(a); // ReferenceError: Cannot access 'a' before initialization
+  let a = 20;
 }
 
 if (true) {
-    // TDZ开始
-    console.log(a); // ReferenceError: Cannot access 'a' before initialization
+  // TDZ开始
+  console.log(a); // ReferenceError: Cannot access 'a' before initialization
 
-    let a; // TDZ结束
-    console.log(a); // undefined
+  let a; // TDZ结束
+  console.log(a); // undefined
 
-    a = 123;
-    console.log(a); // 123
+  a = 123;
+  console.log(a); // 123
 }
 ```
 
@@ -190,19 +202,19 @@ _ES6_ 标准中对 _let/const_ 声明中的解释 [第 13 章](https://link.segm
 
 ```js
 {
-    //Block Scope
-    let A;
-    var A; //SyntaxError: Identifier 'A' has already been declared
+  //Block Scope
+  let A;
+  var A; //SyntaxError: Identifier 'A' has already been declared
 }
 {
-    //Block Scope
-    var A;
-    let A; //SyntaxError: Identifier 'A' has already been declared
+  //Block Scope
+  var A;
+  let A; //SyntaxError: Identifier 'A' has already been declared
 }
 {
-    //Block Scope
-    let A;
-    let A; //SyntaxError: Identifier 'A' has already been declared
+  //Block Scope
+  let A;
+  let A; //SyntaxError: Identifier 'A' has already been declared
 }
 ```
 
@@ -222,8 +234,8 @@ const a; // SyntaxError: Missing initializer in const declaration }
 ```js
 //Block Scope
 {
-    const a = 10;
-    a = 20; // TypeError: Assignment to constant variable
+  const a = 10;
+  a = 20; // TypeError: Assignment to constant variable
 }
 ```
 
@@ -233,7 +245,7 @@ _const_ 实际上保证的，并不是变量的值不得改动，而是**变量�
 
 ### 特点总结
 
--   _var_ 关键字
+- _var_ 关键字
 
 1. 没有**块级作用域**的概念
 2. 有全局作用域、函数作用域的概念
@@ -242,14 +254,14 @@ _const_ 实际上保证的，并不是变量的值不得改动，而是**变量�
 5. 全局作用域用 _var_ 声明的变量会挂载到 _window_ 对象下
 6. 同一作用域中允许重复声明
 
--   _let_ 关键字
+- _let_ 关键字
 
 1. 有**块级作用域**的概念
 2. 不存在变量提升
 3. **暂时性死区**
 4. 同一块作用域中不允许重复声明
 
--   _const_ 关键字
+- _const_ 关键字
 
 1. 与 _let_ 特性一样，仅有 _2_ 个差别
 2. 区别 1：**必须立即初始化**，不能留到以后赋值
@@ -257,13 +269,13 @@ _const_ 实际上保证的，并不是变量的值不得改动，而是**变量�
 
 ## 真题解答
 
--   _let const var_ 的区别？什么是块级作用域？如何用？
+- _let const var_ 的区别？什么是块级作用域？如何用？
 
 1. var 最主要的特性就是它存在变量提升的现象，并且没有块级作用域。其他的一些特点包括 var 定义的变量不初始化默认为 undefined，同一作用域允许重复声明、全局变量挂载到全局对象下。
 2. let 关键字主要的特性即使存在块级作用域和暂时性死区，并且同一作用域下不允许重复声明。
 3. const 关键字和 let 关键字基本相同，主要的的差别是 const 关键字声明的时候需要立即初始化、并且声明的常量不能修改。
 
-块级作用域就是由一堆花括号包裹形成的作用域空间，比如 if 语句和 for 语句里面的花括号
+块级作用域就是由一堆花括号包裹形成的作用域空间，比如 if 语句和 for 语句里面的花括号。
 
 > 参考答案：
 >
@@ -289,75 +301,10 @@ _const_ 实际上保证的，并不是变量的值不得改动，而是**变量�
 | **初始化值**         | 默认为 undefined                | 无默认值，未初始化前无法访问  | 必须立即初始化                      |
 | **值可变性**         | ✅ 可修改                       | ✅ 可修改                     | ❌ 不可修改（但对象内部属性可修改） |
 
-# 为什么会存在变量提升现象？ JavaScript 的执行过程？
+::: info 最佳实践与注意事项
 
-```mermaid
-flowchart TD
-    A[JavaScript 源代码] --> B[词法分析]
-    B -->|生成tokens| C[语法分析]
-    C -->|生成AST| D[代码生成]
-    D --> E[执行准备]
-
-    subgraph 编译阶段
-        B
-        C
-        D
-    end
-
-    subgraph 执行环境准备
-        E --> E1[创建执行上下文]
-
-        E1 --> E2[创建阶段]
-        E2 --> E21[创建词法环境]
-        E2 --> E22[创建变量环境]
-        E2 --> E23[创建this绑定]
-        E2 --> E24[设置外部环境引用]
-
-        E21 --> E211[处理let/const声明]
-        E211 --> E211A[提升但进入暂时性死区]
-
-        E22 --> E221[处理var声明]
-        E221 --> E221A[提升并初始化为undefined]
-        E22 --> E222[函数声明整体提升]
-    end
-
-    E1 --> F[执行阶段]
-
-    subgraph 代码执行
-        F --> F1[按顺序执行代码]
-        F1 --> F2[变量赋值]
-        F1 --> F3[函数调用]
-        F3 -->|创建新的执行上下文| E1
-        F1 --> F4[原型链查找]
-        F1 --> F5[闭包形成]
-    end
-
-    subgraph 执行上下文栈管理
-        G[执行上下文栈/调用栈]
-        G <-->|压入全局上下文| E1
-        G <-->|函数调用压栈| F3
-        F1 -->|函数返回| H[执行上下文出栈]
-        H --> G
-    end
-
-    subgraph 内存管理
-        I[标记-清除垃圾回收]
-        H -.->|可能触发| I
-        I -.->|定期执行| I
-    end
-
-    subgraph 事件循环
-        J[事件队列]
-        K[微任务队列]
-        L[宏任务队列]
-
-        F1 --> K
-        F1 --> L
-        F -.->|同步代码执行完毕| M[检查微任务队列]
-        M -->|执行所有微任务| N[执行一个宏任务]
-        N --> M
-    end
-
-    F5 -.->|保持对外部变量引用| O[形成闭包]
-    O -.->|延长变量生命周期| I
-```
+- 优先使用 `const` 表达不可重新赋值的绑定；对需重新赋值的使用 `let`；避免使用 `var`。
+- 在块级作用域中提前访问 `let/const` 声明的变量会触发 TDZ 错误；统一将声明置于块首以降低心智负担。
+- 避免同名变量在不同块级覆盖造成困扰；合理命名与缩小作用域范围。
+- 全局变量尽量通过模块导出/导入管理；避免依赖 `window` 挂载的 `var` 全局污染。
+  :::

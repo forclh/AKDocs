@@ -1,4 +1,4 @@
-# ✨XSS 攻击 👌
+# XSS 攻击 ✨
 
 **XSS（Cross Site Scripting，跨站脚本攻击）**，是攻击者利用 Web 应用程序的安全漏洞，将在**表单提交**（评论、用户资料、富文本编辑器）时将恶意脚本注入到可被其他用户访问的页面中的攻击方式。当受害者访问包含恶意脚本的页面时，脚本会在其浏览器执行，导致：
 
@@ -12,9 +12,9 @@
 
 ## 防御方式
 
--   输入过滤：**去掉一些危险的标签**，**去掉一些危险的属性**
--   HttpOnly Cookies：阻止 document.cookie 访问
--   [CSP](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Guides/CSP)（内容安全策略）：限制脚本执行来源
+- 输入过滤：**去掉一些危险的标签**，**去掉一些危险的属性**
+- HttpOnly Cookies：阻止 document.cookie 访问
+- [CSP](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Guides/CSP)（内容安全策略）：限制脚本执行来源
 
 ## 面试题
 
@@ -26,6 +26,6 @@ XSS 是指**跨站脚本攻击**。是攻击者利用 Web 应用程序的安全�
 
 要防范 XSS 攻击，需要采用多层防御策略：
 
--   **输入验证和过滤**（移除或编码危险的 HTML 标签和属性）
--   **设置 HttpOnly Cookie**（防止脚本访问敏感 Cookie）
--   **实施 CSP 内容安全策略**（限制脚本执行来源）
+- **输入验证和过滤**（移除或编码危险的 HTML 标签和属性）
+- **设置 HttpOnly Cookie**（防止脚本访问敏感 Cookie）
+- **实施 CSP 内容安全策略**（限制脚本执行来源）

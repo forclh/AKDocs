@@ -1,19 +1,68 @@
-# 面试题
+# Cookie 和 Storage ✨
 
-cookie/sessionStorage/localStorage 的区别
+[[TOC]]
 
-> 参考答案：
-> 
-> cookie、sessionStorage、localStorage 都是**保存本地数据**的方式
-> 
-> 其中，cookie 兼容性较好，所有浏览器均支持。浏览器针对 cookie 会有一些默认行为，比如当响应头中出现`set-cookie`字段时，浏览器会自动保存 cookie 的值；再比如，浏览器发送请求时，会附带匹配的 cookie 到请求头中。这些默认行为，使得 cookie 长期以来担任着维持登录状态的责任。与此同时，也正是因为浏览器的默认行为，给了恶意攻击者可乘之机，CSRF 攻击就是一个典型的利用 cookie 的攻击方式。虽然 cookie 不断的改进，但前端仍然需要另一种更加安全的保存数据的方式
-> 
-> HTML5 新增了 sessionStorage 和 localStorage，前者用于保存会话级别的数据，后者用于更持久的保存数据。浏览器针对它们没有任何默认行为，这样一来，就把保存数据、读取数据的工作交给了前端开发者，这就让恶意攻击者难以针对登录状态进行攻击。 cookie 的大小是有限制的，一般浏览器会限制同一个域下的 cookie 总量不超过 4KB，而 sessionStorage 和 localStorage 则拥有更大的空间，多数浏览器一般要求不超过 5MB~10MB cookie 会与 domain、path 关联，而 sessionStorage 和 localStorage 只与 domain 关联
+## cookie/sessionStorage/localStorage 的区别
 
-sessionStorage、localStorage的区别在于前者用于**保存会话级别的数据**，后者用于**更持久的保存数据**。
+::: tip 要点速览
 
-cookie与上述两者的区别在于：
+- 三者均为浏览器本地存储；适用场景与行为不同。
+- Cookie：随请求自动发送，常用于会话/认证；容量约 4KB；受 `Domain/Path/SameSite/HttpOnly/Secure` 管控。
+- localStorage：持久存储（长期），容量通常 5–10MB；按域隔离；需 JS 主动读写。
+- sessionStorage：会话级存储（标签页/窗口生命周期），容量通常 5–10MB；按域隔离；需 JS 主动读写。
 
-1. cookie **兼容性较好**，所有浏览器均支持。sessionStorage 和 localStorage是HTML5 新增的
-2. 浏览器针对 **cookie 会有一些默认行为**，比如当响应头中出现`set-cookie`字段时，浏览器会自动保存 cookie 的值；再比如，浏览器发送请求时，会附带匹配的 cookie 到请求头中。 sessionStorage 和 localStorage需要开发者手动编写代码进行数据的读取和保存
-3. 由于**浏览器的默认行为，会使得cookie容易被攻击如：CSRF 攻击就是一个典型的利用 cookie 的攻击方式.**
+:::
+
+## 参考答案
+
+Cookie、sessionStorage、localStorage 都是保存本地数据的方式，但有这些核心差异：
+
+### 行为与默认机制
+
+- Cookie 兼容性好（所有浏览器），并具备默认行为：
+  - 响应头出现 `Set-Cookie` 时自动保存；
+  - 符合匹配规则的 Cookie 会自动随请求附带到请求头 `Cookie`。
+- Storage（local/session）无默认传输行为，完全由前端代码控制读写与发送，降低与会话状态相关的攻击面。
+
+### 持久性与容量
+
+- Cookie 容量一般每域不超过约 4KB（含多个键值的总和），适合小型状态标识。
+- localStorage 为持久存储（除非手动清除），多数浏览器限制 5–10MB。
+- sessionStorage 为会话级存储（单标签页/窗口生命周期），关闭标签页或窗口即清空，容量同上。
+
+### 作用域与隔离
+
+- Cookie 受 `Domain/Path` 作用域控制，可在子域间共享（视 `Domain` 设置而定），并受 `Secure/HttpOnly/SameSite` 限制。
+- localStorage/sessionStorage 只与 `domain` 关联，不区分路径；不同子域互不共享；`sessionStorage` 还隔离不同标签页/窗口。
+
+::: warning 安全与风控
+
+- Cookie 的自动携带可能被 CSRF 利用；建议认证类 Cookie 设置 `HttpOnly/Secure/SameSite` 并配合 CSRF Token。
+- 不要把敏感信息（如令牌明文）存入可被 JS 读取的存储（localStorage/sessionStorage/Cookie 非 HttpOnly）。
+  :::
+
+## 示例代码
+
+```js
+// Cookie：由服务端下发或前端写入（注意：无法设置 HttpOnly）
+document.cookie = "pref=dark; Path=/; Max-Age=3600; SameSite=Lax";
+
+// localStorage：长期持久化（同域共享）
+localStorage.setItem("theme", "dark");
+console.log(localStorage.getItem("theme"));
+
+// sessionStorage：会话期存储（每个标签页独立）
+sessionStorage.setItem("tabState", "active");
+console.log(sessionStorage.getItem("tabState"));
+```
+
+## 对比小结
+
+| 维度     | Cookie                     | localStorage       | sessionStorage                |
+| -------- | -------------------------- | ------------------ | ----------------------------- |
+| 传输行为 | 自动随请求附带（匹配后）   | 无（需代码控制）   | 无（需代码控制）              |
+| 持久性   | 受 `Expires/Max-Age` 控制  | 长期持久           | 会话期（标签页/窗口生命周期） |
+| 容量     | ≈ 4KB/域                   | ≈ 5–10MB/域        | ≈ 5–10MB/域                   |
+| 作用域   | `Domain/Path` 可控         | 按域隔离           | 按域且标签页隔离              |
+| 安全属性 | `HttpOnly/Secure/SameSite` | 无（需自控与加密） | 无（需自控与加密）            |
+| 典型用途 | 会话/认证标识、少量偏好    | 业务缓存、偏好配置 | 页面会话状态、临时数据        |

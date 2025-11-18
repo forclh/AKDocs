@@ -1,31 +1,129 @@
-# ✨ CSRF 攻击
+# CSRF 攻击 ✨
 
-CSRF（Cross-site request forgery，**跨站请求伪造**）
+[[TOC]]
 
-它是指攻击者**利用了用户的身份信息，执行了用户非本意的操作**
+::: tip 要点速览
+
+- 概念：跨站请求伪造，利用**浏览器会自动携带凭证（Cookie/会话）在目标站发起请求**，执行非本意操作。
+- 成立条件：自动凭证、可被第三方触发的跨站请求、目标接口缺少用户意图验证或防护。
+- 高危接口：转账、修改密码、绑定手机、下单支付等“状态改变”接口。
+- 关键防护：`SameSite`、CSRF Token、双重提交、校验 `Origin/Referer`、只用非 Cookie 凭证、接口幂等与方法约束。
+
+:::
+
+## 攻击原理与场景
 
 ![](http://mdrs.yuanjin.tech/img/20211101145156.png)
 
+- 用户已登录目标网站，浏览器保存了登录 Cookie。
+- 攻击者引导用户访问恶意页面，该页面通过 `form/img/iframe` 等发起跨站请求到目标网站。
+- 浏览器自动附带 Cookie，若目标接口未做意图校验，即可能执行危险操作。
+
+::: danger 攻击成立的典型条件
+
+- 浏览器自动附带 Cookie（或其他会话凭证）。
+- 跨站来源可发起到目标域的请求。
+- 目标接口缺少令牌校验或来源校验，且允许 GET/POST 等无额外验证的提交。
+  :::
+
 ## 防御方式
 
-| 防御手段                                                                                                                                                | 防御力          | 问题                                                                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 不使用 cookie                                                                                                                                           | ⭐️⭐️⭐️⭐️⭐️ | 兼容性略差（使用 H5 的 localStorage）<br>ssr 会遇到困难（因为登录和不登陆服务器返回的页面大概率是不同的，而第一次请求无法携带 localStorage），但可解决 |
-| 使用**sameSite**（cookie 中的一个特殊字段，**当值为 strict 的时候表示，发送请求的页面需要和获得 cookie 的页面为相同站点，但是太过严格，一般使用 lax**） | ⭐️⭐️⭐️⭐️    | 兼容性差<br>容易挡住自己人                                                                                                                             |
-| 使用**csrf token**                                                                                                                                      | ⭐️⭐️⭐️⭐️⭐️ | 获取到 token 后未进行操作仍然会被攻击                                                                                                                  |
-| 使用 referer 防护                                                                                                                                       | ⭐️⭐️          | 过去很常用，现在已经发现漏洞                                                                                                                           |
+| 防御手段                                                                    | 防御力          | 适用性与注意点                                                      |
+| --------------------------------------------------------------------------- | --------------- | ------------------------------------------------------------------- |
+| 不使用 Cookie（改用 `Authorization` 头、Token 存储于内存/`sessionStorage`） | ⭐️⭐️⭐️⭐️⭐️ | 跨站不会自动携带；SSR 场景需设计首屏与鉴权流程；谨慎处理 XSS。      |
+| `SameSite`（`Lax`/`Strict`/`None`）                                         | ⭐️⭐️⭐️⭐️    | 降低跨站请求携带 Cookie；`None` 需 `Secure`；过严可能影响自身业务。 |
+| CSRF Token（同步令牌/双重提交）                                             | ⭐️⭐️⭐️⭐️⭐️ | 后端生成令牌，前端提交时携带，后端校验；适合表单与变更接口。        |
+| 校验 `Origin/Referer`                                                       | ⭐️⭐️          | 可作为辅助；存在绕过与兼容问题，不可单独依赖。                      |
 
-## 面试题
+::: warning 实施建议
 
-介绍 csrf 攻击
+- 对“状态改变”接口统一采用 CSRF Token 校验，并拒绝 GET 修改状态。
+- 为 Cookie 设置 `HttpOnly/Secure/SameSite`，跨域场景谨慎使用 `SameSite=None` 与凭证。
+- 不要将令牌写入 Cookie 明文；令牌应与会话绑定，具备有效期与一次性策略（可选）。
+  :::
 
-> CSRF 是跨站请求伪造，是一种挟制**用户在当前已登录的 Web 应用上执行非本意的操作的攻击方法**
->
-> 它首先引导用户访问一个危险网站，**当用户访问网站后，网站会发送请求（img\iframe）到被攻击的站点，这次请求会携带用户的 cookie 发送**，因此就利用了用户的身份信息完成攻击
->
-> 防御 CSRF 攻击有多种手段：
->
-> 1. 不使用 cookie
-> 2. 为表单添加校验的 token 校验
-> 3. cookie 中使用 sameSite 字段
-> 4. 服务器检查 referer 字段（不用了）
+### 服务端示例（Express + 同步令牌模式）
+
+```js
+const express = require("express");
+const crypto = require("crypto");
+const app = express();
+app.use(express.json());
+
+const sessions = new Map();
+
+function parseCookies(s) {
+  const out = {};
+  if (!s) return out;
+  s.split(";")
+    .map((v) => v.trim())
+    .forEach((kv) => {
+      const [k, ...r] = kv.split("=");
+      out[k] = decodeURIComponent(r.join("="));
+    });
+  return out;
+}
+
+app.use((req, res, next) => {
+  const c = parseCookies(req.headers.cookie);
+  let sid = c.sessionid;
+  if (!sid || !sessions.has(sid)) {
+    sid = crypto.randomUUID();
+    sessions.set(sid, { csrf: crypto.randomBytes(16).toString("hex") });
+    res.setHeader(
+      "Set-Cookie",
+      `sessionid=${sid}; HttpOnly; Path=/; SameSite=Lax`
+    );
+  }
+  req.session = sessions.get(sid);
+  next();
+});
+
+app.get("/csrf-token", (req, res) => {
+  res.json({ token: req.session.csrf });
+});
+
+app.post("/transfer", (req, res) => {
+  const token = req.headers["x-csrf-token"] || req.body.csrf;
+  if (!token || token !== req.session.csrf)
+    return res.status(403).json({ ok: false, reason: "csrf" });
+  res.json({ ok: true });
+});
+
+app.listen(4000);
+```
+
+### 前端示例（获取令牌并提交）
+
+```js
+async function getToken() {
+  const r = await fetch("http://localhost:4000/csrf-token", {
+    credentials: "include",
+  });
+  const j = await r.json();
+  return j.token;
+}
+
+async function transfer(amount) {
+  const token = await getToken();
+  const r = await fetch("http://localhost:4000/transfer", {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json", "x-csrf-token": token },
+    body: JSON.stringify({ amount, csrf: token }),
+  });
+  return r.json();
+}
+```
+
+::: tip 提示
+
+- 令牌需与会话绑定并定期轮换；对关键操作可采用一次性令牌。
+- 禁止使用 GET 修改状态；优先限制跨站来源与方法。
+  :::
+
+## 面试题速览
+
+- 定义与原理：跨站请求伪造依赖浏览器自动附带凭证在目标站执行操作。
+- 常见载体：`form` 自动提交、隐蔽 `img/iframe` 请求、第三方脚本触发导航。
+- 防御要点：`SameSite`、CSRF Token、来源校验、凭证策略与方法约束。

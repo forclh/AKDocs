@@ -1,6 +1,15 @@
-# ✨JWT👌
+# JWT ✨
 
-> 本文有配套案例
+[[TOC]]
+
+::: tip 要点速览
+
+- JWT 是一种令牌格式，不限定存储与传输位置；常用 `Authorization: Bearer <token>`。
+- 令牌结构：`header.payload.signature`，`header/payload` 为 base64url 编码的 JSON，`signature` 用指定算法签名。
+- 安全本质：`signature` 保证不可伪造与篡改；`payload` 非加密，属于可读内容。
+- 算法选择：`HS256`（对称密钥）与 `RS256`（非对称密钥）；服务端需安全管理密钥。
+- 过期与校验：服务器自行验证签名、`exp/nbf/iat/aud/iss` 等声明；库仅提供基础能力，策略由业务控制。
+  :::
 
 ## 概述
 
@@ -12,8 +21,8 @@
 
 一种比较简单的办法就是直接存储用户信息的 JSON 串，这会造成下面的几个问题：
 
--   非浏览器环境，如何在令牌中记录过期时间
--   如何防止令牌被伪造
+- 非浏览器环境，如何在令牌中记录过期时间
+- 如何防止令牌被伪造
 
 JWT 就是为了解决这些问题出现的。
 
@@ -29,12 +38,11 @@ JWT 全称`Json Web Token`，本质就是一个字符串
 
 ```
 HTTP/1.1 200 OK
-...
-set-cookie:token=JWT令牌
-authentication:JWT令牌
-...
+Set-Cookie: token=JWT令牌
+Authorization: Bearer JWT令牌
+Content-Type: application/json
 
-{..., token:JWT令牌}
+{ "token": "JWT令牌" }
 ```
 
 可以看到，**JWT 令牌可以出现在响应的任何一个地方，客户端和服务器自行约定即可**。
@@ -51,9 +59,7 @@ authentication:JWT令牌
 
 ```
 GET /api/resources HTTP/1.1
-...
-authorization: bearer JWT令牌
-...
+Authorization: Bearer JWT令牌
 ```
 
 这样一来，服务器就能够收到这个令牌了，通过对令牌的验证，即可知道该令牌是否有效。
@@ -80,9 +86,9 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9.BC
 
 它各个部分的值分别是：
 
--   `header：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`
--   `payload：eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9`
--   `signature: BCwUy3jnUQ_E6TqCayc7rCHkx-vxxdagUwPOWqwYCFc`
+- `header：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`
+- `payload：eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9`
+- `signature: BCwUy3jnUQ_E6TqCayc7rCHkx-vxxdagUwPOWqwYCFc`
 
 下面分别对每个部分进行说明
 
@@ -90,7 +96,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9.BC
 
 它是令牌头部，记录了整个**令牌的类型和签名算法**
 
-**它的格式是一个`json`对象**，如下：
+**它的格式是一个 JSON 对象**，如下：
 
 ```json
 { "alg": "HS256", "typ": "JWT" }
@@ -98,39 +104,39 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9.BC
 
 该对象记录了：
 
--   alg：signature 部分使用的签名算法，通常可以取两个值
-    -   **HS256：一种对称加密算法，使用同一个秘钥对 signature 加密解密**
-    -   **RS256：一种非对称加密算法，使用私钥签名，公钥验证**
--   typ：整个令牌的类型，固定写`JWT`即可
+- alg：signature 部分使用的签名算法，通常可以取两个值
+  - **HS256：一种对称加密算法，使用同一个秘钥对 signature 加密解密**
+  - **RS256：一种非对称加密算法，使用私钥签名，公钥验证**
+- typ：整个令牌的类型，固定写`JWT`即可
 
-设置好了`header`之后，就可以生成`header`部分了
+设置好了 `header` 之后，就可以生成 `header` 部分了
 
 具体的生成方式及其简单，**就是把`header`部分使用`base64 url`编码**即可
 
-> base64 url 不是一个加密算法，而是一种编码方式，它是在 base64 算法的基础上对+、=、/三个字符做出特殊处理的算法
+> base64url 不是一个加密算法，而是一种编码方式，它是在 base64 算法的基础上对 +、=、/ 三个字符做出特殊处理的算法
 >
 > 而`base64`是使用 64 个可打印字符来表示一个二进制数据，具体的做法参考[百度百科](https://baike.baidu.com/item/base64/8545775?fr=aladdin)
 
-浏览器提供了`btoa`函数，可以完成这个操作：
+浏览器提供了 `btoa` 函数，可以完成这个操作：
 
 ```js
 window.btoa(
-    JSON.stringify({
-        alg: "HS256",
-        typ: "JWT",
-    })
+  JSON.stringify({
+    alg: "HS256",
+    typ: "JWT",
+  })
 );
 // 得到字符串：eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 ```
 
-同样的，浏览器也提供了`atob`函数，可以对其进行解码：
+同样的，浏览器也提供了 `atob` 函数，可以对其进行解码：
 
 ```js
 window.atob("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
 // 得到字符串：{"alg":"HS256","typ":"JWT"}
 ```
 
-> nodejs 中没有提供这两个函数，可以安装第三方库 atob 和 bota 搞定或者手动搞定
+> nodejs 中没有提供这两个函数，可以安装第三方库或使用 Buffer 实现。
 
 ### payload
 
@@ -152,13 +158,13 @@ window.atob("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
 
 上述属性表达的含义分别是：
 
--   ss：发行该 JWT 的是谁，可以写公司名字，也可以写服务名称
--   iat：该 JWT 的发放时间，通常写当前时间的时间戳
--   exp：该 JWT 的**到期时间**，通常写时间戳
--   sub：该 JWT 是用于干嘛的
--   aud：该 JWT 是发放给哪个终端的，可以是终端类型，也可以是用户名称，随意一点
--   nbf：一个时间点，在该时间点到达之前，这个令牌是不可用的
--   jti：JWT 的唯一编号，设置此项的目的，主要是为了防止重放攻击（重放攻击是在某些场景下，用户使用之前的令牌发送到服务器，被服务器正确的识别，从而导致不可预期的行为发生）
+- ss：发行该 JWT 的是谁，可以写公司名字，也可以写服务名称
+- iat：该 JWT 的发放时间，通常写当前时间的时间戳
+- exp：该 JWT 的**到期时间**，通常写时间戳
+- sub：该 JWT 是用于干嘛的
+- aud：该 JWT 是发放给哪个终端的，可以是终端类型，也可以是用户名称，随意一点
+- nbf：一个时间点，在该时间点到达之前，这个令牌是不可用的
+- jti：JWT 的唯一编号，设置此项的目的，主要是为了防止重放攻击（重放攻击是在某些场景下，用户使用之前的令牌发送到服务器，被服务器正确的识别，从而导致不可预期的行为发生）
 
 可是到现在，看了半天，没有出现我想要写入的数据啊 😂
 
@@ -170,21 +176,21 @@ window.atob("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
 
 ```json
 {
-    "foo": "bar",
-    "iat": 1587548215
+  "foo": "bar",
+  "iat": 1587548215
 }
 ```
 
 `foo: bar`是我们自定义的信息，`iat: 1587548215`是 JWT 规范中的信息
 
-最终，payload 部分和 header 一样，**需要通过`base64 url`编码得到**：
+最终，payload 部分和 header 一样，**需要通过 base64url 编码得到**：
 
 ```js
 window.btoa(
-    JSON.stringify({
-        foo: "bar",
-        iat: 1587548215,
-    })
+  JSON.stringify({
+    foo: "bar",
+    iat: 1587548215,
+  })
 );
 // 得到字符串：eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9
 ```
@@ -193,16 +199,16 @@ window.btoa(
 
 这一部分是 JWT 的签名，正是它的存在，保证了整个 JWT 不被篡改
 
-这部分的生成，是对**前面两个部分的编码结果，按照头部指定的方式进行加密**
+这部分的生成，是对**前面两个部分的编码结果，按照头部指定的方式进行签名**
 
 比如：头部指定的加密方法是`HS256`，前面两部分的编码结果是`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9`
 
-则第三部分就是用对称加密算法`HS256`对字符串`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9`进行加密，当然你得指定一个秘钥，比如`shhhhh`
+则第三部分就是用对称算法 `HS256` 对字符串进行签名（HMAC-SHA256），需指定一个密钥。
 
 ```js
 HS256(
-    `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9`,
-    "shhhhh"
+  `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9`,
+  "shhhhh"
 );
 // 得到：BCwUy3jnUQ_E6TqCayc7rCHkx-vxxdagUwPOWqwYCFc
 ```
@@ -213,7 +219,7 @@ HS256(
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE1ODc1NDgyMTV9.BCwUy3jnUQ_E6TqCayc7rCHkx-vxxdagUwPOWqwYCFc
 ```
 
-由于**签名使用的秘钥保存在服务器，这样一来，客户端就无法伪造出签名，因为它拿不到秘钥。**
+由于**签名使用的密钥保存在服务器，这样一来，客户端就无法伪造出签名，因为它拿不到密钥。**
 
 换句话说，之所以说无法伪造 JWT，就是因为第三部分的存在。
 
@@ -230,6 +236,69 @@ JWT 的`signature`可以保证令牌不被伪造，那如何保证令牌不被�
 比如，某个用户登陆成功了，获得了 JWT，但他人为的篡改了`payload`，比如把自己的账户余额修改为原来的两倍，然后重新编码出`payload`发送到服务器，服务器如何得知这些信息被篡改过了呢？
 
 这就要说到令牌的验证了
+
+## 生成与验证示例（Node.js）
+
+```js
+const crypto = require("crypto");
+
+function base64url(input) {
+  return Buffer.from(input)
+    .toString("base64")
+    .replace(/=/g, "")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_");
+}
+
+function signHS256(data, secret) {
+  return crypto
+    .createHmac("sha256", secret)
+    .update(data)
+    .digest("base64")
+    .replace(/=/g, "")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_");
+}
+
+function createToken(payload, secret) {
+  const header = { alg: "HS256", typ: "JWT" };
+  const h = base64url(JSON.stringify(header));
+  const p = base64url(JSON.stringify(payload));
+  const s = signHS256(`${h}.${p}`, secret);
+  return `${h}.${p}.${s}`;
+}
+
+function verifyToken(token, secret) {
+  const [h, p, s] = token.split(".");
+  if (!h || !p || !s) return { ok: false, reason: "format" };
+  const expect = signHS256(`${h}.${p}`, secret);
+  if (expect !== s) return { ok: false, reason: "signature" };
+  const payload = JSON.parse(
+    Buffer.from(p.replace(/-/g, "+").replace(/_/g, "/"), "base64").toString(
+      "utf8"
+    )
+  );
+  const now = Math.floor(Date.now() / 1000);
+  if (payload.nbf && now < payload.nbf) return { ok: false, reason: "nbf" };
+  if (payload.exp && now >= payload.exp) return { ok: false, reason: "exp" };
+  return { ok: true, payload };
+}
+
+const secret = "shhhhh";
+const payload = {
+  sub: "user:123",
+  iat: Math.floor(Date.now() / 1000),
+  exp: Math.floor(Date.now() / 1000) + 3600,
+};
+const token = createToken(payload, secret);
+const res = verifyToken(token, secret);
+```
+
+::: warning 算法与环境
+
+- 浏览器环境可使用 Web Crypto API 实现 HMAC/RSASSA-PKCS1-v1_5；示例基于 Node.js 标准库。
+- `RS256` 需管理私钥/公钥，支持撤销与轮换；`HS256` 密钥共享，适合单服务或集中密钥管理。
+  :::
 
 ## 令牌的验证
 
@@ -253,15 +322,37 @@ JWT 的`signature`可以保证令牌不被伪造，那如何保证令牌不被�
 
 当令牌验证为没有被篡改后，服务器可以进行其他验证：比如是否过期、听众是否满足要求等等，这些就视情况而定了
 
-注意：这些验证都需要服务器手动完成，没有哪个服务器会给你进行自动验证，当然，你可以借助第三方库来完成这些操作
+注意：这些验证都需要服务器手动完成；第三方库（如 `jsonwebtoken`）提供签名与基础校验，具体策略由业务控制。
+
+::: tip 常用声明与作用
+
+- `iss` 发行者、`aud` 听众：限定令牌来源与使用方。
+- `exp` 过期时间、`nbf` 生效时间、`iat` 签发时间：控制时效性与防重放窗口。
+- `jti` 唯一 ID：结合服务端黑名单/撤销列表实现失效与踢出。
+  :::
+
+::: danger 安全注意
+
+- 不在 `payload` 存放敏感数据；`payload` 非加密。
+- HTTPS 传输，防止中间人窃听与篡改。
+- 妥善管理密钥，支持轮换与撤销；区分测试与生产密钥。
+- 与 Cookie 结合时，建议使用 `HttpOnly/Secure/SameSite`；防范 XSS/CSRF。
+  :::
 
 ## 总结
 
 最后，总结一下 JWT 的特点：
 
--   **JWT 本质上是一种令牌格式**。它和终端设备无关，同样和服务器无关，甚至与如何传输无关，它只是规范了令牌的格式而已
--   JWT 由三部分组成：header、payload、signature。主体信息在 payload
--   JWT 难以被篡改和伪造。这是因为有第三部分的签名存在。
+- **JWT 本质上是一种令牌格式**。它和终端设备无关，同样和服务器无关，甚至与如何传输无关，它只是规范了令牌的格式而已
+- JWT 由三部分组成：header、payload、signature。主体信息在 payload
+- JWT 难以被篡改和伪造。这是因为有第三部分的签名存在。
+
+::: details 适用场景与替代
+
+- 适合跨端与分布式场景的无状态鉴权；携带基础身份/权限信息。
+- 结合短期令牌与刷新令牌机制，降低泄露风险与提升续期体验。
+- 对于需要可撤销、细粒度会话控制的场景，可结合服务端会话表、Token 黑名单或采用服务器存储会话的方案。
+  :::
 
 ## 面试题
 
