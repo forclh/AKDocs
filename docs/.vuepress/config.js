@@ -112,6 +112,19 @@ export default defineUserConfig({
         ],
       },
       {
+        text: "ES6+",
+        prefix: "/es6+/",
+        collapsible: true,
+        children: [
+          "12反射与代理-属性描述符.md",
+          "12反射与代理-Reflect.md",
+          "12反射与代理-Proxy.md",
+          "12反射与代理-观察者模式.md",
+          "12反射与代理-偷懒的构造函数.md",
+          "12反射与代理-可验证的函数参数.md",
+        ],
+      },
+      {
         text: "Vue3",
         collapsible: true,
         children: [
@@ -164,7 +177,7 @@ export default defineUserConfig({
               "15指令的本质.md",
               "16插槽的本质.md",
               "17v-model的本质.md",
-              "18setup语法语法标签.md",
+              "18setup语法标签.md",
               "19组件生命周期.md",
               "20keepalive生命周期.md",
               "21keepalive的本质.md",

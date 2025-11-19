@@ -1,82 +1,126 @@
-# 【Router】滚动行为
+# 【Router】路由滚动行为 👌
 
-在 Vue-router 可以自定义路由切换时页面如何滚动。
+[[TOC]]
 
-> 注意：这个功能只在支持 history.pushState 的浏览器中可用。
+::: tip 要点速览
 
-当创建一个 Router 实例，可以提供一个 scrollBehavior 方法：
+- 在创建路由时通过 `scrollBehavior(to, from, savedPosition)` 自定义页面滚动
+- 仅在支持 `history.pushState` 的浏览器可用
+- `savedPosition` 仅在浏览器前进/后退（`popstate`）时提供
+- `scrollBehavior` 返回值可为 `{ left, top, behavior }` 或 `{ el, top, left, behavior }`
+- 处理锚点跳转：`to.hash` 可配合 `{ el: to.hash }` 精确滚动
+- 可返回 Promise 以延迟滚动，适配过渡/懒加载
+  :::
 
-```jsx
+## 概念与签名
+
+在路由实例上声明滚动策略：
+
+```js
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes: [...],
-  scrollBehavior (to, from, savedPosition) {
-    // return 期望滚动到哪个的位置
-		// 始终滚动到顶部
-    return { top: 0 }
-  }
-})
-```
-
-第三个参数 savedPosition，只有当这是一个 popstate 导航时才可用（**由浏览器的 后退/前进 按钮触发**）。
-
-## **快速入门**
-
-核心代码如下：
-
-```jsx
-const router = createRouter({
-    history: createWebHistory(),
-    routes,
-    // 设置滚动行为
-    scrollBehavior(to, from, savedPosition) {
-        console.log("savedPosition:", savedPosition);
-        if (savedPosition) {
-            return { ...savedPosition, behavior: "smooth" };
-        } else {
-            return { top: 0, behavior: "smooth" };
-        }
-    },
+  history: createWebHistory(),
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) return savedPosition;
+    return { top: 0 };
+  },
 });
 ```
 
-savedPosition 是一个类似于 `{ left: XXX, top: XXX }` 这样的对象，如果存在就滚动到对应位置，否则滚动到 top 为 0 的位置。
+- `to`：目标路由对象，含 `path/fullPath/hash/query/meta` 等
+- `from`：来源路由对象
+- `savedPosition`：仅在 popstate 导航提供，形如 `{ left, top }`
 
-## **相关细节**
+## 常用场景
 
-### **1. 滚动到指定元素**
+### 统一滚顶与平滑
 
-以通过 el 传递一个 CSS 选择器或一个 DOM 元素。在这种情况下，top 和 left 将被视为该元素的相对偏移量。
+```js
+scrollBehavior() {
+  return { top: 0, behavior: 'smooth' }
+}
+```
 
-```jsx
+### 历史返回恢复位置
+
+```js
+scrollBehavior(to, from, savedPosition) {
+  if (savedPosition) return { ...savedPosition, behavior: 'smooth' }
+  return { top: 0 }
+}
+```
+
+### 锚点滚动与偏移
+
+```js
+scrollBehavior(to) {
+  if (to.hash) return { el: to.hash }
+  return { top: 0 }
+}
+```
+
+指定元素并设置相对偏移：
+
+```js
+scrollBehavior() {
+  return { el: '#main', top: 10 }
+}
+```
+
+### 延迟滚动（适配过渡/懒加载）
+
+```js
+scrollBehavior(to, from, savedPosition) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(savedPosition ?? { top: 0 })
+    }, 300)
+  })
+}
+```
+
+## 返回值与行为
+
+- 位置描述符：`{ left, top, behavior }`
+- 元素描述符：`{ el, top, left, behavior }`，`el` 可为选择器或 DOM 元素
+- 平滑滚动：设置 `behavior: 'smooth'`，或在 CSS 中全局配置 `html { scroll-behavior: smooth }`
+
+## 实际开发注意事项
+
+- `savedPosition` 不在编程式前进导航中提供，仅限浏览器前进/后退
+- 锚点导航需显式处理 `to.hash`，否则默认策略可能不滚动
+- 大量内容懒加载时应延迟滚动或在资源就绪后触发
+- 与过渡配合时建议延迟至过渡结束，避免位置抖动
+- 移动端滚动惯性与软键盘影响需实际验证并调整偏移
+
+## 示例合集
+
+统一策略：
+
+```js
 const router = createRouter({
-    scrollBehavior(to, from, savedPosition) {
-        // 始终在元素 #main 上方滚动 10px
-        return {
-            // 也可以这么写
-            // el: document.getElementById('main'),
-            el: "#main",
-            // 在元素上 10 像素
-            top: 10,
-        };
-    },
+  history: createWebHistory(),
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) return { ...savedPosition, behavior: "smooth" };
+    if (to.hash) return { el: to.hash, behavior: "smooth" };
+    return { top: 0 };
+  },
 });
 ```
 
-### **2. 延迟滚动**
+延迟与元素偏移：
 
-有时候，我们需要在页面中滚动之前稍作等待。例如，当处理过渡时，我们希望等待过渡结束后再滚动。要做到这一点，你可以返回一个 Promise，它可以返回所需的位置描述符。
-
-下面是一个例子，我们在滚动前等待 500ms：
-
-```jsx
+```js
 const router = createRouter({
-    scrollBehavior(to, from, savedPosition) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve({ left: 0, top: 0 });
-            }, 500);
-        });
-    },
+  history: createWebHistory(),
+  routes,
+  scrollBehavior(to) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(to.hash ? { el: to.hash, top: 8 } : { top: 0 });
+      }, 250);
+    });
+  },
 });
 ```

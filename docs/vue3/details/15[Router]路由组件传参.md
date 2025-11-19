@@ -1,129 +1,106 @@
-# 【Router】路由组件传参
+# 【Router】路由组件传参 ✨
 
-路由组件传参是指**将参数直接以 props 的形式传递给组件**。
+[[TOC]]
 
-## **快速上手**
+::: tip 要点速览
 
-回顾如何获取路由参数。假设有如下的动态路由：
+- 目的：将路由参数以组件 `props` 传递，解耦组件与 `$route`。
+- 模式：`props: true`（布尔）、`props: { ... }`（对象）、`props: (route) => ({ ... })`（函数）。
+- 命名视图：为每个命名视图分别配置 `props` 映射。
+- 插槽透传：在 `RouterView` 插槽中为渲染的组件统一传入附加 `props`。
+- 类型建议：在函数模式中完成类型转换（如 `Number(route.params.id)`）。
 
-```jsx
+:::
+
+## 动机与定义
+
+传统在组件中通过 `$route.params` 或 `useRoute()` 读取参数会令组件与路由强耦合，只能应用于特定 URL。将参数设置为组件的 `props` 能提升复用性与可测试性，使组件对路由实现不敏感。
+
+## 快速上手
+
+路由配置开启 `props`，组件声明对应 `props`：
+
+```js
 const routes = [
-    {
-        path: "/users/:userId(\\d+)",
-        component: User,
-    },
+  {
+    path: "/users/:userId(\\d+)",
+    name: "User",
+    component: User,
+    props: true,
+  },
 ];
 ```
 
-之后诸如 /users/1 就会匹配上该路由，其中 1 就是对应的参数。那么在组件中如何获取这个参数呢？
+```js
+const props = defineProps({
+  userId: { type: String, required: true },
+});
+```
 
-1. 要么用 `$route.params`
-2. 要么就是 `useRoute( )` 方法获取到当前的路由
+## 相关细节
 
-这些方式**和路由是紧密耦合的**，这限制了组件的灵活性，因为它**只能用于特定的 URL**.
+### 布尔模式
 
-一种更好的方式，是将参数设置为组件的一个 props，这样能删除组件对 $route 的直接依赖。
+`props: true` 时，`route.params` 会作为同名 `props` 传入组件。命名视图需要分别为各视图配置 `props`：
 
-1. 首先在路由配置中开启 props
-
-    ```jsx
-    const routes = [
-        {
-            path: "/user/:userId(\\d+)",
-            name: "User",
-            component: User,
-            props: true,
-        },
-    ];
-    ```
-
-2. 在组件内部设置这个 props，之后路由参数就会以 props 的形式传递进来
-
-    ```jsx
-    const props = defineProps({
-        userId: {
-            type: String,
-            required: true,
-        },
-    });
-    ```
-
-## **相关细节**
-
-路由参数设置成组件 props，支持不同的模式：
-
-1. 布尔模式
-2. 对象模式
-3. 函数模式
-
-### **1. 布尔模式**
-
-当 props 设置为 true 时，route.params 将被设置为组件的 props。
-
-如果是命名视图，那么需要为每个命名视图定义 props 配置：
-
-```jsx
+```js
 const routes = [
-    {
-        path: "/user/:id",
-        components: { default: User, sidebar: Sidebar },
-        props: { default: true, sidebar: false },
-    },
+  {
+    path: "/user/:id",
+    components: { default: User, sidebar: Sidebar },
+    props: { default: true, sidebar: false },
+  },
 ];
 ```
 
-### **2. 对象模式**
+### 对象模式
 
-当 props 设置为一个对象时候，它将原样设置为组件 props。当 props 是静态的时候很有用。
+**静态对象**将原样作为组件 `props`，适用于固定的展示开关或配置：
 
-```jsx
+```js
 const routes = [
-    {
-        path: "/promotion",
-        name: "Promotion",
-        component: Promotion,
-        props: {
-            newsletter: true,
-        },
-    },
+  {
+    path: "/promotion",
+    name: "Promotion",
+    component: Promotion,
+    props: { newsletter: true },
+  },
 ];
 ```
 
-### **3. 函数模式**
+### 函数模式
 
-可以创建一个返回 props 的函数。这允许你将参数转换为其他类型，将静态值与基于路由的值相结合。
+以函数接收 `route` 并返回 `props`，可进行类型转换与组合：
 
-```jsx
+```js
 const routes = [
-    {
-        path: "/search",
-        component: Search,
-        // route是接收到的路由,{ query: route.query.q }为传递给组件的props
-        props: (route) => ({ query: route.query.q }),
-    },
+  {
+    path: "/search",
+    component: Search,
+    props: (route) => ({ query: route.query.q }),
+  },
 ];
 ```
 
-```jsx
-// App.vue
+```vue
 <template>
-    <div id="app">
-        <nav>
-            <router-link to="/search?q=vue">Search</router-link>
-        </nav>
-        <router-view></router-view>
-    </div>
+  <div id="app">
+    <nav>
+      <router-link to="/search?q=vue">Search</router-link>
+    </nav>
+    <router-view />
+  </div>
 </template>
 ```
 
-### **RouterView 插槽设置 props**
+### RouterView 插槽传参
 
-还可以在 RouterView 里面设置 props，例如：
+在 `RouterView` 的插槽中统一为被渲染组件传入附加 `props`：
 
-```html
+```vue
 <RouterView v-slot="{ Component }">
-    <component :is="Component" view-prop="value" />
+  <component :is="Component" view-prop="value" />
 </RouterView>
 ```
 
-这种设置方式会让所有视图组件都接收 view-prop，相当于每个组件都设置了 view-prop 这个 props，使用时需考虑实际情况来用。
+该方式会让所有视图组件均接收 `view-prop`，使用时需评估作用范围。
