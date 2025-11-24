@@ -47,14 +47,14 @@ const handleDragStart = (event: DragEvent) => {
   // 将组件类型信息存储到拖拽数据中，用于在拖拽结束时（drop）获取组件类型信息
   if (event.dataTransfer) {
     event.dataTransfer.setData(
-      'application/json',
+      "application/json",
       JSON.stringify({
         type: props.type,
         name: props.name,
-      }),
+      })
     );
     // 设置拖曳效果
-    event.dataTransfer.effectAllowed = 'copy';
+    event.dataTransfer.effectAllowed = "copy";
   }
 };
 
@@ -89,7 +89,11 @@ const handleDragEnd = () => {
     :class="{ 'drag-over': isDragOver }"
   >
     <!-- vuedraggable 用于内部排序 -->
-    <draggable v-model="editorStore.questionComs" item-key="id" @start="startDrag">
+    <draggable
+      v-model="editorStore.questionComs"
+      item-key="id"
+      @start="startDrag"
+    >
       <!-- 组件列表 -->
     </draggable>
   </div>
@@ -101,6 +105,11 @@ const handleDragEnter = (event: DragEvent) => {
   event.preventDefault();
   isDragOver.value = true;
 };
+
+// 节流后的拖拽效果设置函数
+const setDragEffect = throttle((dataTransfer: DataTransfer) => {
+  dataTransfer.dropEffect = "copy";
+}, 100);
 
 // 处理拖拽悬停
 const handleDragOver = (event: DragEvent) => {
@@ -128,11 +137,11 @@ const handleDrop = (event: DragEvent) => {
 
   if (event.dataTransfer) {
     try {
-      const data = JSON.parse(event.dataTransfer.getData('application/json'));
+      const data = JSON.parse(event.dataTransfer.getData("application/json"));
       const questionType = data.type as MaterialComType;
 
       if (!questionType) {
-        console.warn('无效的组件类型');
+        console.warn("无效的组件类型");
         return;
       }
 
@@ -143,12 +152,12 @@ const handleDrop = (event: DragEvent) => {
       // 添加状态到仓库
       editorStore.addQuestionCom(defaultStatus);
       // 滚动到底部
-      eventBus.emit('scrollToBottom');
+      eventBus.emit("scrollToBottom");
 
       ElMessage.success(`已添加${data.name}组件`);
     } catch (error) {
-      console.error('解析拖拽数据失败:', error);
-      ElMessage.error('添加组件失败');
+      console.error("解析拖拽数据失败:", error);
+      ElMessage.error("添加组件失败");
     }
   }
 };
@@ -168,7 +177,7 @@ const handleDrop = (event: DragEvent) => {
 ```typescript
 // 节流后的拖拽效果设置函数
 const setDragEffect = throttle((dataTransfer: DataTransfer) => {
-  dataTransfer.dropEffect = 'copy';
+  dataTransfer.dropEffect = "copy";
 }, 100);
 ```
 
@@ -263,7 +272,7 @@ const setDragEffect = throttle((dataTransfer: DataTransfer) => {
 }
 
 .center-container.drag-over::before {
-  content: '拖拽组件到此处添加';
+  content: "拖拽组件到此处添加";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -321,7 +330,7 @@ vuedraggable 响应式更新
 
 ```typescript
 // src/stores/useEditor.ts
-const useEditorStore = defineStore('editor', {
+const useEditorStore = defineStore("editor", {
   state: () => ({
     questionComs: [] as SchemaType[], // 同时被两种拖拽方式操作
     currentQuestionIndex: -1,
@@ -352,8 +361,8 @@ const startDrag = () => {
 };
 
 // 事件总线协调滚动行为
-eventBus.emit('scrollToBottom'); // H5 API 添加后滚动
-eventBus.emit('scrollToCenter', index); // vuedraggable 选中后滚动
+eventBus.emit("scrollToBottom"); // H5 API 添加后滚动
+eventBus.emit("scrollToCenter", index); // vuedraggable 选中后滚动
 ```
 
 ### 5. 最佳实践总结
