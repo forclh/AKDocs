@@ -5,12 +5,12 @@ heroImage: https://bu.dusays.com/2025/07/02/6864965471a79.jpg
 heroText: 阿卡的文档库
 tagline: 如果无处可逃 那就一往无前
 actions:
-    - text: 开始阅读
-      link: /vue3/quick-start/02搭建工程
-      type: primary
-    # - text: 开始阅读
-    #   link: /vue3/quick-start/02搭建工程
-    #   type: secondary
+  - text: 开始阅读
+    link: /interview/面试核心.md
+    type: primary
+  # - text: 开始阅读
+  #   link: /vue3/quick-start/02搭建工程
+  #   type: secondary
 # features:
 #     - title: Simplicity First
 #       details: Minimal setup with markdown-centered project structure helps you focus on writing.
