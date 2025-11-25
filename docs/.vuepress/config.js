@@ -13,8 +13,8 @@ export default defineUserConfig({
 
     navbar: [
       {
-        text: "Vue3",
-        link: "/vue3/quick-start/02搭建工程.md",
+        text: "面试核心",
+        link: "/interview/面试核心.md",
       },
       {
         text: "阿卡的博客",
@@ -305,7 +305,7 @@ export default defineUserConfig({
               "18浮点数精度问题.md",
               "19严格模式.md",
               "20函数防抖和节流.md",
-              "21WeakSet 和 WeakMap.md",
+              "21WeakSet和WeakMap.md",
               "22深浅拷贝.md",
               "23函数柯里化.md",
               "24Node的事件循环.md",
