@@ -11,6 +11,8 @@ export default defineConfig({
     ["meta", { property: "og:title", content: "阿卡不拉" }],
     ["meta", { property: "og:description", content: "阿卡的文档" }],
     ["meta", { property: "og:locale", content: "zh_CN" }],
+    // 网站图标
+    ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
   ],
   themeConfig: {
     logo: "https://bu.dusays.com/2025/11/26/69266a4e6508c.png",
