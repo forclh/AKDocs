@@ -676,8 +676,8 @@ export default defineConfig({
               { text: "文档声明", link: "/interview/html/01文档声明.md" },
               { text: "语义化", link: "/interview/html/02语义化.md" },
               {
-                text: "W3C 标准组织",
-                link: "/interview/html/03W3C 标准组织.md",
+                text: "W3C标准组织",
+                link: "/interview/html/03W3C标准组织.md",
               },
               { text: "SEO", link: "/interview/html/04SEO.md" },
               { text: "iframe", link: "/interview/html/05iframe.md" },
@@ -692,7 +692,7 @@ export default defineConfig({
             items: [
               {
                 text: "CSS 面试题汇总",
-                link: "/interview/css/00CSS 面试题汇总.md",
+                link: "/interview/css/00CSS面试题汇总.md",
               },
               {
                 text: "CSS单位总结",
@@ -780,11 +780,11 @@ export default defineConfig({
               { text: "闭包", link: "/interview/js/11闭包.md" },
               {
                 text: "DOM 事件的注册和移除",
-                link: "/interview/js/12DOM 事件的注册和移除.md",
+                link: "/interview/js/12DOM事件的注册和移除.md",
               },
               {
                 text: "DOM 事件的传播机制",
-                link: "/interview/js/13DOM 事件的传播机制.md",
+                link: "/interview/js/13DOM事件的传播机制.md",
               },
               {
                 text: "阻止事件默认行为",
@@ -869,7 +869,7 @@ export default defineConfig({
                 text: "IndexedDB",
                 link: "/interview/browser/04IndexedDB.md",
               },
-              { text: "File API", link: "/interview/browser/05File API.md" },
+              { text: "File API", link: "/interview/browser/05FileAPI.md" },
               {
                 text: "浏览器缓存",
                 link: "/interview/browser/06浏览器缓存.md",
