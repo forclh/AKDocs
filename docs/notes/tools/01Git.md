@@ -1,9 +1,17 @@
 # git 常用命令。
 
-## 创建 SSH Key
+## SSH Key
+
+创建 SSH Key
 
 ```shell
 $ ssh-keygen -t rsa -C "youremail@example.com"
+```
+
+测试 SSH Key 是否配置成功
+
+```shell
+$ ssh -T git@github.com
 ```
 
 ## 配置用户信息
