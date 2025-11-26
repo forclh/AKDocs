@@ -25,7 +25,7 @@ vue2、vuex、vue-router、vue-antd、quill、mavon-editor
 
 ## Q2: 亮难点二
 
-[演示 demo]()
+[演示 demo](https://github.com/forclh/mini-demo/tree/main/%E5%85%B6%E4%BB%96demo/md%E6%96%87%E4%BB%B6%E7%9A%84%E8%A7%A3%E6%9E%90%E5%92%8C%E6%B8%B2%E6%9F%93)
 
 背景：之前首页的帮助中心页面是通过导入 github 上的一个文档仓库中的 md 内容来进行渲染的，因此每次需要改动的时候，都需要访问那个 github 仓库进行变更。因此产品说希望吧帮助中心的内容转移到后台。
 
