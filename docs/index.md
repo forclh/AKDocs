@@ -12,7 +12,7 @@ hero:
       link: /notes/notes.md
     - theme: alt
       text: 面试核心
-      link: /interview/面试核心.md
+      link: /interview/interview.md
 # features:
 #   - title: Feature A
 #     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
