@@ -411,6 +411,8 @@ pq.push(9);
 
 ## 图算法
 
+[图论](./图论.md)
+
 ## 回溯算法
 
 ## DFS
@@ -419,29 +421,7 @@ pq.push(9);
 
 ## 动态规划
 
-- [最长递增子序列](https://labuladong.online/algo/dynamic-programming/longest-increasing-subsequence/)
-
-> dp[i] 表示以 nums[i] 这个数结尾的最长递增子序列的长度
-
-- [经典动态规划：编辑距离](https://labuladong.online/algo/dynamic-programming/edit-distance/)
-
-> dp[i], dp[j] 定义为 s1[0..i], s2[0..j] 子串的编辑距离
-
-- [经典动态规划：最长公共子序列](https://labuladong.online/algo/dynamic-programming/longest-common-subsequence/)
-
-> dp[i], dp[j] 定义为 s1[0..i], s2[0..j] 子串的最长公共子序列长度
-
-- [动态规划设计：最大子数组](https://labuladong.online/algo/dynamic-programming/maximum-subarray/)
-
-> dp[i] 表示以 nums[i] 为结尾的「最大子数组和」
-
-- [经典动态规划：0-1 背包问题](https://labuladong.online/algo/dynamic-programming/knapsack1/)
-
-> dp[i][w] 表示前 i 个物品，背包重量为 w，所能装下的最大价值
-
-- [经典动态规划：子集背包问题](https://labuladong.online/algo/dynamic-programming/knapsack2/)
-
-> dp[i][w] = x 表示，对于前 i 个物品（i 从 1 开始计数），当前背包的容量为 w 时，若 x 为 true，则说明可以恰好将背包装满，若 x 为 false，则说明不能恰好将背包装满。
+[动态规划](./动态规划.md)
 
 ## 贪心算法
 
