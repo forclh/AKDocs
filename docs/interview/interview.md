@@ -167,7 +167,7 @@
 
 ## 手撕算法
 
-- [LeetCode](./code/00leetcode.md)
+- [LeetCode](../leetcode/00leetcode.md)
 - [数组洗牌和随机采样](./code/01数组洗牌和随机采样.md)
 - [数组去重](./code/02数组去重.md)
 - [实现数组方法](./code/03实现数组方法.md)
