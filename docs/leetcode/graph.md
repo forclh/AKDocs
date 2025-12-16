@@ -2,11 +2,10 @@
 
 ## 图的性质
 
-[997. 找到小镇的法官](https://leetcode.cn/problems/find-the-town-judge/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [997. 找到小镇的法官](https://leetcode.cn/problems/find-the-town-judge/description)
+::: code-group
 
-::: details 节点的入度和出度
-
-```js
+```js [节点的入度和出度]
 /**
  * v1 图论：利用节点的入度和出度
  * @param {number} n
@@ -34,11 +33,10 @@ const findJudge = function (n, trust) {
 
 :::
 
-[1557. 可以到达所有点的最少点数目](https://leetcode.cn/problems/minimum-number-of-vertices-to-reach-all-nodes/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [1557. 可以到达所有点的最少点数目](https://leetcode.cn/problems/minimum-number-of-vertices-to-reach-all-nodes/description)
+::: code-group
 
-::: details 节点的入度和出度
-
-```js
+```js [节点的入度和出度]
 /**
  * v1 图论（出入度）
  *
@@ -67,11 +65,10 @@ const findSmallestSetOfVertices = function (n, edges) {
 
 :::
 
-[1615. 最大网络秩](https://leetcode.cn/problems/maximal-network-rank/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [1615. 最大网络秩](https://leetcode.cn/problems/maximal-network-rank/description)
+::: code-group
 
-::: details 节点的入度和出度
-
-```js
+```js [节点的入度和出度]
 /**
  * v1 枚举（出入度）
  *
@@ -107,11 +104,10 @@ const maximalNetworkRank = function (n, roads) {
 
 ## 图的遍历
 
-[547. 省份数量](https://leetcode.cn/problems/number-of-provinces/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [547. 省份数量](https://leetcode.cn/problems/number-of-provinces/description)
+::: code-group
 
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1 DFS
  * @param {number[][]} isConnected
@@ -145,10 +141,7 @@ const findCircleNum = function (isConnected) {
 };
 ```
 
-:::
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * v1 BFS
  * @param {number[][]} isConnected
@@ -184,11 +177,7 @@ const findCircleNum = function (isConnected) {
 };
 ```
 
-:::
-
-::: details 并查集
-
-```js
+```js [并查集]
 /**
  * v1 并查集
  * @param {number[][]} isConnected
@@ -235,11 +224,10 @@ class UF {
 
 :::
 
-[841. 钥匙和房间](https://leetcode.cn/problems/keys-and-rooms/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [841. 钥匙和房间](https://leetcode.cn/problems/keys-and-rooms/description)
+::: code-group
 
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1 DFS
  * @param {number[][]} rooms
@@ -264,10 +252,7 @@ let canVisitAllRooms = function (rooms) {
 };
 ```
 
-:::
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * v1 BFS
  * @param {number[][]} rooms
@@ -294,11 +279,10 @@ let canVisitAllRooms = function (rooms) {
 
 :::
 
-[797. 所有可能的路径](https://leetcode.cn/problems/all-paths-from-source-to-target/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [797. 所有可能的路径](https://leetcode.cn/problems/all-paths-from-source-to-target/description)
+::: code-group
 
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1 DFS
  * @param {number[][]} graph
@@ -332,11 +316,10 @@ const allPathsSourceTarget = function (graph) {
 
 :::
 
-[1466. 重新规划路线](https://leetcode.cn/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [1466. 重新规划路线](https://leetcode.cn/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description)
+::: code-group
 
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1 DFS
  * @param {number} n
@@ -370,10 +353,7 @@ const minReorder = function (n, connections) {
 };
 ```
 
-:::
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * v1 BFS
  * @param {number} n
@@ -418,11 +398,10 @@ const minReorder = function (n, connections) {
 
 :::
 
-✨[802. 找到最终的安全状态](https://leetcode.cn/problems/find-eventual-safe-states/description/?envType=study-plan-v2&envId=graph-theory)
+::: details ✨[802. 找到最终的安全状态](https://leetcode.cn/problems/find-eventual-safe-states/description)
+::: code-group
 
-::: details DFS-三色标记法
-
-```js
+```js [DFS-三色标记法]
 /**
  * v1 DFS(三色标记法)
  * @param {number[][]} graph
@@ -465,11 +444,10 @@ const eventualSafeNodes = function (graph) {
 
 :::
 
-✨[1129. 颜色交替的最短路径](https://leetcode.cn/problems/shortest-path-with-alternating-colors/description/?envType=study-plan-v2&envId=graph-theory)
+::: details ✨[1129. 颜色交替的最短路径](https://leetcode.cn/problems/shortest-path-with-alternating-colors/description)
+::: code-group
 
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * @param {number} n
  * @param {number[][]} redEdges
@@ -525,11 +503,10 @@ function buildGraph(n, redEdges, blueEdges) {
 
 :::
 
-✨[1376. 通知所有员工所需的时间](https://leetcode.cn/problems/time-needed-to-inform-all-employees/description/?envType=study-plan-v2&envId=graph-theory)
+::: details ✨[1376. 通知所有员工所需的时间](https://leetcode.cn/problems/time-needed-to-inform-all-employees/description)
+::: code-group
 
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1 DFS
  * @param {number} n
@@ -569,10 +546,7 @@ const numOfMinutes = function (n, headID, manager, informTime) {
 };
 ```
 
-:::
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * v1 BFS
  * @param {number} n
@@ -607,11 +581,10 @@ const numOfMinutes = function (n, headID, manager, informTime) {
 
 :::
 
-[1306. 跳跃游戏 III](https://leetcode.cn/problems/jump-game-iii/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [1306. 跳跃游戏 III](https://leetcode.cn/problems/jump-game-iii/description)
+::: code-group
 
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1 DFS
  * @param {number[]} arr
@@ -643,10 +616,7 @@ const canReach = function (arr, start) {
 };
 ```
 
-:::
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * v1 BFS
  * @param {number[]} arr
@@ -685,11 +655,10 @@ const canReach = function (arr, start) {
 
 :::
 
-[1926. 迷宫中离入口最近的出口](https://leetcode.cn/problems/nearest-exit-from-entrance-in-maze/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [1926. 迷宫中离入口最近的出口](https://leetcode.cn/problems/nearest-exit-from-entrance-in-maze/description)
+::: code-group
 
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * v1 BFS
  * @param {character[][]} maze
@@ -749,11 +718,11 @@ const nearestExit = function (maze, entrance) {
 ```
 
 :::
-[1091. 二进制矩阵中的最短路径](https://leetcode.cn/problems/shortest-path-in-binary-matrix/description/?envType=study-plan-v2&envId=graph-theory)
 
-::: details BFS
+::: details [1091. 二进制矩阵中的最短路径](https://leetcode.cn/problems/shortest-path-in-binary-matrix/description)
+::: code-group
 
-```js
+```js [BFS]
 /**
  * v1 BFS
  * @param {number[][]} grid
@@ -813,11 +782,10 @@ const shortestPathBinaryMatrix = function (grid) {
 
 :::
 
-[433. 最小基因变化](https://leetcode.cn/problems/minimum-genetic-mutation/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [433. 最小基因变化](https://leetcode.cn/problems/minimum-genetic-mutation/description)
+::: code-group
 
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * @param {string} startGene
  * @param {string} endGene
@@ -866,11 +834,10 @@ const getNeighbor = (gene) => {
 
 :::
 
-✨[542. 01 矩阵](https://leetcode.cn/problems/01-matrix/description/?envType=study-plan-v2&envId=graph-theory)
+::: details ✨[542. 01 矩阵](https://leetcode.cn/problems/01-matrix/description)
+::: code-group
 
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * v1 BFS
  *
@@ -941,11 +908,10 @@ const updateMatrix = function (mat) {
 
 :::
 
-✨[863. 二叉树中所有距离为 K 的结点](https://leetcode.cn/problems/all-nodes-distance-k-in-binary-tree/description/?envType=study-plan-v2&envId=graph-theory)
+::: details ✨[863. 二叉树中所有距离为 K 的结点](https://leetcode.cn/problems/all-nodes-distance-k-in-binary-tree/description)
+::: code-group
 
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * v1 BFS
  * @param {TreeNode} root
@@ -1000,11 +966,10 @@ let distanceK = function (root, target, k) {
 
 :::
 
-✨[934. 最短的桥](https://leetcode.cn/problems/shortest-bridge/description/?envType=study-plan-v2&envId=graph-theory)
+::: details ✨[934. 最短的桥](https://leetcode.cn/problems/shortest-bridge/description)
+::: code-group
 
-::: details DFS + BFS
-
-```js
+```js [DFS + BFS]
 /**
  * v BFS(DFS标记岛屿，BFS记录最短路径)
  * @param {number[][]} grid
@@ -1094,11 +1059,10 @@ const shortestBridge = function (grid) {
 
 :::
 
-[127. 单词接龙](https://leetcode.cn/problems/word-ladder/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [127. 单词接龙](https://leetcode.cn/problems/word-ladder/description)
+::: code-group
 
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * v1 BFS
  * @param {string} beginWord
@@ -1166,11 +1130,10 @@ function getNeighbor(word) {
 
 :::
 
-[864. 获取所有钥匙的最短路径](https://leetcode.cn/problems/shortest-path-to-get-all-keys/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [864. 获取所有钥匙的最短路径](https://leetcode.cn/problems/shortest-path-to-get-all-keys/description)
+::: code-group
 
-::: details BFS + 位操作
-
-```js
+```js [BFS + 位操作]
 
 ```
 
@@ -1178,11 +1141,10 @@ function getNeighbor(word) {
 
 ### 岛屿问题
 
-[200. 岛屿数量](https://leetcode.cn/problems/number-of-islands/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [200. 岛屿数量](https://leetcode.cn/problems/number-of-islands/description)
+::: code-group
 
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1 DFS 遍历二维数组
  * 岛屿问题
@@ -1230,11 +1192,10 @@ function dfs(grid, i, j) {
 
 :::
 
-[1020. 飞地的数量](https://leetcode.cn/problems/number-of-enclaves/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [1020. 飞地的数量](https://leetcode.cn/problems/number-of-enclaves/description)
+::: code-group
 
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1 dfs 岛屿问题
  * 封闭岛屿中陆地的数量
@@ -1295,10 +1256,10 @@ function dfs(grid, i, j) {
 
 :::
 
-[1254. 统计封闭岛屿的数目](https://leetcode.cn/problems/number-of-closed-islands/description/?envType=study-plan-v2&envId=graph-theory)
-::: details DFS
+::: details [1254. 统计封闭岛屿的数目](https://leetcode.cn/problems/number-of-closed-islands/description)
+::: code-group
 
-```js
+```js [DFS]
 /**
  * v1 dfs 岛屿问题
  * @param {number[][]} grid
@@ -1362,11 +1323,10 @@ function dfs(grid, i, j) {
 
 :::
 
-[695. 岛屿的最大面积](https://leetcode.cn/problems/max-area-of-island/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [695. 岛屿的最大面积](https://leetcode.cn/problems/max-area-of-island/description)
+::: code-group
 
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1 DFS 岛屿问题
  * @param {number[][]} grid
@@ -1422,11 +1382,10 @@ function dfs(grid, i, j) {
 
 :::
 
-[417. 太平洋大西洋水流问题](https://leetcode.cn/problems/pacific-atlantic-water-flow/description/?envType=study-plan-v2&envId=graph-theory)
+::: details [417. 太平洋大西洋水流问题](https://leetcode.cn/problems/pacific-atlantic-water-flow/description)
+::: code-group
 
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1 BFS
  * @param {number[][]} heights
@@ -1507,11 +1466,10 @@ const bfs = (heights, queue, visited) => {
 
 ## 环检测
 
-✨[207. 课程表](https://leetcode.cn/problems/course-schedule/description/?envType=study-plan-v2&envId=graph-theory)
+::: details ✨[207. 课程表](https://leetcode.cn/problems/course-schedule/description)
+::: code-group
 
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1.1 环检测（DFS）
  * @param {number} numCourses
@@ -1577,10 +1535,7 @@ let buildGraph = function (numCourses, prerequisites) {
 };
 ```
 
-:::
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * v1 环检测（BFS）
  * @param {number} numCourses
@@ -1643,11 +1598,10 @@ let buildGraph = function (numCourses, prerequisites) {
 
 ## 拓扑排序
 
-✨[210. 课程表 II](https://leetcode.cn/problems/course-schedule-ii/description/?envType=study-plan-v2&envId=graph-theory)
+::: details ✨[210. 课程表 II](https://leetcode.cn/problems/course-schedule-ii/description)
+::: code-group
 
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1 拓扑排序
  * @param {number} numCourses
@@ -1712,11 +1666,7 @@ let buildGraph = function (numCourses, prerequisites) {
 };
 ```
 
-:::
-
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * v1 拓扑排序(BFS)
  * @param {number} numCourses
@@ -1780,11 +1730,10 @@ let buildGraph = function (numCourses, prerequisites) {
 
 ## 二分图判定
 
-✨[785. 判断二分图](https://leetcode.cn/problems/is-graph-bipartite/description/?envType=study-plan-v2&envId=graph-theory)
+::: details ✨[785. 判断二分图](https://leetcode.cn/problems/is-graph-bipartite/description)
+::: code-group
 
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1 二分图判断问题 DFS
  * @param {number[][]} graph
@@ -1834,10 +1783,7 @@ let isBipartite = function (graph) {
 };
 ```
 
-:::
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * v1 二分图判断问题 BFS
  * @param {number[][]} graph
@@ -1893,11 +1839,10 @@ let isBipartite = function (graph) {
 
 :::
 
-[886. 可能的二分法](https://leetcode.cn/problems/possible-bipartition/description/)
+::: details [886. 可能的二分法](https://leetcode.cn/problems/possible-bipartition/description/)
+::: code-group
 
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1 二分图判断 DFS
  * @param {number} n
@@ -1954,10 +1899,7 @@ let buildGraph = function (n, dislikes) {
 };
 ```
 
-:::
-::: details BFS
-
-```js
+```js [BFS]
 /**
  * v1 二分图判断 BFS
  * @param {number} n
@@ -2022,10 +1964,10 @@ let buildGraph = function (n, dislikes) {
 
 ## 并查集
 
-✨[990. 等式方程的可满足性](https://leetcode.cn/problems/satisfiability-of-equality-equations/description/?envType=study-plan-v2&envId=graph-theory)
-::: details 并查集
+::: details ✨[990. 等式方程的可满足性](https://leetcode.cn/problems/satisfiability-of-equality-equations/description)
+::: code-group
 
-```js
+```js [并查集]
 /**
  * v1 并查集
  * @param {string[]} equations 等式数组，每个等式形如 "a==b" 或 "a!=b"
@@ -2105,10 +2047,10 @@ class UF {
 
 :::
 
-[684. 冗余连接](https://leetcode.cn/problems/redundant-connection/description/)
-::: details 并查集
+::: details [684. 冗余连接](https://leetcode.cn/problems/redundant-connection/description/)
+::: code-group
 
-```js
+```js [并查集]
 /**
  * 解题思路：使用并查集检测无向图中的环
  * 
@@ -2213,11 +2155,10 @@ class UF {
 
 :::
 
-[130. 被围绕的区域](https://leetcode.cn/problems/surrounded-regions/description/)
+::: details [130. 被围绕的区域](https://leetcode.cn/problems/surrounded-regions/description/)
+::: code-group
 
-::: details 并查集
-
-```js
+```js [并查集]
 /**
  * 解题思路：
  * 1. 本题可以转化为连通性问题：
@@ -2359,11 +2300,7 @@ class UF {
 }
 ```
 
-:::
-
-::: details DFS
-
-```js
+```js [DFS]
 /**
  * v1 DFS 岛屿问题
  * @param {character[][]} board
@@ -2427,11 +2364,10 @@ let dfs = function (board, i, j) {
 
 将**所有边按照权重从小到大排序**，从权重最小的边开始遍历，如果这条边和 mst 中的其它边不会形成环，则这条边是最小生成树的一部分，将它加入 mst 集合；否则，这条边不是最小生成树的一部分，不要把它加入 mst 集合
 
-✨[1584. 连接所有点的最小费用](https://leetcode.cn/problems/min-cost-to-connect-all-points/description/)
+::: details ✨[1584. 连接所有点的最小费用](https://leetcode.cn/problems/min-cost-to-connect-all-points/description/)
+::: code-group
 
-::: details Kruskal 最小生成树算法
-
-```js
+```js [Kruskal 最小生成树算法]
 /**
  * 连接所有点的最小费用问题 - 最小生成树（Minimum Spanning Tree, MST）
  *
@@ -2656,11 +2592,10 @@ class PriorityQueue {
 
 :::
 
-✨[743. 网络延迟时间](https://leetcode.cn/problems/network-delay-time/description/)
+::: details ✨[743. 网络延迟时间](https://leetcode.cn/problems/network-delay-time/description/)
+::: code-group
 
-::: details Dijkstra 算法
-
-```js
+```js [Dijkstra 算法]
 /**
  * 网络延迟时间（Dijkstra算法）
  *
@@ -2746,11 +2681,10 @@ class State {
 
 :::
 
-[1631. 最小体力消耗路径](https://leetcode.cn/problems/path-with-minimum-effort/description/)
+::: details [1631. 最小体力消耗路径](https://leetcode.cn/problems/path-with-minimum-effort/description/)
+::: code-group
 
-::: details Dijkstra 算法
-
-```js
+```js [Dijkstra 算法]
 /**
  * 最小体力消耗路径（Dijkstra变形）
  *

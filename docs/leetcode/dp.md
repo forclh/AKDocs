@@ -2,10 +2,10 @@
 
 ## 基础问题
 
-[509. 斐波那契数](https://leetcode.cn/problems/fibonacci-number/description/)
-::: details 动态规划解法-dp 数组
+::: details [509. 斐波那契数](https://leetcode.cn/problems/fibonacci-number/description/)
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（自底向上）
  * @param {number} n
@@ -27,10 +27,11 @@ let fib = function (n) {
 ```
 
 :::
-[70. 爬楼梯](https://leetcode.cn/problems/climbing-stairs/description/)
-::: details 动态规划解法-dp 数组
 
-```js
+::: details [70. 爬楼梯](https://leetcode.cn/problems/climbing-stairs/description/)
+::: code-group
+
+```js [DP 数组]
 /**
  * v1 动态规划（自顶向下）
  * @param {number} n
@@ -54,10 +55,11 @@ const climbStairs = function (n) {
 ```
 
 :::
-[746. 使用最小花费爬楼梯](https://leetcode.cn/problems/min-cost-climbing-stairs/)
-::: details 动态规划解法-dp 数组
 
-```js
+::: details [746. 使用最小花费爬楼梯](https://leetcode.cn/problems/min-cost-climbing-stairs/)
+::: code-group
+
+```js [DP 数组]
 /**
  * v1 动态规划（自底向上）
  *
@@ -89,10 +91,11 @@ const minCostClimbingStairs = function (cost) {
 ```
 
 :::
-[62. 不同路径](https://leetcode.cn/problems/unique-paths/)
-::: details 动态规划解法-dp 数组
 
-```js
+::: details [62. 不同路径](https://leetcode.cn/problems/unique-paths/)
+::: code-group
+
+```js [DP 数组]
 /**
  * v1 动态规划（自底向上）
  * @param {number} m
@@ -121,10 +124,11 @@ const uniquePaths = function (m, n) {
 ```
 
 :::
-[63. 不同路径 II](https://leetcode.cn/problems/unique-paths-ii/)
-::: details 动态规划解法-dp 数组
 
-```js
+::: details [63. 不同路径 II](https://leetcode.cn/problems/unique-paths-ii/)
+::: code-group
+
+```js [DP 数组]
 /**
  * v1 动态规划（自底向上）
  *
@@ -176,10 +180,11 @@ const uniquePathsWithObstacles = function (obstacleGrid) {
 ```
 
 :::
-[64. 最小路径和](https://leetcode.cn/problems/minimum-path-sum/description/)
-::: details 动态规划解法-dp 数组
 
-```js
+::: details [64. 最小路径和](https://leetcode.cn/problems/minimum-path-sum/description/)
+::: code-group
+
+```js [DP 数组]
 /**
  * v1 动态规划（dp数组）
  * @param {number[][]} grid
@@ -219,10 +224,10 @@ let minPathSum = function (grid) {
 
 :::
 
-[931. 下降路径最小和](https://leetcode.cn/problems/minimum-falling-path-sum/description)
-::: details 动态规划解法-dp 数组
+::: details [931. 下降路径最小和](https://leetcode.cn/problems/minimum-falling-path-sum/description)
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（dp数组）
  * @param {number[][]} matrix
@@ -257,11 +262,11 @@ let minFallingPathSum = function (matrix) {
 ```
 
 :::
-[120. 三角形最小路径和](https://leetcode.cn/problems/triangle/description)
 
-::: details 动态规划解法-dp 数组
+::: details [120. 三角形最小路径和](https://leetcode.cn/problems/triangle/description)
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（dp数组）
  * @param {number[][]} triangle
@@ -290,10 +295,10 @@ const minimumTotal = function (triangle) {
 
 :::
 
-[343. 整数拆分](https://leetcode.cn/problems/integer-break/description/)
-::: details 动态规划解法-dp 数组
+::: details [343. 整数拆分](https://leetcode.cn/problems/integer-break/description/)
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（dp数组)
  * @param {number} n
@@ -319,10 +324,11 @@ const integerBreak = function (n) {
 ```
 
 :::
-[96. 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/)
-::: details 动态规划解法-dp 数组
 
-```js
+::: details [96. 不同的二叉搜索树](https://leetcode.cn/problems/unique-binary-search-trees/)
+::: code-group
+
+```js [DP 数组]
 /**
  * v2 动态规划（自底向上）
  * @param {number} n
@@ -352,11 +358,10 @@ const numTrees = function (n) {
 
 :::
 
-[91. 解码方法](https://leetcode.cn/problems/decode-ways/description)
+::: details [91. 解码方法](https://leetcode.cn/problems/decode-ways/description)
+::: code-group
 
-::: details 动态规划解法-dp 数组
-
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（dp数组）
  * @param {string} s
@@ -397,13 +402,10 @@ const numDecodings = function (s) {
 01 背包问题中 dp 数组从二维降到一维时，需要**倒序遍历**，避免重复放入物品
 :::
 
-#### 子集背包
+::: details [416. 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/description/) - 是否能够装满背包
+::: code-group
 
-[416. 分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/description/) - 是否能够装满背包
-
-::: details 动态规划解法-dp 数组
-
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（自底向上）
  * @param {number[]} nums
@@ -443,11 +445,7 @@ let canPartition = function (nums) {
 };
 ```
 
-:::
-
-::: details 动态规划解法-dp 数组+空间压缩
-
-```js
+```js [DP 数组+空间压缩]
 /**
  * v2 动态规划（01背包：dp数组）
  * @param {number[]} nums
@@ -478,11 +476,11 @@ let canPartition = function (nums) {
 ```
 
 :::
-[1049. 最后一块石头的重量 II](https://leetcode.cn/problems/last-stone-weight-ii/description/) - 背包能够装的最大重量是多少
 
-::: details 动态规划解法-dp 数组
+::: details [1049. 最后一块石头的重量 II](https://leetcode.cn/problems/last-stone-weight-ii/description/) - 背包能够装的最大重量是多少
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划(子集背包问题:自底向上)
  * @param {number[]} stones
@@ -516,10 +514,7 @@ const lastStoneWeightII = function (stones) {
 };
 ```
 
-:::
-::: details 动态规划解法-dp 数组+空间压缩
-
-```js
+```js [DP 数组+空间压缩]
 /**
  * v2 动态规划(子集背包问题:自底向上+空间压缩)
  * @param {number[]} stones
@@ -555,10 +550,10 @@ const lastStoneWeightII = function (stones) {
 
 :::
 
-[494. 目标和](https://leetcode.cn/problems/target-sum/description/) - 装满背包有几种方法
-::: details 动态规划解法-dp 数组
+::: details [494. 目标和](https://leetcode.cn/problems/target-sum/description/) - 装满背包有几种方法
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（转换为子集背包问题）
  * @param {number[]} nums 非负整数数组
@@ -603,10 +598,7 @@ let findTargetSumWays = function (nums, target) {
 };
 ```
 
-:::
-::: details 动态规划解法-dp 数组+空间压缩
-
-```js
+```js [DP 数组+空间压缩]
 /**
  * v2 动态规划（子集背包:自底向上+空间压缩）
  * @param {number[]} nums 非负整数数组
@@ -651,12 +643,10 @@ let findTargetSumWays = function (nums, target) {
 
 :::
 
-##### 多维度 01 背包
+::: details [474. 一和零](https://leetcode.cn/problems/ones-and-zeroes/description/) - 背包（多维）能够装的最大重量是多少
+::: code-group
 
-[474. 一和零](https://leetcode.cn/problems/ones-and-zeroes/description/) - 背包能够装的最大重量是多少
-::: details 动态规划解法-dp 数组
-
-```js
+```js [DP 数组]
 /**
  * v1 动态规划(01背包问题:自底向上)
  * @param {string[]} strs
@@ -706,10 +696,7 @@ const findMaxForm = function (strs, m, n) {
 };
 ```
 
-:::
-::: details 动态规划解法-dp 数组+空间压缩
-
-```js
+```js [DP 数组+空间压缩]
 /**
  * v2 动态规划(01背包问题:自底向上+空间压缩)
  * @param {string[]} strs
@@ -763,10 +750,10 @@ const findMaxForm = function (strs, m, n) {
 
 #### 完全背包-不考虑顺序
 
-[518. 零钱兑换 II](https://leetcode.cn/problems/coin-change-ii/description/) - 装满背包有几种方法
-::: details 动态规划解法-dp 数组
+::: details [518. 零钱兑换 II](https://leetcode.cn/problems/coin-change-ii/description/) - 装满背包有几种方法
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（完全背包问题：dp数组）
  * @param {number} amount 目标金额
@@ -802,11 +789,7 @@ let change = function (amount, coins) {
 };
 ```
 
-:::
-
-::: details 动态规划解法-dp 数组+空间压缩
-
-```js
+```js [DP 数组+空间压缩]
 /**
  * v1 动态规划(完全背包问题：dp数组+空间压缩)
  * @param {number} amount 目标金额
@@ -835,15 +818,10 @@ let change = function (amount, coins) {
 
 :::
 
-::: tip
-完全背包问题 dp 数组从二维降到一维时，正序遍历即可。
-:::
+::: details [322. 零钱兑换](https://leetcode.cn/problems/coin-change/description/) - 装满背包的最少物品数
+::: code-group
 
-[322. 零钱兑换](https://leetcode.cn/problems/coin-change/description/) - 装满背包的最少物品数
-
-::: details 动态规划解法-dp 数组
-
-```js
+```js [DP 数组]
 /**
  * v1 动态规划(完全背包：自底向上)
  * @param {number[]} coins
@@ -877,10 +855,7 @@ let coinChange = function (coins, amount) {
 };
 ```
 
-:::
-::: details 动态规划解法-dp 数组+空间压缩
-
-```js
+```js [DP 数组+空间压缩]
 /**
  * v2 动态规划(完全背包：自底向上+空间压缩)
  * @param {number[]} coins
@@ -907,10 +882,11 @@ let coinChange = function (coins, amount) {
 ```
 
 :::
-[279. 完全平方数](https://leetcode.cn/problems/perfect-squares/description/) - 装满背包的最少物品数
-::: details 动态规划解法-dp 数组
 
-```js
+::: details [279. 完全平方数](https://leetcode.cn/problems/perfect-squares/description/) - 装满背包的最少物品数
+::: code-group
+
+```js [DP 数组]
 /**
  * v1 动态规划（完全背包：自底向上）
  * @param {number} n
@@ -957,10 +933,7 @@ const numSquares = function (n) {
 };
 ```
 
-:::
-::: details 动态规划解法-dp 数组+空间压缩
-
-```js
+```js [DP 数组+空间压缩]
 /**
  * v2 动态规划(完全背包问题：自底向上+空间压缩)
  * @param {number} n
@@ -995,10 +968,10 @@ const numSquares = function (n) {
 
 #### 完全背包-考虑顺序
 
-[377. 组合总和 Ⅳ](https://leetcode.cn/problems/combination-sum-iv/description/) - 装满背包有几种方法
-::: details 动态规划解法-dp 数组
+::: details [377. 组合总和 Ⅳ](https://leetcode.cn/problems/combination-sum-iv/description/) - 装满背包有几种方法
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（完全背包求排列：二维数组版本）
  *
@@ -1042,11 +1015,7 @@ const combinationSum4 = function (nums, target) {
 };
 ```
 
-:::
-
-::: details 动态规划解法-dp 数组+空间压缩
-
-```js
+```js [DP 数组+空间压缩]
 /**
  * v2 动态规划（完全背包求排列问题:一维数组）
  * 注意：本题求的是“排列数”（顺序不同视为不同），而非“组合数”。
@@ -1079,18 +1048,20 @@ const combinationSum4 = function (nums, target) {
 ```
 
 :::
-[爬楼梯进阶版](https://programmercarl.com/0070.%E7%88%AC%E6%A5%BC%E6%A2%AF%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E7%89%88%E6%9C%AC.html#%E6%80%9D%E8%B7%AF) - 装满背包有几种方法
-::: details 动态规划解法
 
-```js
+::: details [爬楼梯进阶版](https://programmercarl.com/0070.%E7%88%AC%E6%A5%BC%E6%A2%AF%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E7%89%88%E6%9C%AC.html#%E6%80%9D%E8%B7%AF) - 装满背包有几种方法
+::: code-group
+
+```js [DP 数组]
 
 ```
 
 :::
-✨[139. 单词拆分](https://leetcode.cn/problems/word-break/description/) - 是否能够装满背包
-::: details 动态规划解法
 
-```js
+::: details ✨[139. 单词拆分](https://leetcode.cn/problems/word-break/description/) - 是否能够装满背包
+::: code-group
+
+```js [DP 数组+空间压缩]
 /**
  * v1 动态规划(完全背包问题求排列)
  * @param {string} s
@@ -1127,10 +1098,10 @@ const wordBreak = function (s, wordDict) {
 
 ## 打家劫舍
 
-[198. 打家劫舍](https://leetcode.cn/problems/house-robber/submissions/)
-::: details 动态规划解法-dp 数组
+::: details [198. 打家劫舍](https://leetcode.cn/problems/house-robber/submissions/)
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划(自底向上)
  * @param {number[]} nums
@@ -1153,11 +1124,10 @@ let rob = function (nums) {
 
 :::
 
-[2140. 解决智力问题](https://leetcode.cn/problems/solving-questions-with-brainpower/description/)
+::: details [2140. 解决智力问题](https://leetcode.cn/problems/solving-questions-with-brainpower/description/)
+::: code-group
 
-::: details 动态规划解法-dp 数组
-
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（打家劫舍问题：dp数组）
  * @param {number[][]} questions
@@ -1182,11 +1152,10 @@ const mostPoints = function (questions) {
 
 :::
 
-[740. 删除并获得点数](https://leetcode.cn/problems/delete-and-earn/description/?envType=study-plan-v2&envId=dynamic-programming)
+::: details [740. 删除并获得点数](https://leetcode.cn/problems/delete-and-earn/description/?envType=study-plan-v2&envId=dynamic-programming)
+::: code-group
 
-::: details 动态规划解法-dp 数组
-
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（打家劫舍问题：dp数组）
  * @param {number[]} nums
@@ -1213,11 +1182,10 @@ const deleteAndEarn = function (nums) {
 
 :::
 
-[983. 最低票价](https://leetcode.cn/problems/minimum-cost-for-tickets/description/)
+::: details [983. 最低票价](https://leetcode.cn/problems/minimum-cost-for-tickets/description/)
+::: code-group
 
-::: details 动态规划解法-dp 数组
-
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（打家劫舍问题：dp数组）
  * @param {number[]} days
@@ -1257,10 +1225,10 @@ const mincostTickets = function (days, costs) {
 
 :::
 
-[213. 打家劫舍 II](https://leetcode.cn/problems/house-robber-ii/description/)
-::: details 动态规划解法
+::: details [213. 打家劫舍 II](https://leetcode.cn/problems/house-robber-ii/description/)
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划(自底向上)
  * @param {number[]} nums
@@ -1289,10 +1257,10 @@ function robRange(nums, start, end) {
 
 :::
 
-[337. 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/description/)
-::: details 分解问题思想
+::: details [337. 打家劫舍 III](https://leetcode.cn/problems/house-robber-iii/description/)
+::: code-group
 
-```js
+```js [分解问题思想]
 /**
  * v2 分解问题思想
  * @param {TreeNode} root
@@ -1308,7 +1276,7 @@ let rob = function (root) {
     let left = _rob(root.left);
     let right = _rob(root.right);
 
-    /// 不抢，下家可抢可不抢，取决于收益大小
+    /// 抢，下家不可抢
     let doIt = root.val + left[1] + right[1];
     // 不抢，下家可抢可不抢，取决于收益大小
     let notDo = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
@@ -1326,11 +1294,34 @@ let rob = function (root) {
 
 ## 股票问题
 
-[121. 买卖股票的最佳时机](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/description/) - 只能买卖一次
+::: details 股票问题通用解题思路
+**问题抽象**
+此类问题的核心是在给定价格序列 `prices` 中，通过买入和卖出操作（可能受限于交易次数 `k`、冷冻期或手续费）来最大化利润。
 
-::: details 贪心解法
+**通用状态定义**
+定义 `dp[i][k][s]` 为：第 `i` 天，至多进行 `k` 次交易，当前持有状态为 `s`（0 表示不持有，1 表示持有）时的最大利润。
 
-```js
+**状态转移方程**
+
+- **今天不持有 (`s=0`)**：
+  `dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])`
+  > 解释：要么昨天就不持有（休息），要么昨天持有今天卖出（套现）。
+- **今天持有 (`s=1`)**：
+  `dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])`
+  > 解释：要么昨天就持有（休息），要么昨天不持有今天买入（投资）。
+  > _注：通常在买入时扣减交易次数 k，也可以在卖出时扣减，保持一致即可。_
+
+**常用技巧**
+
+1. **状态压缩（状态机）**：由于 `dp[i]` 只依赖 `dp[i-1]`，可将空间从 $O(N)$ 优化为 $O(1)$，仅用变量维护当天的状态（如 `buy`, `sell`）。
+2. **初始化**：`dp[0][...][1]` 通常初始化为 `-prices[0]`，`dp[0][...][0]` 初始化为 0。
+
+:::
+
+::: details [121. 买卖股票的最佳时机](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/description/) - 只能买卖一次
+::: code-group
+
+```js [贪心]
 /**
  * v1 贪心算法
  * 时间复杂度：O(n)
@@ -1351,11 +1342,7 @@ let maxProfit = function (prices) {
 };
 ```
 
-:::
-
-::: details 动态规划解法-状态机 ✨
-
-```js
+```js [状态机]
 /**
  * v1 动态规划（股票问题：状态机）
  * @param {number[]} prices
@@ -1378,11 +1365,7 @@ let maxProfit = function (prices) {
 };
 ```
 
-:::
-
-::: details 动态规划解法
-
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（自底向上）
  * @param {number[]} prices
@@ -1408,11 +1391,10 @@ let maxProfit = function (prices) {
 
 :::
 
-[122. 买卖股票的最佳时机 II](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/description/) - 可以进行多次买卖
+::: details [122. 买卖股票的最佳时机 II](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/description/) - 可以进行多次买卖
+::: code-group
 
-::: details 贪心解法 ✨
-
-```js
+```js [贪心]
 /**
  * v1 贪心算法
  * @param {number[]} prices
@@ -1428,11 +1410,7 @@ let maxProfit = function (prices) {
 };
 ```
 
-:::
-
-::: details 动态规划解法-状态机 ✨
-
-```js
+```js [状态机]
 /**
  * v1 动态规划（状态机）
  * @param {number[]} prices
@@ -1461,11 +1439,7 @@ let maxProfit = function (prices) {
 };
 ```
 
-:::
-
-::: details 动态规划解法-dp 数组
-
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（自底向上）
  * @param {number[]} prices
@@ -1491,19 +1465,18 @@ let maxProfit = function (prices) {
 
 :::
 
-[123. 买卖股票的最佳时机 III](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/description/) - 最多进行 2 次买卖
+::: details [123. 买卖股票的最佳时机 III](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/description/) - 最多进行 2 次买卖
+::: code-group
 
-::: details 动态规划解法-状态机 ✨
-
-```js
+```js [状态机]
 /**
  * v1.1 动态规划（状态机）
  */
 const maxProfit = function (prices) {
-  // 1. 第一次持有的最大余额 (buy1)
-  // 2. 第一次卖出的最大余额 (sell1)
-  // 3. 第二次持有的最大余额 (buy2)
-  // 4. 第二次卖出的最大余额(sell2)
+  // 1. 目前已经完成一次买入后的最大利润 (buy1)
+  // 2. 目前已经完成一次卖出后的最大利润 (sell1)
+  // 3. 目前已经完成两次买入后的最大利润 (buy2)
+  // 4. 目前已经完成两次卖出后的最大利润(sell2)
 
   // 初始化（第0天）
   let buy1 = -prices[0]; // 买入股票
@@ -1513,15 +1486,15 @@ const maxProfit = function (prices) {
 
   for (let i = 1; i < prices.length; i++) {
     // 顺序更新 4 个状态
-    // 第一次买入的最大余额：要么之前就买了，要么今天刚买
+    // 目前已经完成一次买入后的最大利润：要么之前就买了，要么今天刚买
     buy1 = Math.max(buy1, -prices[i]);
-    // 第一次卖出的最大余额：要么之前就卖了，要么今天卖
+    // 目前已经完成一次卖出后的最大利润：要么之前就卖了，要么今天卖
     sell1 = Math.max(sell1, buy1 + prices[i]);
 
-    // 第二次买入的最大余额：要么之前就买了，要么今天刚买
+    // 目前已经完成两次买入后的最大利润：要么之前就买了，要么今天刚买
     buy2 = Math.max(buy2, sell1 - prices[i]);
 
-    // 第二次卖出的最大余额：要么之前就卖了，要么今天卖
+    // 目前已经完成两次卖出后的最大利润：要么之前就卖了，要么今天卖
     sell2 = Math.max(sell2, buy2 + prices[i]);
   }
 
@@ -1529,11 +1502,7 @@ const maxProfit = function (prices) {
 };
 ```
 
-:::
-
-::: details 动态规划解法-dp 数组
-
-```js
+```js [DP 数组]
 /**
  * v1 动态规划
  * @param {number[]} prices
@@ -1577,11 +1546,10 @@ let maxProfit = function (prices) {
 
 :::
 
-[188. 买卖股票的最佳时机 IV](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/description/) - 最多进行 k 次买卖
+::: details [188. 买卖股票的最佳时机 IV](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/description/) - 最多进行 k 次买卖
+::: code-group
 
-::: details 动态规划解法-状态机 ✨
-
-```js
+```js [状态机]
 /**
  * v1 动态规划（股票问题：状态机）
  * @param {number} k
@@ -1633,11 +1601,10 @@ const maxProfit = function (k, prices) {
 
 :::
 
-[309. 买卖股票的最佳时机含冷冻期](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/)
+::: details [309. 买卖股票的最佳时机含冷冻期](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/)
+::: code-group
 
-::: details 动态规划解法-状态机 ✨
-
-```js
+```js [状态机]
 /**
  * v1 动态规划（状态机）
  * @param {number[]} prices
@@ -1671,11 +1638,7 @@ const maxProfit = function (prices) {
 };
 ```
 
-:::
-
-::: details 动态规划解法-dp 数组
-
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（dp数组）
  * @param {number[]} prices
@@ -1703,11 +1666,10 @@ const maxProfit = function (prices) {
 
 :::
 
-[714. 买卖股票的最佳时机含手续费](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/)
+::: details [714. 买卖股票的最佳时机含手续费](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/)
+::: code-group
 
-::: details 动态规划解法-状态机 ✨
-
-```js
+```js [状态机 ✨]
 /**
  * v1 动态规划（状态机）
  * @param {number[]} prices
@@ -1742,11 +1704,10 @@ const maxProfit = function (prices, fee) {
 
 ## 子序列问题
 
-[300. 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/description/)
+::: details [300. 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/description/)
+::: code-group
 
-::: details 动态规划解法
-
-```js
+```js [DP 数组]
 /**
  * v1 动态规划(子序列问题)
  * @param {number[]} nums
@@ -1772,11 +1733,10 @@ let lengthOfLIS = function (nums) {
 
 :::
 
-✨[673. 最长递增子序列的个数](https://leetcode.cn/problems/number-of-longest-increasing-subsequence/description/?envType=study-plan-v2&envId=dynamic-programming)
+::: details ✨[673. 最长递增子序列的个数](https://leetcode.cn/problems/number-of-longest-increasing-subsequence/description/?envType=study-plan-v2&envId=dynamic-programming)
+::: code-group
 
-::: details 动态规划解法
-
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（子序列问题：dp数组）
  * @param {number[]} nums
@@ -1821,11 +1781,11 @@ const findNumberOfLIS = function (nums) {
 
 :::
 
-[674. 最长连续递增序列](https://leetcode.cn/problems/longest-continuous-increasing-subsequence/description/)
+::: details [674. 最长连续递增序列](https://leetcode.cn/problems/longest-continuous-increasing-subsequence/description/)
 
-::: details 动态规划解法
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划
  * @param {number[]} nums
@@ -1845,11 +1805,7 @@ const findLengthOfLCIS = function (nums) {
 };
 ```
 
-:::
-
-::: details 贪心策略
-
-```js
+```js [贪心]
 /**
  * v1 贪心策略
  * @param {number[]} nums
@@ -1874,11 +1830,10 @@ const findLengthOfLCIS = function (nums) {
 
 :::
 
-✨[1218. 最长定差子序列](https://leetcode.cn/problems/longest-arithmetic-subsequence-of-given-difference/description/)
+::: details ✨[1218. 最长定差子序列](https://leetcode.cn/problems/longest-arithmetic-subsequence-of-given-difference/description/)
+::: code-group
 
-::: details 动态规划解法-dp 数组（超时）
-
-```js
+```js [DP 数组（超时）]
 /**
  * v1 动态规划（子序列问题：dp数组）
  * @param {number[]} arr
@@ -1904,11 +1859,7 @@ const longestSubsequence = function (arr, difference) {
 };
 ```
 
-:::
-
-::: details 动态规划解法-哈希表
-
-```js
+```js [DP 哈希表]
 /**
  * v1 动态规划（子序列问题：哈希表）
  * @param {number[]} arr
@@ -1939,11 +1890,10 @@ const longestSubsequence = function (arr, difference) {
 
 :::
 
-✨[1027. 最长等差数列](https://leetcode.cn/problems/longest-arithmetic-subsequence/description)
+::: details ✨[1027. 最长等差数列](https://leetcode.cn/problems/longest-arithmetic-subsequence/description)
+::: code-group
 
-::: details 动态规划解法-哈希表
-
-```js
+```js [DP 哈希表]
 /**
  * v1 动态规划（子序列问题：哈希表）
  * @param {number[]} nums
@@ -1973,10 +1923,10 @@ const longestArithSeqLength = function (nums) {
 
 :::
 
-✨[646. 最长数对链](https://leetcode.cn/problems/maximum-length-of-pair-chain/description)
-::: details 贪心算法
+::: details ✨[646. 最长数对链](https://leetcode.cn/problems/maximum-length-of-pair-chain/description)
+::: code-group
 
-```js
+```js [贪心]
 /**
  * v1 贪心算法
  * @param {number[][]} pairs
@@ -2001,11 +1951,7 @@ const findLongestChain = function (pairs) {
 };
 ```
 
-:::
-
-::: details 动态规划解法-dp 数组
-
-```js
+```js [DP 数组]
 /**
  * v2 动态规划（子序列问题：dp数组）
  * @param {number[][]} pairs
@@ -2032,11 +1978,11 @@ const findLongestChain = function (pairs) {
 
 :::
 
-[718. 最长重复子数组](https://leetcode.cn/problems/maximum-length-of-repeated-subarray/)
+::: details [718. 最长重复子数组](https://leetcode.cn/problems/maximum-length-of-repeated-subarray/)
 
-::: details 动态规划解法-dp 数组
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（子序列问题）
  * @param {number[]} nums1
@@ -2066,11 +2012,11 @@ const findLength = function (nums1, nums2) {
 
 :::
 
-[1143. 最长公共子序列](https://leetcode.cn/problems/longest-common-subsequence/)
+::: details [1143. 最长公共子序列](https://leetcode.cn/problems/longest-common-subsequence/)
 
-::: details 动态规划解法
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（子序列问题：dp数组）
  * @param {string} text1
@@ -2081,7 +2027,7 @@ let longestCommonSubsequence = function (text1, text2) {
   const m = text1.length;
   const n = text2.length;
   if (m === 0 || n === 0) return 0;
-  // dp[i][j]表示以text1[i-1]和text2[j-1]结尾的最长公共子序列的长度
+  // dp[i][j]表示text1[0...i-1]和text2[0...j-1]的最长公共子序列的长度
   const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
   let maxLen = 0;
   for (let i = 1; i <= m; i++) {
@@ -2101,11 +2047,11 @@ let longestCommonSubsequence = function (text1, text2) {
 
 :::
 
-[1035. 不相交的线](https://leetcode.cn/problems/uncrossed-lines/description/)
+::: details [1035. 不相交的线](https://leetcode.cn/problems/uncrossed-lines/description/)
 
-::: details 动态规划解法
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划(子序列问题:dp数组)
  *
@@ -2119,7 +2065,7 @@ const maxUncrossedLines = function (nums1, nums2) {
   const n = nums2.length;
   if (m === 0 || n === 0) return 0;
 
-  // dp[i][j]表示以nums[i-1]和nums2[j - 1]为结尾的最长公共子序列的长度
+  // dp[i][j]表示nums[0...i-1]和nums2[0...j - 1]的最长公共子序列的长度
   const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
   let maxLen = 0;
   for (let i = 1; i <= m; i++) {
@@ -2138,11 +2084,11 @@ const maxUncrossedLines = function (nums1, nums2) {
 
 :::
 
-[53. 最大子数组和](https://leetcode.cn/problems/maximum-subarray/description/)
+::: details [53. 最大子数组和](https://leetcode.cn/problems/maximum-subarray/description/)
 
-::: details 动态规划解法
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划(子序列问题:dp数组)
  * @param {number[]} nums
@@ -2164,11 +2110,7 @@ let maxSubArray = function (nums) {
 };
 ```
 
-:::
-
-::: details 前缀和解法
-
-```js
+```js [前缀和]
 /**
  * v1 前缀和
  * 以 nums[i]结尾的最小子数组和 = preNum[i + 1] - min(preNum[0],...,preNum[i])
@@ -2197,10 +2139,11 @@ let maxSubArray = function (nums) {
 
 :::
 
-[115. 不同的子序列](https://leetcode.cn/problems/distinct-subsequences/description/)
-::: details 动态规划解法
+::: details [115. 不同的子序列](https://leetcode.cn/problems/distinct-subsequences/description/)
 
-```js
+::: code-group
+
+```js [DP 数组]
 /**
  * v1 动态规划（子序列问题：dp）
  * @param {string} s
@@ -2235,11 +2178,11 @@ const numDistinct = function (s, t) {
 
 :::
 
-[583. 两个字符串的删除操作](https://leetcode.cn/problems/delete-operation-for-two-strings/description/)
+::: details [583. 两个字符串的删除操作](https://leetcode.cn/problems/delete-operation-for-two-strings/description/)
 
-::: details 动态规划解法-dp 数组
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（子序列问题：dp数组）
  * @param {string} word1
@@ -2277,10 +2220,11 @@ var minDistance = function (word1, word2) {
 
 :::
 
-[72. 编辑距离](https://leetcode.cn/problems/edit-distance/description/)
-::: details 动态规划解法-dp 数组
+::: details [72. 编辑距离](https://leetcode.cn/problems/edit-distance/description/)
 
-```js
+::: code-group
+
+```js [DP 数组]
 /**
  * v1 动态规划（自底向上）
  * @param {string} word1
@@ -2320,11 +2264,11 @@ let minDistance = function (word1, word2) {
 
 :::
 
-✨[647. 回文子串](https://leetcode.cn/problems/palindromic-substrings/description/)
+::: details ✨[647. 回文子串](https://leetcode.cn/problems/palindromic-substrings/description/)
 
-::: details 动态规划解法-dp 数组
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（子序列问题：dp数组）
  * @param {string} s
@@ -2371,11 +2315,11 @@ const countSubstrings = function (s) {
 
 :::
 
-✨[1312. 让字符串成为回文串的最少插入次数](https://leetcode.cn/problems/minimum-insertion-steps-to-make-a-string-palindrome/description/)
+::: details ✨[1312. 让字符串成为回文串的最少插入次数](https://leetcode.cn/problems/minimum-insertion-steps-to-make-a-string-palindrome/description/)
 
-::: details 动态规划解法-dp 数组
+::: code-group
 
-```js
+```js [DP 数组]
 /**
  * v1 动态规划（子序列问题：dp数组）
  * @param {string} s
@@ -2403,10 +2347,11 @@ let minInsertions = function (s) {
 
 :::
 
-✨[516. 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/description/)
-::: details 动态规划解法
+::: details ✨[516. 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/description/)
 
-```js
+::: code-group
+
+```js [DP 数组]
 /**
  * v1 动态规划(子序列问题：dp数组)
  * @param {string} s

@@ -1133,6 +1133,48 @@ export default defineConfig({
         ],
       },
       {
+        text: "力扣",
+        collapsed: true,
+        items: [
+          {
+            text: "链表",
+            link: "/leetcode/linked-list.md",
+          },
+          {
+            text: "数组",
+            link: "/leetcode/array.md",
+          },
+          {
+            text: "哈希表",
+            link: "/leetcode/hash-table.md",
+          },
+          {
+            text: "栈",
+            link: "/leetcode/stack.md",
+          },
+          {
+            text: "队列",
+            link: "/leetcode/tree.md",
+          },
+          {
+            text: "树",
+            link: "/leetcode/tree.md",
+          },
+          {
+            text: "贪心",
+            link: "/leetcode/greedy.md",
+          },
+          {
+            text: "图论",
+            link: "/leetcode/graph.md",
+          },
+          {
+            text: "动态规划",
+            link: "/leetcode/dp.md",
+          },
+        ],
+      },
+      {
         text: "案例",
         collapsed: true,
         items: [

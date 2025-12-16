@@ -14,7 +14,7 @@ hero:
       text: 学习笔记
       link: /notes/notes.md
     - theme: alt
-      text: 面试核心
+      text: 面试汇总
       link: /interview/interview.md
 features:
   - title: 系统化前端笔记
