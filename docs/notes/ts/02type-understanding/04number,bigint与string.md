@@ -1,4 +1,4 @@
-# 04 number、bigint、string
+# number、bigint、string
 
 ## number 与 bigint
 

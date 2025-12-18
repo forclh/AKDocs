@@ -1,4 +1,4 @@
-# 05 symbol
+# symbol
 
 symbol 符号是 ES6 新增的一种基本数据类型。
 

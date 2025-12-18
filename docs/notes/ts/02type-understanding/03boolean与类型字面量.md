@@ -1,4 +1,4 @@
-# 03 boolean 与类型字面量
+# boolean 与类型字面量
 
 `number`,`boolean`,`string`,`symbol`,`bigint`这些 js 本身就支持的基础类型使用起来很简单，ts 的书写几乎感觉不到和 js 的差别，而且支持很多种书写的方式，当然中间还隐藏着一些很重要的细节。拿 boolean 举例来说：
 
