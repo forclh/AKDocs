@@ -896,6 +896,47 @@ function longestKSubstring(s, k, count) {
 
 :::
 
+::: details [1456. 定长子串中元音的最大数目](https://leetcode.cn/problems/maximum-number-of-vowels-in-a-substring-of-given-length/description/)
+::: code-group
+
+```js [滑动窗口]
+/**
+ * S1 滑动窗口（定长）
+ * @param {string} s
+ * @param {number} k
+ * @return {number}
+ */
+const maxVowels = function (s, k) {
+  const vowels = ["a", "e", "i", "o", "u"];
+  let window = 0; // 统计窗口中元音字母的数量
+  let left = 0;
+  let right = 0; // [left, right)表示当前窗口
+  let ans = 0;
+  while (right < s.length) {
+    const rightVal = s[right];
+    right++;
+    if (vowels.includes(rightVal)) {
+      window++;
+    }
+    // 因为right是开区间，所有right - left为字符串长度
+    while (right - left > k) {
+      const leftValue = s[left];
+      left++;
+      if (vowels.includes(leftValue)) {
+        window--;
+      }
+    }
+
+    // 此时窗口内字符串长度为k
+    ans = Math.max(ans, window);
+  }
+
+  return ans;
+};
+```
+
+:::
+
 ## 二分搜索
 
 ::: details 二分搜索的适用场景
