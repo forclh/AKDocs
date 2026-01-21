@@ -616,6 +616,102 @@ export default defineConfig({
                     text: "symbol",
                     link: "/notes/ts/02type-understanding/05symbol.md",
                   },
+                  {
+                    text: "类型拓宽",
+                    link: "/notes/ts/02type-understanding/06类型拓宽.md",
+                  },
+                  {
+                    text: "null与undefined",
+                    link: "/notes/ts/02type-understanding/07null与undefined.md",
+                  },
+                  { text: "void", link: "/notes/ts/02type-understanding/08void.md" },
+                  {
+                    text: "对象字面量",
+                    link: "/notes/ts/02type-understanding/09对象字面量.md",
+                  },
+                  {
+                    text: "类型别名与接口",
+                    link: "/notes/ts/02type-understanding/10类型别名与接口.md",
+                  },
+                  {
+                    text: "结构化类型",
+                    link: "/notes/ts/02type-understanding/11结构化类型.md",
+                  },
+                  {
+                    text: "装箱与拆箱类型",
+                    link: "/notes/ts/02type-understanding/12装箱与拆箱类型.md",
+                  },
+                  {
+                    text: "联合类型",
+                    link: "/notes/ts/02type-understanding/13联合类型.md",
+                  },
+                  {
+                    text: "交叉类型",
+                    link: "/notes/ts/02type-understanding/14交叉类型.md",
+                  },
+                  {
+                    text: "typeof与控制流分析",
+                    link: "/notes/ts/02type-understanding/15typeof与控制流分析.md",
+                  },
+                  {
+                    text: "instanceof与in",
+                    link: "/notes/ts/02type-understanding/16instanceof与in.md",
+                  },
+                  {
+                    text: "字面量类型检查",
+                    link: "/notes/ts/02type-understanding/17字面量类型检查.md",
+                  },
+                  {
+                    text: "自定义守卫",
+                    link: "/notes/ts/02type-understanding/18自定义守卫.md",
+                  },
+                  {
+                    text: "never",
+                    link: "/notes/ts/02type-understanding/19never.md",
+                  },
+                  {
+                    text: "数组与元组",
+                    link: "/notes/ts/02type-understanding/20数组与元组.md",
+                  },
+                  {
+                    text: "方括号运算符",
+                    link: "/notes/ts/02type-understanding/21方括号运算符.md",
+                  },
+                  {
+                    text: "类型断言",
+                    link: "/notes/ts/02type-understanding/22类型断言.md",
+                  },
+                  {
+                    text: "satisfies",
+                    link: "/notes/ts/02type-understanding/23satisfies.md",
+                  },
+                  { text: "枚举", link: "/notes/ts/02type-understanding/24枚举.md" },
+                ],
+              },
+              {
+                text: "函数与泛型",
+                collapsed: true,
+                items: [
+                  {
+                    text: "函数的声明与调用",
+                    link: "/notes/ts/03functions-and-generics/01函数的声明与调用.md",
+                  },
+                  {
+                    text: "调用签名",
+                    link: "/notes/ts/03functions-and-generics/02调用签名.md",
+                  },
+                  {
+                    text: "重载",
+                    link: "/notes/ts/03functions-and-generics/03重载.md",
+                  },
+                  {
+                    text: "理解泛型",
+                    link: "/notes/ts/03functions-and-generics/04理解泛型.md",
+                  },
+                  {
+                    text: "类型别名与接口使用泛型",
+                    link: "/notes/ts/03functions-and-generics/05类型别名与接口使用泛型.md",
+                  },
                 ],
               },
             ],
