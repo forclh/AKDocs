@@ -624,7 +624,10 @@ export default defineConfig({
                     text: "null与undefined",
                     link: "/notes/ts/02type-understanding/07null与undefined.md",
                   },
-                  { text: "void", link: "/notes/ts/02type-understanding/08void.md" },
+                  {
+                    text: "void",
+                    link: "/notes/ts/02type-understanding/08void.md",
+                  },
                   {
                     text: "对象字面量",
                     link: "/notes/ts/02type-understanding/09对象字面量.md",
@@ -685,7 +688,10 @@ export default defineConfig({
                     text: "satisfies",
                     link: "/notes/ts/02type-understanding/23satisfies.md",
                   },
-                  { text: "枚举", link: "/notes/ts/02type-understanding/24枚举.md" },
+                  {
+                    text: "枚举",
+                    link: "/notes/ts/02type-understanding/24枚举.md",
+                  },
                 ],
               },
               {
@@ -711,6 +717,30 @@ export default defineConfig({
                   {
                     text: "类型别名与接口使用泛型",
                     link: "/notes/ts/03functions-and-generics/05类型别名与接口使用泛型.md",
+                  },
+                  {
+                    text: "多泛型",
+                    link: "/notes/ts/03functions-and-generics/06多泛型.md",
+                  },
+                  {
+                    text: "泛型的默认类型",
+                    link: "/notes/ts/03functions-and-generics/07泛型的默认类型.md",
+                  },
+                  {
+                    text: "受限的泛型",
+                    link: "/notes/ts/03functions-and-generics/08受限的泛型.md",
+                  },
+                  {
+                    text: "类型理解再升级-型变",
+                    link: "/notes/ts/03functions-and-generics/09类型理解再升级-型变.md",
+                  },
+                  {
+                    text: "多余属性检查",
+                    link: "/notes/ts/03functions-and-generics/10多余属性检查.md",
+                  },
+                  {
+                    text: "逆变",
+                    link: "/notes/ts/03functions-and-generics/11逆变.md",
                   },
                 ],
               },
