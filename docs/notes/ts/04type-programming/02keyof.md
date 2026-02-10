@@ -1,21 +1,21 @@
-## `keyof`
+# `keyof`
 
 `keyof` 操作符。它可以将对象中的所有键转换为对应字面量类型，然后再组合成联合类型。
 
 ```typescript
 type User = {
-  id: number
-  name: string
-  age: number
-}
+  id: number;
+  name: string;
+  age: number;
+};
 
-type UserKeys = keyof User // keyof User = 'id' | 'name' | 'age'
+type UserKeys = keyof User; // keyof User = 'id' | 'name' | 'age'
 ```
 
 在 VS Code 中悬浮鼠标只能看到 `keyof User`，看不到其中的实际值，你可以这么做
 
 ```typescript
-type UserKeys = keyof User & {} // "id" | "name" | "age"
+type UserKeys = keyof User & {}; // "id" | "name" | "age"
 ```
 
 甚至我们可以结合这`typeof`，直接从一个对象上，获取这个对象键的所有联合类型
@@ -24,9 +24,9 @@ type UserKeys = keyof User & {} // "id" | "name" | "age"
 const user = {
   id: 1,
   name: 'hayes',
-  age: 19
-}
-type UserKeys = keyof typeof user // "id" | "name" | "age"
+  age: 19,
+};
+type UserKeys = keyof typeof user; // "id" | "name" | "age"
 ```
 
 也可以和方括号运算符结合
@@ -47,9 +47,9 @@ type A = Person[keyof Person];
 ```typescript
 type TagName = keyof HTMLElementTagNameMap;
 
-function createElement<T extends TagName>(tag: T): HTMLElementTagNameMap[T] { 
+function createElement<T extends TagName>(tag: T): HTMLElementTagNameMap[T] {
   return document.createElement(tag);
 }
 
-const a = createElement("a"); // ok
+const a = createElement('a'); // ok
 ```

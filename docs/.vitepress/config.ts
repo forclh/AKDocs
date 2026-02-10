@@ -744,6 +744,24 @@ export default defineConfig({
                   },
                 ],
               },
+              {
+                text: "类型编程",
+                collapsed: true,
+                items: [
+                  {
+                    text: "索引签名类型",
+                    link: "/notes/ts/04type-programming/01索引签名类型.md",
+                  },
+                  {
+                    text: "keyof",
+                    link: "/notes/ts/04type-programming/02keyof.md",
+                  },
+                  {
+                    text: "in运算符遍历",
+                    link: "/notes/ts/04type-programming/03in运算符遍历.md",
+                  },
+                ],
+              }
             ],
           },
           {
