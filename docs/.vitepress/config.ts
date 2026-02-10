@@ -760,6 +760,50 @@ export default defineConfig({
                     text: "in运算符遍历",
                     link: "/notes/ts/04type-programming/03in运算符遍历.md",
                   },
+                  {
+                    text: "类型编程的理解",
+                    link: "/notes/ts/04type-programming/04类型编程的理解.md",
+                  },
+                  {
+                    text: "关联泛型",
+                    link: "/notes/ts/04type-programming/05关联泛型.md",
+                  },
+                  {
+                    text: "方括号运算符常见操作",
+                    link: "/notes/ts/04type-programming/06方括号运算符常见操作.md",
+                  },
+                  {
+                    text: "条件类型与类型兼容性",
+                    link: "/notes/ts/04type-programming/07条件类型与类型兼容性.md",
+                  },
+                  {
+                    text: "条件类型与泛型",
+                    link: "/notes/ts/04type-programming/08条件类型与泛型.md",
+                  },
+                  {
+                    text: "分布式条件特性",
+                    link: "/notes/ts/04type-programming/09分布式条件特性.md",
+                  },
+                  {
+                    text: "映射类型的属性过滤",
+                    link: "/notes/ts/04type-programming/10映射类型的属性过滤.md",
+                  },
+                  {
+                    text: "infer",
+                    link: "/notes/ts/04type-programming/11infer.md",
+                  },
+                  {
+                    text: "模板字符串类型",
+                    link: "/notes/ts/04type-programming/12模板字符串类型.md",
+                  },
+                  {
+                    text: "递归复用",
+                    link: "/notes/ts/04type-programming/13递归复用.md",
+                  },
+                  {
+                    text: "分发逆变推断",
+                    link: "/notes/ts/04type-programming/14分发逆变推断.md",
+                  },
                 ],
               }
             ],
