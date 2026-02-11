@@ -805,6 +805,68 @@ export default defineConfig({
                     link: "/notes/ts/04type-programming/14分发逆变推断.md",
                   },
                 ],
+              },
+              {
+                text: '类和接口',
+                collapsed: true,
+                items: [
+                  {
+                    text: '面向对象的理解',
+                    link: '/notes/ts/05class-and-interface/01面向对象的理解.md',
+                  },
+                  {
+                    text: '访问修饰符',
+                    link: '/notes/ts/05class-and-interface/02访问修饰符.md',
+                  },
+                  {
+                    text: '存取器(访问器)属性',
+                    link: '/notes/ts/05class-and-interface/03存取器属性.md',
+                  },
+                  {
+                    text: '静态成员',
+                    link: '/notes/ts/05class-and-interface/04静态成员.md',
+                  },
+                  {
+                    text: '继承',
+                    link: '/notes/ts/05class-and-interface/05继承.md',
+                  },
+                  {
+                    text: 'this返回类型',
+                    link: '/notes/ts/05class-and-interface/06this返回类型.md',
+                  },
+                  {
+                    text: '类的泛型支持',
+                    link: '/notes/ts/05class-and-interface/07类的泛型支持.md',
+                  },
+                  {
+                    text: '有关this的类型体操',
+                    link: '/notes/ts/05class-and-interface/08有关this的类型体操.md',
+                  },
+                  {
+                    text: '抽象类',
+                    link: '/notes/ts/05class-and-interface/09抽象类.md',
+                  },
+                  {
+                    text: '接口',
+                    link: '/notes/ts/05class-and-interface/10接口.md',
+                  },
+                  {
+                    text: '接口与类型别名的区别',
+                    link: '/notes/ts/05class-and-interface/12接口与类型别名的区别.md',
+                  },
+                  {
+                    text: '类的类型理解升级',
+                    link: '/notes/ts/05class-and-interface/13类的类型理解升级.md',
+                  },
+                  {
+                    text: '混入',
+                    link: '/notes/ts/05class-and-interface/14混入.md',
+                  },
+                  {
+                    text: '构造函数相关类型工具',
+                    link: '/notes/ts/05class-and-interface/15构造函数类型相关类型工具.md',
+                  },
+                ]
               }
             ],
           },
