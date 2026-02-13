@@ -1,4 +1,4 @@
-## this返回类型
+# this返回类型
 
 this可以用作值，也能用作类型。
 
@@ -48,8 +48,8 @@ console.log(mySet.values()); // 输出: [1, 3]
 
 ```typescript
 class MutableSet extends SimpleSet {
-  show() { 
-    console.log('MutableSet show')
+  show() {
+    console.log('MutableSet show');
   }
 }
 ```
@@ -70,8 +70,8 @@ class MutableSet extends SimpleSet {
     super.add(element);
     return this;
   }
-  show() { 
-    console.log('MutableSet show')
+  show() {
+    console.log('MutableSet show');
   }
 }
 ```
@@ -85,17 +85,17 @@ class SimpleSet {
     this.elements.set(element, true);
     return this; // 链式调用
   }
-	......
+  // ......
 }
 
-// 子类  
+// 子类
 class MutableSet extends SimpleSet {
-  show() { 
-    console.log('MutableSet show')
+  show() {
+    console.log('MutableSet show');
   }
 }
 
 // 示例使用
 const mySet = new MutableSet();
-mySet.add(1).add(2).add(3).show();  
+mySet.add(1).add(2).add(3).show();
 ```

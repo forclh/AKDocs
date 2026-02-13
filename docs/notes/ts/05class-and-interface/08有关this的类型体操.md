@@ -1,6 +1,6 @@
-## 有关`this`的类型体操
+# 有关`this`的类型体操
 
-### [`ThisType<Type>`](https://www.typescriptlang.org/docs/handbook/utility-types.html)
+## [`ThisType<Type>`](https://www.typescriptlang.org/docs/handbook/utility-types.html)
 
 `ThisType<Type>` 可以让`Type`充当上下文类型的标记[`this`](https://www.typescriptlang.org/docs/handbook/functions.html#this)
 
@@ -9,13 +9,13 @@ type ObjectDescriptor<D, M> = {
   data?: D;
   methods?: M & ThisType<D & M>; // Type of 'this' in methods is D & M
 };
- 
+
 function makeObject<D, M>(desc: ObjectDescriptor<D, M>): D & M {
   let data: object = desc.data || {};
   let methods: object = desc.methods || {};
   return { ...data, ...methods } as D & M;
 }
- 
+
 let obj = makeObject({
   data: { x: 0, y: 0 },
   methods: {
@@ -25,7 +25,7 @@ let obj = makeObject({
     },
   },
 });
- 
+
 obj.x = 10;
 obj.y = 20;
 obj.moveBy(5, 5);
@@ -35,43 +35,41 @@ obj.moveBy(5, 5);
 
 ```typescript
 type Foo = {
-  foo: () => number
+  foo: () => number;
 } & ThisType<{
-  a: number,
-  b: number
-}>
+  a: number;
+  b: number;
+}>;
 
 const f: Foo = {
-  foo() { 
-    return this.a + this.b
-  }
-}
+  foo() {
+    return this.a + this.b;
+  },
+};
 ```
 
 ```typescript
 type Bar = {
   a: number;
   b: number;
-}
+};
 type Foo = {
   // bar: () => Bar;
   foo: () => number;
-} & ThisType<Bar>
+} & ThisType<Bar>;
 
 const foo: Foo = {
   // bar: () => ({
   //   a: 10,
   //   b: 20,
   // }),
-  foo() { 
-    return this.a + this.b
-  }
-}
+  foo() {
+    return this.a + this.b;
+  },
+};
 ```
 
-
-
-### [SimpleVue](https://typehero.dev/challenge/simple-vue)
+## [SimpleVue](https://typehero.dev/challenge/simple-vue)
 
 实现类似 Vue 的类型支持的简化版本。
 
@@ -98,31 +96,25 @@ const foo: Foo = {
 4.infer推断
 
 ```typescript
-declare function SimpleVue<D,C,M>(options: {
-	data:(this:void) => D,
-	computed: C & ThisType<D>,
-	methods: M & ThisType<D & getComputed<C> & M>
-}): any
+declare function SimpleVue<D, C, M>(options: {
+  data: (this: void) => D;
+  computed: C & ThisType<D>;
+  methods: M & ThisType<D & getComputed<C> & M> 
+}): any;
 
 type getComputed<T> = {
-	readonly [P in keyof T] : T[P] extends (...args:any[]) => infer R ? R : never
-}
+  readonly [P in keyof T]: T[P] extends (...args: any[]) => infer R ? R : never;
+};
 ```
 
-
-
-### 实现可链接选项
+## 实现可链接选项
 
 这是TS类型体操中的一个挑战[Chainable options](https://typehero.dev/challenge/chainable-options)
 
 ```typescript
 declare const config: Chainable;
 
-const result = config
-  .option('foo', 123)
-  .option('name', 'type-challenges')
-  .option('bar', { value: 'Hello World' })
-  .get();
+const result = config.option('foo', 123).option('name', 'type-challenges').option('bar', { value: 'Hello World' }).get();
 
 // 期望 result 的类型是：
 interface Result {
@@ -139,27 +131,26 @@ interface Result {
 一开始我们这样思考，option每次返回的类型肯定是之前的T类型与option调用之后的对象字面量类型的交叉
 
 ```typescript
-type Chainable<T={}> = {
-  option<K extends string, V>(key: K, value: V): Chainable<T & {[P in K]:V}>
-  get(): T
-}
+type Chainable<T = {}> = {
+  option<K extends string, V>(key: K, value: V): Chainable<T & { [P in K]: V }>;
+  get(): T;
+};
 ```
 
 然后如果出现同名的key，将其排除
 
 ```typescript
-type Chainable<T={}> = {
-  option<K extends string, V>(key: Exclude<K, keyof T>, value: V): Chainable<T & {[P in K]:V}>
-  get(): T
-}
+type Chainable<T = {}> = {
+  option<K extends string, V>(key: Exclude<K, keyof T>, value: V): Chainable<T & { [P in K]: V }>;
+  get(): T;
+};
 ```
 
 最后，每次返回的T，应该忽略当然的K，当然如果没有同名的就没有任何影响，如果出现同名的才会触发
 
 ```typescript
-type Chainable<T={}> = {
-  option<K extends string, V>(key: Exclude<K, keyof T>, value: V): Chainable<Omit<T,K> & {[P in K]:V}>
-  get(): T
-}
+type Chainable<T = {}> = {
+  option<K extends string, V>(key: Exclude<K, keyof T>, value: V): Chainable<Omit<T, K> & { [P in K]: V }>;
+  get(): T;
+};
 ```
-
