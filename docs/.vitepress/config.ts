@@ -867,6 +867,32 @@ export default defineConfig({
                     link: '/notes/ts/05class-and-interface/15构造函数类型相关类型工具.md',
                   },
                 ]
+              },
+              {
+                text: '装饰器',
+                collapsed: true,
+                items: [
+                  { text: '理解装饰器', link: '/notes/ts/06decorator/01理解装饰器.md' },
+                  { text: '类装饰器', link: '/notes/ts/06decorator/02类装饰器.md' },
+                  { text: '属性装饰器', link: '/notes/ts/06decorator/03属性装饰器.md' },
+                  { text: '方法装饰器', link: '/notes/ts/06decorator/04方法装饰器.md' },
+                  { text: '访问器属性与参数装饰器', link: '/notes/ts/06decorator/05访问器属性与参数装饰器.md' },
+                  { text: 'reflect-metadata', link: '/notes/ts/06decorator/06reflect-metadata.md' },
+                  { text: '元数据相关功能库', link: '/notes/ts/06decorator/07元数据相关功能库.md' },
+                ]
+              },
+              {
+                text: '工程化',
+                collapsed: true,
+                items: [
+                  { text: '模块化-ESM的问题', link: '/notes/ts/08engineering/01模块化-ESM的问题.md' },
+                  { text: '模块化-模块解析策略', link: '/notes/ts/08engineering/02模块化-模块解析策略.md' },
+                  { text: '模块化-TS模块解析策略', link: '/notes/ts/08engineering/03模块化-TS模块解析策略.md' },
+                  { text: '模块化-模块解析最佳实践', link: '/notes/ts/08engineering/04模块化-模块解析最佳实践.md' },
+                  { text: '模块化-路径别名', link: '/notes/ts/08engineering/05模块化-路径别名.md' },
+                  { text: '类型声明', link: '/notes/ts/08engineering/06类型声明.md' },
+                  { text: 'webpack中TS的处理', link: '/notes/ts/08engineering/07webpack中TS的处理.md' },
+                ]
               }
             ],
           },
