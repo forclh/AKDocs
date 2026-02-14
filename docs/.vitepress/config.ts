@@ -630,99 +630,99 @@ export default defineConfig({
                 items: [
                   {
                     text: "一切从类型的理解开始",
-                    link: "/notes/ts/02type-understanding/01一切从类型的理解开始.md",
+                    link: "/notes/ts/02类型理解/01一切从类型的理解开始.md",
                   },
                   {
                     text: "any与unknown",
-                    link: "/notes/ts/02type-understanding/02any与unknown.md",
+                    link: "/notes/ts/02类型理解/02any与unknown.md",
                   },
                   {
                     text: "boolean与类型字面量",
-                    link: "/notes/ts/02type-understanding/03boolean与类型字面量.md",
+                    link: "/notes/ts/02类型理解/03boolean与类型字面量.md",
                   },
                   {
                     text: "number,bigint与string",
-                    link: "/notes/ts/02type-understanding/04number,bigint与string.md",
+                    link: "/notes/ts/02类型理解/04number,bigint与string.md",
                   },
                   {
                     text: "symbol",
-                    link: "/notes/ts/02type-understanding/05symbol.md",
+                    link: "/notes/ts/02类型理解/05symbol.md",
                   },
                   {
                     text: "类型拓宽",
-                    link: "/notes/ts/02type-understanding/06类型拓宽.md",
+                    link: "/notes/ts/02类型理解/06类型拓宽.md",
                   },
                   {
                     text: "null与undefined",
-                    link: "/notes/ts/02type-understanding/07null与undefined.md",
+                    link: "/notes/ts/02类型理解/07null与undefined.md",
                   },
                   {
                     text: "void",
-                    link: "/notes/ts/02type-understanding/08void.md",
+                    link: "/notes/ts/02类型理解/08void.md",
                   },
                   {
                     text: "对象字面量",
-                    link: "/notes/ts/02type-understanding/09对象字面量.md",
+                    link: "/notes/ts/02类型理解/09对象字面量.md",
                   },
                   {
                     text: "类型别名与接口",
-                    link: "/notes/ts/02type-understanding/10类型别名与接口.md",
+                    link: "/notes/ts/02类型理解/10类型别名与接口.md",
                   },
                   {
                     text: "结构化类型",
-                    link: "/notes/ts/02type-understanding/11结构化类型.md",
+                    link: "/notes/ts/02类型理解/11结构化类型.md",
                   },
                   {
                     text: "装箱与拆箱类型",
-                    link: "/notes/ts/02type-understanding/12装箱与拆箱类型.md",
+                    link: "/notes/ts/02类型理解/12装箱与拆箱类型.md",
                   },
                   {
                     text: "联合类型",
-                    link: "/notes/ts/02type-understanding/13联合类型.md",
+                    link: "/notes/ts/02类型理解/13联合类型.md",
                   },
                   {
                     text: "交叉类型",
-                    link: "/notes/ts/02type-understanding/14交叉类型.md",
+                    link: "/notes/ts/02类型理解/14交叉类型.md",
                   },
                   {
                     text: "typeof与控制流分析",
-                    link: "/notes/ts/02type-understanding/15typeof与控制流分析.md",
+                    link: "/notes/ts/02类型理解/15typeof与控制流分析.md",
                   },
                   {
                     text: "instanceof与in",
-                    link: "/notes/ts/02type-understanding/16instanceof与in.md",
+                    link: "/notes/ts/02类型理解/16instanceof与in.md",
                   },
                   {
                     text: "字面量类型检查",
-                    link: "/notes/ts/02type-understanding/17字面量类型检查.md",
+                    link: "/notes/ts/02类型理解/17字面量类型检查.md",
                   },
                   {
                     text: "自定义守卫",
-                    link: "/notes/ts/02type-understanding/18自定义守卫.md",
+                    link: "/notes/ts/02类型理解/18自定义守卫.md",
                   },
                   {
                     text: "never",
-                    link: "/notes/ts/02type-understanding/19never.md",
+                    link: "/notes/ts/02类型理解/19never.md",
                   },
                   {
                     text: "数组与元组",
-                    link: "/notes/ts/02type-understanding/20数组与元组.md",
+                    link: "/notes/ts/02类型理解/20数组与元组.md",
                   },
                   {
                     text: "方括号运算符",
-                    link: "/notes/ts/02type-understanding/21方括号运算符.md",
+                    link: "/notes/ts/02类型理解/21方括号运算符.md",
                   },
                   {
                     text: "类型断言",
-                    link: "/notes/ts/02type-understanding/22类型断言.md",
+                    link: "/notes/ts/02类型理解/22类型断言.md",
                   },
                   {
                     text: "satisfies",
-                    link: "/notes/ts/02type-understanding/23satisfies.md",
+                    link: "/notes/ts/02类型理解/23satisfies.md",
                   },
                   {
                     text: "枚举",
-                    link: "/notes/ts/02type-understanding/24枚举.md",
+                    link: "/notes/ts/02类型理解/24枚举.md",
                   },
                 ],
               },
@@ -732,47 +732,47 @@ export default defineConfig({
                 items: [
                   {
                     text: "函数的声明与调用",
-                    link: "/notes/ts/03functions-and-generics/01函数的声明与调用.md",
+                    link: "/notes/ts/03函数与泛型/01函数的声明与调用.md",
                   },
                   {
                     text: "调用签名",
-                    link: "/notes/ts/03functions-and-generics/02调用签名.md",
+                    link: "/notes/ts/03函数与泛型/02调用签名.md",
                   },
                   {
                     text: "重载",
-                    link: "/notes/ts/03functions-and-generics/03重载.md",
+                    link: "/notes/ts/03函数与泛型/03重载.md",
                   },
                   {
                     text: "理解泛型",
-                    link: "/notes/ts/03functions-and-generics/04理解泛型.md",
+                    link: "/notes/ts/03函数与泛型/04理解泛型.md",
                   },
                   {
                     text: "类型别名与接口使用泛型",
-                    link: "/notes/ts/03functions-and-generics/05类型别名与接口使用泛型.md",
+                    link: "/notes/ts/03函数与泛型/05类型别名与接口使用泛型.md",
                   },
                   {
                     text: "多泛型",
-                    link: "/notes/ts/03functions-and-generics/06多泛型.md",
+                    link: "/notes/ts/03函数与泛型/06多泛型.md",
                   },
                   {
                     text: "泛型的默认类型",
-                    link: "/notes/ts/03functions-and-generics/07泛型的默认类型.md",
+                    link: "/notes/ts/03函数与泛型/07泛型的默认类型.md",
                   },
                   {
                     text: "受限的泛型",
-                    link: "/notes/ts/03functions-and-generics/08受限的泛型.md",
+                    link: "/notes/ts/03函数与泛型/08受限的泛型.md",
                   },
                   {
                     text: "类型理解再升级-型变",
-                    link: "/notes/ts/03functions-and-generics/09类型理解再升级-型变.md",
+                    link: "/notes/ts/03函数与泛型/09类型理解再升级-型变.md",
                   },
                   {
                     text: "多余属性检查",
-                    link: "/notes/ts/03functions-and-generics/10多余属性检查.md",
+                    link: "/notes/ts/03函数与泛型/10多余属性检查.md",
                   },
                   {
                     text: "逆变",
-                    link: "/notes/ts/03functions-and-generics/11逆变.md",
+                    link: "/notes/ts/03函数与泛型/11逆变.md",
                   },
                 ],
               },
@@ -782,59 +782,59 @@ export default defineConfig({
                 items: [
                   {
                     text: "索引签名类型",
-                    link: "/notes/ts/04type-programming/01索引签名类型.md",
+                    link: "/notes/ts/04类型编程/01索引签名类型.md",
                   },
                   {
                     text: "keyof",
-                    link: "/notes/ts/04type-programming/02keyof.md",
+                    link: "/notes/ts/04类型编程/02keyof.md",
                   },
                   {
                     text: "in运算符遍历",
-                    link: "/notes/ts/04type-programming/03in运算符遍历.md",
+                    link: "/notes/ts/04类型编程/03in运算符遍历.md",
                   },
                   {
                     text: "类型编程的理解",
-                    link: "/notes/ts/04type-programming/04类型编程的理解.md",
+                    link: "/notes/ts/04类型编程/04类型编程的理解.md",
                   },
                   {
                     text: "关联泛型",
-                    link: "/notes/ts/04type-programming/05关联泛型.md",
+                    link: "/notes/ts/04类型编程/05关联泛型.md",
                   },
                   {
                     text: "方括号运算符常见操作",
-                    link: "/notes/ts/04type-programming/06方括号运算符常见操作.md",
+                    link: "/notes/ts/04类型编程/06方括号运算符常见操作.md",
                   },
                   {
                     text: "条件类型与类型兼容性",
-                    link: "/notes/ts/04type-programming/07条件类型与类型兼容性.md",
+                    link: "/notes/ts/04类型编程/07条件类型与类型兼容性.md",
                   },
                   {
                     text: "条件类型与泛型",
-                    link: "/notes/ts/04type-programming/08条件类型与泛型.md",
+                    link: "/notes/ts/04类型编程/08条件类型与泛型.md",
                   },
                   {
                     text: "分布式条件特性",
-                    link: "/notes/ts/04type-programming/09分布式条件特性.md",
+                    link: "/notes/ts/04类型编程/09分布式条件特性.md",
                   },
                   {
                     text: "映射类型的属性过滤",
-                    link: "/notes/ts/04type-programming/10映射类型的属性过滤.md",
+                    link: "/notes/ts/04类型编程/10映射类型的属性过滤.md",
                   },
                   {
                     text: "infer",
-                    link: "/notes/ts/04type-programming/11infer.md",
+                    link: "/notes/ts/04类型编程/11infer.md",
                   },
                   {
                     text: "模板字符串类型",
-                    link: "/notes/ts/04type-programming/12模板字符串类型.md",
+                    link: "/notes/ts/04类型编程/12模板字符串类型.md",
                   },
                   {
                     text: "递归复用",
-                    link: "/notes/ts/04type-programming/13递归复用.md",
+                    link: "/notes/ts/04类型编程/13递归复用.md",
                   },
                   {
                     text: "分发逆变推断",
-                    link: "/notes/ts/04type-programming/14分发逆变推断.md",
+                    link: "/notes/ts/04类型编程/14分发逆变推断.md",
                   },
                 ],
               },
@@ -844,59 +844,59 @@ export default defineConfig({
                 items: [
                   {
                     text: '面向对象的理解',
-                    link: '/notes/ts/05class-and-interface/01面向对象的理解.md',
+                    link: '/notes/ts/05类和接口/01面向对象的理解.md',
                   },
                   {
                     text: '访问修饰符',
-                    link: '/notes/ts/05class-and-interface/02访问修饰符.md',
+                    link: '/notes/ts/05类和接口/02访问修饰符.md',
                   },
                   {
                     text: '存取器(访问器)属性',
-                    link: '/notes/ts/05class-and-interface/03存取器属性.md',
+                    link: '/notes/ts/05类和接口/03存取器属性.md',
                   },
                   {
                     text: '静态成员',
-                    link: '/notes/ts/05class-and-interface/04静态成员.md',
+                    link: '/notes/ts/05类和接口/04静态成员.md',
                   },
                   {
                     text: '继承',
-                    link: '/notes/ts/05class-and-interface/05继承.md',
+                    link: '/notes/ts/05类和接口/05继承.md',
                   },
                   {
                     text: 'this返回类型',
-                    link: '/notes/ts/05class-and-interface/06this返回类型.md',
+                    link: '/notes/ts/05类和接口/06this返回类型.md',
                   },
                   {
                     text: '类的泛型支持',
-                    link: '/notes/ts/05class-and-interface/07类的泛型支持.md',
+                    link: '/notes/ts/05类和接口/07类的泛型支持.md',
                   },
                   {
                     text: '有关this的类型体操',
-                    link: '/notes/ts/05class-and-interface/08有关this的类型体操.md',
+                    link: '/notes/ts/05类和接口/08有关this的类型体操.md',
                   },
                   {
                     text: '抽象类',
-                    link: '/notes/ts/05class-and-interface/09抽象类.md',
+                    link: '/notes/ts/05类和接口/09抽象类.md',
                   },
                   {
                     text: '接口',
-                    link: '/notes/ts/05class-and-interface/10接口.md',
+                    link: '/notes/ts/05类和接口/10接口.md',
                   },
                   {
                     text: '接口与类型别名的区别',
-                    link: '/notes/ts/05class-and-interface/12接口与类型别名的区别.md',
+                    link: '/notes/ts/05类和接口/12接口与类型别名的区别.md',
                   },
                   {
                     text: '类的类型理解升级',
-                    link: '/notes/ts/05class-and-interface/13类的类型理解升级.md',
+                    link: '/notes/ts/05类和接口/13类的类型理解升级.md',
                   },
                   {
                     text: '混入',
-                    link: '/notes/ts/05class-and-interface/14混入.md',
+                    link: '/notes/ts/05类和接口/14混入.md',
                   },
                   {
                     text: '构造函数相关类型工具',
-                    link: '/notes/ts/05class-and-interface/15构造函数类型相关类型工具.md',
+                    link: '/notes/ts/05类和接口/15构造函数类型相关类型工具.md',
                   },
                 ]
               },
@@ -904,26 +904,26 @@ export default defineConfig({
                 text: '装饰器',
                 collapsed: true,
                 items: [
-                  { text: '理解装饰器', link: '/notes/ts/06decorator/01理解装饰器.md' },
-                  { text: '类装饰器', link: '/notes/ts/06decorator/02类装饰器.md' },
-                  { text: '属性装饰器', link: '/notes/ts/06decorator/03属性装饰器.md' },
-                  { text: '方法装饰器', link: '/notes/ts/06decorator/04方法装饰器.md' },
-                  { text: '访问器属性与参数装饰器', link: '/notes/ts/06decorator/05访问器属性与参数装饰器.md' },
-                  { text: 'reflect-metadata', link: '/notes/ts/06decorator/06reflect-metadata.md' },
-                  { text: '元数据相关功能库', link: '/notes/ts/06decorator/07元数据相关功能库.md' },
+                  { text: '理解装饰器', link: '/notes/ts/06装饰器/01理解装饰器.md' },
+                  { text: '类装饰器', link: '/notes/ts/06装饰器/02类装饰器.md' },
+                  { text: '属性装饰器', link: '/notes/ts/06装饰器/03属性装饰器.md' },
+                  { text: '方法装饰器', link: '/notes/ts/06装饰器/04方法装饰器.md' },
+                  { text: '访问器属性与参数装饰器', link: '/notes/ts/06装饰器/05访问器属性与参数装饰器.md' },
+                  { text: 'reflect-metadata', link: '/notes/ts/06装饰器/06reflect-metadata.md' },
+                  { text: '元数据相关功能库', link: '/notes/ts/06装饰器/07元数据相关功能库.md' },
                 ]
               },
               {
                 text: '工程化',
                 collapsed: true,
                 items: [
-                  { text: '模块化-ESM的问题', link: '/notes/ts/08engineering/01模块化-ESM的问题.md' },
-                  { text: '模块化-模块解析策略', link: '/notes/ts/08engineering/02模块化-模块解析策略.md' },
-                  { text: '模块化-TS模块解析策略', link: '/notes/ts/08engineering/03模块化-TS模块解析策略.md' },
-                  { text: '模块化-模块解析最佳实践', link: '/notes/ts/08engineering/04模块化-模块解析最佳实践.md' },
-                  { text: '模块化-路径别名', link: '/notes/ts/08engineering/05模块化-路径别名.md' },
-                  { text: '类型声明', link: '/notes/ts/08engineering/06类型声明.md' },
-                  { text: 'webpack中TS的处理', link: '/notes/ts/08engineering/07webpack中TS的处理.md' },
+                  { text: '模块化-ESM的问题', link: '/notes/ts/08工程化/01模块化-ESM的问题.md' },
+                  { text: '模块化-模块解析策略', link: '/notes/ts/08工程化/02模块化-模块解析策略.md' },
+                  { text: '模块化-TS模块解析策略', link: '/notes/ts/08工程化/03模块化-TS模块解析策略.md' },
+                  { text: '模块化-模块解析最佳实践', link: '/notes/ts/08工程化/04模块化-模块解析最佳实践.md' },
+                  { text: '模块化-路径别名', link: '/notes/ts/08工程化/05模块化-路径别名.md' },
+                  { text: '类型声明', link: '/notes/ts/08工程化/06类型声明.md' },
+                  { text: 'webpack中TS的处理', link: '/notes/ts/08工程化/07webpack中TS的处理.md' },
                 ]
               }
             ],
@@ -1245,10 +1245,10 @@ export default defineConfig({
             items: [
               {
                 text: "CMJ和ESM",
-                link: "/interview/engineering/01CMJ和ESM.md",
+                link: "/interview/工程化/01CMJ和ESM.md",
               },
-              { text: "npx", link: "/interview/engineering/02npx.md" },
-              { text: "ESLint", link: "/interview/engineering/03ESLint.md" },
+              { text: "npx", link: "/interview/工程化/02npx.md" },
+              { text: "ESLint", link: "/interview/工程化/03ESLint.md" },
             ],
           },
           {
