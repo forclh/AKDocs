@@ -192,28 +192,60 @@ export default defineConfig({
             collapsed: true,
             items: [
               {
-                text: "反射与代理-属性描述符",
-                link: "/notes/es6+/12反射与代理-属性描述符.md",
+                text: "异步处理",
+                collapsed: true,
+                items: [
+                  {
+                    text: "Promise基础",
+                    link: "/notes/es6+/异步处理/01Promise基础.md",
+                  },
+                  {
+                    text: "Promise的链式调用",
+                    link: "/notes/es6+/异步处理/02Promise的链式调用.md",
+                  },
+                  {
+                    text: "Promise的静态方法",
+                    link: "/notes/es6+/异步处理/03Promise的静态方法.md",
+                  },
+                  {
+                    text: "async和await",
+                    link: "/notes/es6+/异步处理/04async和await.md",
+                  },
+                  {
+                    text: "手写Promise",
+                    link: "/notes/es6+/异步处理/05手写Promise.md",
+                  },
+                ]
               },
               {
-                text: "反射与代理-Reflect",
-                link: "/notes/es6+/12反射与代理-Reflect.md",
-              },
-              {
-                text: "反射与代理-Proxy",
-                link: "/notes/es6+/12反射与代理-Proxy.md",
-              },
-              {
-                text: "反射与代理-观察者模式",
-                link: "/notes/es6+/12反射与代理-观察者模式.md",
-              },
-              {
-                text: "反射与代理-偷懒的构造函数",
-                link: "/notes/es6+/12反射与代理-偷懒的构造函数.md",
-              },
-              {
-                text: "反射与代理-可验证的函数参数",
-                link: "/notes/es6+/12反射与代理-可验证的函数参数.md",
+                text: "反射与代理",
+                collapsed: true,
+                items: [
+                  {
+                    text: "属性描述符",
+                    link: "/notes/es6+/反射与代理/01属性描述符.md",
+                  },
+                  {
+                    text: "Reflect",
+                    link: "/notes/es6+/反射与代理/02Reflect.md",
+                  },
+                  {
+                    text: "Proxy",
+                    link: "/notes/es6+/反射与代理/03Proxy.md",
+                  },
+                  {
+                    text: "观察者模式",
+                    link: "/notes/es6+/反射与代理/04观察者模式.md",
+                  },
+                  {
+                    text: "偷懒的构造函数",
+                    link: "/notes/es6+/反射与代理/05偷懒的构造函数.md",
+                  },
+                  {
+                    text: "可验证的函数参数",
+                    link: "/notes/es6+/反射与代理/06可验证的函数参数.md",
+                  },
+                ]
               },
             ],
           },
@@ -227,80 +259,80 @@ export default defineConfig({
                 items: [
                   {
                     text: "搭建工程",
-                    link: "/notes/vue3/quick-start/02搭建工程.md",
+                    link: "/notes/vue3/01快速入门/02搭建工程.md",
                   },
                   {
                     text: "模板语法",
-                    link: "/notes/vue3/quick-start/03模板语法.md",
+                    link: "/notes/vue3/01快速入门/03模板语法.md",
                   },
                   {
                     text: "响应式基础",
-                    link: "/notes/vue3/quick-start/04-05响应式基础.md",
+                    link: "/notes/vue3/01快速入门/04-05响应式基础.md",
                   },
                   {
                     text: "响应式常用API",
-                    link: "/notes/vue3/quick-start/06响应式常用API.md",
+                    link: "/notes/vue3/01快速入门/06响应式常用API.md",
                   },
                   {
                     text: "计算属性",
-                    link: "/notes/vue3/quick-start/07计算属性.md",
+                    link: "/notes/vue3/01快速入门/07计算属性.md",
                   },
                   {
                     text: "类与样式绑定",
-                    link: "/notes/vue3/quick-start/08类与样式绑定.md",
+                    link: "/notes/vue3/01快速入门/08类与样式绑定.md",
                   },
                   {
                     text: "条件和列表渲染",
-                    link: "/notes/vue3/quick-start/09条件和列表渲染.md",
+                    link: "/notes/vue3/01快速入门/09条件和列表渲染.md",
                   },
                   {
                     text: "事件处理",
-                    link: "/notes/vue3/quick-start/10事件处理.md",
+                    link: "/notes/vue3/01快速入门/10事件处理.md",
                   },
                   {
                     text: "表单处理",
-                    link: "/notes/vue3/quick-start/11表单处理.md",
+                    link: "/notes/vue3/01快速入门/11表单处理.md",
                   },
                   {
                     text: "生命周期",
-                    link: "/notes/vue3/quick-start/13生命周期.md",
+                    link: "/notes/vue3/01快速入门/13生命周期.md",
                   },
                   {
                     text: "侦听器",
-                    link: "/notes/vue3/quick-start/14-15侦听器.md",
+                    link: "/notes/vue3/01快速入门/14-15侦听器.md",
                   },
                   {
                     text: "组件介绍",
-                    link: "/notes/vue3/quick-start/18组件介绍.md",
+                    link: "/notes/vue3/01快速入门/18组件介绍.md",
                   },
                   {
                     text: "Props",
-                    link: "/notes/vue3/quick-start/19Props.md",
+                    link: "/notes/vue3/01快速入门/19Props.md",
                   },
                   {
                     text: "自定义事件",
-                    link: "/notes/vue3/quick-start/20自定义事件.md",
+                    link: "/notes/vue3/01快速入门/20自定义事件.md",
                   },
                   {
                     text: "组件v-model",
-                    link: "/notes/vue3/quick-start/21组件v-model.md",
+                    link: "/notes/vue3/01快速入门/21组件v-model.md",
                   },
-                  { text: "插槽", link: "/notes/vue3/quick-start/22插槽.md" },
+                  { text: "插槽", link: "/notes/vue3/01快速入门/22插槽.md" },
                   {
                     text: "前端路由介绍",
-                    link: "/notes/vue3/quick-start/24前端路由介绍.md",
+                    link: "/notes/vue3/01快速入门/24前端路由介绍.md",
                   },
                   {
                     text: "KeepAlive内置组件",
-                    link: "/notes/vue3/quick-start/27KeepAlive内置组件.md",
+                    link: "/notes/vue3/01快速入门/27KeepAlive内置组件.md",
                   },
                   {
                     text: "状态管理库",
-                    link: "/notes/vue3/quick-start/28状态管理库.md",
+                    link: "/notes/vue3/01快速入门/28状态管理库.md",
                   },
                   {
                     text: "使用组件库",
-                    link: "/notes/vue3/quick-start/30使用组件库.md",
+                    link: "/notes/vue3/01快速入门/30使用组件库.md",
                   },
                 ],
               },
@@ -310,87 +342,87 @@ export default defineConfig({
                 items: [
                   {
                     text: "虚拟DOM本质",
-                    link: "/notes/vue3/go-deep/02虚拟DOM本质.md",
+                    link: "/notes/vue3/02深入本质/02虚拟DOM本质.md",
                   },
                   {
                     text: "模板的本质",
-                    link: "/notes/vue3/go-deep/03模板的本质.md",
+                    link: "/notes/vue3/02深入本质/03模板的本质.md",
                   },
                   {
                     text: "组件树和虚拟DOM树",
-                    link: "/notes/vue3/go-deep/04组件树和虚拟DOM树.md",
+                    link: "/notes/vue3/02深入本质/04组件树和虚拟DOM树.md",
                   },
                   {
                     text: "数据拦截的本质",
-                    link: "/notes/vue3/go-deep/05数据拦截的本质.md",
+                    link: "/notes/vue3/02深入本质/05数据拦截的本质.md",
                   },
                   {
                     text: "响应式数据的本质",
-                    link: "/notes/vue3/go-deep/06响应式数据的本质.md",
+                    link: "/notes/vue3/02深入本质/06响应式数据的本质.md",
                   },
                   {
                     text: "响应式的本质",
-                    link: "/notes/vue3/go-deep/07响应式的本质.md",
+                    link: "/notes/vue3/02深入本质/07响应式的本质.md",
                   },
                   {
                     text: "响应式和组件渲染",
-                    link: "/notes/vue3/go-deep/08响应式和组件渲染.md",
+                    link: "/notes/vue3/02深入本质/08响应式和组件渲染.md",
                   },
                   {
                     text: "实现响应式系统1",
-                    link: "/notes/vue3/go-deep/09实现响应式系统1.md",
+                    link: "/notes/vue3/02深入本质/09实现响应式系统1.md",
                   },
                   {
                     text: "实现响应式系统2",
-                    link: "/notes/vue3/go-deep/10实现响应式系统2.md",
+                    link: "/notes/vue3/02深入本质/10实现响应式系统2.md",
                   },
                   {
                     text: "图解EFFECT",
-                    link: "/notes/vue3/go-deep/11图解EFFECT.md",
+                    link: "/notes/vue3/02深入本质/11图解EFFECT.md",
                   },
                   {
                     text: "实现响应式系统3",
-                    link: "/notes/vue3/go-deep/12实现响应式系统3.md",
+                    link: "/notes/vue3/02深入本质/12实现响应式系统3.md",
                   },
                   {
                     text: "手写computed",
-                    link: "/notes/vue3/go-deep/13手写computed.md",
+                    link: "/notes/vue3/02深入本质/13手写computed.md",
                   },
                   {
                     text: "手写watch",
-                    link: "/notes/vue3/go-deep/14手写watch.md",
+                    link: "/notes/vue3/02深入本质/14手写watch.md",
                   },
                   {
                     text: "指令的本质",
-                    link: "/notes/vue3/go-deep/15指令的本质.md",
+                    link: "/notes/vue3/02深入本质/15指令的本质.md",
                   },
                   {
                     text: "插槽的本质",
-                    link: "/notes/vue3/go-deep/16插槽的本质.md",
+                    link: "/notes/vue3/02深入本质/16插槽的本质.md",
                   },
                   {
                     text: "v-model的本质",
-                    link: "/notes/vue3/go-deep/17v-model的本质.md",
+                    link: "/notes/vue3/02深入本质/17v-model的本质.md",
                   },
                   {
                     text: "setup语法标签",
-                    link: "/notes/vue3/go-deep/18setup语法标签.md",
+                    link: "/notes/vue3/02深入本质/18setup语法标签.md",
                   },
                   {
                     text: "组件生命周期",
-                    link: "/notes/vue3/go-deep/19组件生命周期.md",
+                    link: "/notes/vue3/02深入本质/19组件生命周期.md",
                   },
                   {
                     text: "keepalive生命周期",
-                    link: "/notes/vue3/go-deep/20keepalive生命周期.md",
+                    link: "/notes/vue3/02深入本质/20keepalive生命周期.md",
                   },
                   {
                     text: "keepalive的本质",
-                    link: "/notes/vue3/go-deep/21keepalive的本质.md",
+                    link: "/notes/vue3/02深入本质/21keepalive的本质.md",
                   },
                   {
                     text: "key的本质",
-                    link: "/notes/vue3/go-deep/22key的本质.md",
+                    link: "/notes/vue3/02深入本质/22key的本质.md",
                   },
                 ],
               },
@@ -400,163 +432,163 @@ export default defineConfig({
                 items: [
                   {
                     text: "[Vue]属性透传",
-                    link: "/notes/vue3/details/02Vue-属性透传.md",
+                    link: "/notes/vue3/03细节补充/02Vue-属性透传.md",
                   },
                   {
                     text: "[Vue]依赖注入",
-                    link: "/notes/vue3/details/03Vue-依赖注入.md",
+                    link: "/notes/vue3/03细节补充/03Vue-依赖注入.md",
                   },
                   {
                     text: "[Vue]组合式函数",
-                    link: "/notes/vue3/details/04Vue-组合式函数.md",
+                    link: "/notes/vue3/03细节补充/04Vue-组合式函数.md",
                   },
                   {
                     text: "[Vue]自定义指令",
-                    link: "/notes/vue3/details/05Vue-自定义指令.md",
+                    link: "/notes/vue3/03细节补充/05Vue-自定义指令.md",
                   },
                   {
                     text: "[Vue]插件",
-                    link: "/notes/vue3/details/06Vue-插件.md",
+                    link: "/notes/vue3/03细节补充/06Vue-插件.md",
                   },
                   {
                     text: "[Vue]Transition",
-                    link: "/notes/vue3/details/07Vue-Transition.md",
+                    link: "/notes/vue3/03细节补充/07Vue-Transition.md",
                   },
                   {
                     text: "[Vue]TransitionGroup",
-                    link: "/notes/vue3/details/08Vue-TransitionGroup.md",
+                    link: "/notes/vue3/03细节补充/08Vue-TransitionGroup.md",
                   },
                   {
                     text: "[Vue]Teleport",
-                    link: "/notes/vue3/details/09Vue-Teleport.md",
+                    link: "/notes/vue3/03细节补充/09Vue-Teleport.md",
                   },
                   {
                     text: "[Vue]异步组件",
-                    link: "/notes/vue3/details/10Vue-异步组件.md",
+                    link: "/notes/vue3/03细节补充/10Vue-异步组件.md",
                   },
                   {
                     text: "[Vue]Suspense",
-                    link: "/notes/vue3/details/11Vue-Suspense.md",
+                    link: "/notes/vue3/03细节补充/11Vue-Suspense.md",
                   },
                   {
                     text: "[Router]路由模式",
-                    link: "/notes/vue3/details/12Router-路由模式.md",
+                    link: "/notes/vue3/03细节补充/12Router-路由模式.md",
                   },
                   {
                     text: "[Router]路由零碎知识",
-                    link: "/notes/vue3/details/13Router-路由零碎知识.md",
+                    link: "/notes/vue3/03细节补充/13Router-路由零碎知识.md",
                   },
                   {
                     text: "[Router]路由匹配语法",
-                    link: "/notes/vue3/details/14Router-路由匹配语法.md",
+                    link: "/notes/vue3/03细节补充/14Router-路由匹配语法.md",
                   },
                   {
                     text: "[Router]路由组件传参",
-                    link: "/notes/vue3/details/15Router-路由组件传参.md",
+                    link: "/notes/vue3/03细节补充/15Router-路由组件传参.md",
                   },
                   {
                     text: "[Router]内置组件和函数",
-                    link: "/notes/vue3/details/16Router-内置组件和函数.md",
+                    link: "/notes/vue3/03细节补充/16Router-内置组件和函数.md",
                   },
                   {
                     text: "[Router]导航守卫",
-                    link: "/notes/vue3/details/17Router-导航守卫.md",
+                    link: "/notes/vue3/03细节补充/17Router-导航守卫.md",
                   },
                   {
                     text: "[Router]过渡特效",
-                    link: "/notes/vue3/details/18Router-过渡特效.md",
+                    link: "/notes/vue3/03细节补充/18Router-过渡特效.md",
                   },
                   {
                     text: "[Router]滚动行为",
-                    link: "/notes/vue3/details/19Router-滚动行为.md",
+                    link: "/notes/vue3/03细节补充/19Router-滚动行为.md",
                   },
                   {
                     text: "[Router]动态路由",
-                    link: "/notes/vue3/details/20Router-动态路由.md",
+                    link: "/notes/vue3/03细节补充/20Router-动态路由.md",
                   },
                   {
                     text: "[State]通信方式总结",
-                    link: "/notes/vue3/details/21State-通信方式总结.md",
+                    link: "/notes/vue3/03细节补充/21State-通信方式总结.md",
                   },
                   {
                     text: "[State]Pinia自定义插件",
-                    link: "/notes/vue3/details/22State-Pinia自定义插件.md",
+                    link: "/notes/vue3/03细节补充/22State-Pinia自定义插件.md",
                   },
                   {
                     text: "[场景]封装树形组件",
-                    link: "/notes/vue3/details/23场景-封装树形组件.md",
+                    link: "/notes/vue3/03细节补充/23场景-封装树形组件.md",
                   },
                   {
                     text: "[场景]自定义ref实现防抖",
-                    link: "/notes/vue3/details/24场景-自定义ref实现防抖.md",
+                    link: "/notes/vue3/03细节补充/24场景-自定义ref实现防抖.md",
                   },
                   {
                     text: "[场景]懒加载",
-                    link: "/notes/vue3/details/25场景-懒加载.md",
+                    link: "/notes/vue3/03细节补充/25场景-懒加载.md",
                   },
                   {
                     text: "[场景]虚拟列表",
-                    link: "/notes/vue3/details/26场景-虚拟列表.md",
+                    link: "/notes/vue3/03细节补充/26场景-虚拟列表.md",
                   },
                   {
                     text: "[场景]虚拟列表优化",
-                    link: "/notes/vue3/details/27-28场景-虚拟列表优化.md",
+                    link: "/notes/vue3/03细节补充/27-28场景-虚拟列表优化.md",
                   },
                   {
                     text: "[第三方库]VueUse",
-                    link: "/notes/vue3/details/29第三方库-VueUse.md",
+                    link: "/notes/vue3/03细节补充/29第三方库-VueUse.md",
                   },
                   {
                     text: "[第三方库]vuedraggable",
-                    link: "/notes/vue3/details/30第三方库-vuedraggable.md",
+                    link: "/notes/vue3/03细节补充/30第三方库-vuedraggable.md",
                   },
                   {
                     text: "[第三方库]vue-drag-resize",
-                    link: "/notes/vue3/details/31第三方库-vue-drag-resize.md",
+                    link: "/notes/vue3/03细节补充/31第三方库-vue-drag-resize.md",
                   },
                   {
                     text: "[第三方库]vue-chartjs",
-                    link: "/notes/vue3/details/32第三方库-vue-chartjs.md",
+                    link: "/notes/vue3/03细节补充/32第三方库-vue-chartjs.md",
                   },
                   {
                     text: "[第三方库]vuelidate",
-                    link: "/notes/vue3/details/33第三方库-vuelidate.md",
+                    link: "/notes/vue3/03细节补充/33第三方库-vuelidate.md",
                   },
                   {
                     text: "[第三方库]vue3-lazyload",
-                    link: "/notes/vue3/details/34第三方库-vue3-lazyload.md",
+                    link: "/notes/vue3/03细节补充/34第三方库-vue3-lazyload.md",
                   },
                   {
                     text: "[场景]Websocket聊天室",
-                    link: "/notes/vue3/details/35场景-Websocket聊天室.md",
+                    link: "/notes/vue3/03细节补充/35场景-Websocket聊天室.md",
                   },
                   {
                     text: "[vite]认识Vite",
-                    link: "/notes/vue3/details/36vite-认识Vite.md",
+                    link: "/notes/vue3/03细节补充/36vite-认识Vite.md",
                   },
                   {
                     text: "[vite]配置文件",
-                    link: "/notes/vue3/details/37vite-配置文件.md",
+                    link: "/notes/vue3/03细节补充/37vite-配置文件.md",
                   },
                   {
                     text: "[vite]依赖预构建",
-                    link: "/notes/vue3/details/38vite-依赖预构建.md",
+                    link: "/notes/vue3/03细节补充/38vite-依赖预构建.md",
                   },
                   {
                     text: "[vite]构建生产版本",
-                    link: "/notes/vue3/details/39vite-构建生产版本.md",
+                    link: "/notes/vue3/03细节补充/39vite-构建生产版本.md",
                   },
                   {
                     text: "[vite]环境变量与模式",
-                    link: "/notes/vue3/details/40vite-环境变量与模式.md",
+                    link: "/notes/vue3/03细节补充/40vite-环境变量与模式.md",
                   },
                   {
                     text: "[vite]CLI",
-                    link: "/notes/vue3/details/41vite-CLI.md",
+                    link: "/notes/vue3/03细节补充/41vite-CLI.md",
                   },
                   {
                     text: "[vite]Vite插件",
-                    link: "/notes/vue3/details/42vite-Vite插件.md",
+                    link: "/notes/vue3/03细节补充/42vite-Vite插件.md",
                   },
                 ],
               },
@@ -572,23 +604,23 @@ export default defineConfig({
                 items: [
                   {
                     text: "Playground",
-                    link: "/notes/ts/01quick-start/01Playground.md",
+                    link: "/notes/ts/01快速入门/01Playground.md",
                   },
                   {
                     text: "安装与运行",
-                    link: "/notes/ts/01quick-start/02安装与运行.md",
+                    link: "/notes/ts/01快速入门/02安装与运行.md",
                   },
                   {
                     text: "开发相关配置",
-                    link: "/notes/ts/01quick-start/03开发相关配置.md",
+                    link: "/notes/ts/01快速入门/03开发相关配置.md",
                   },
                   {
                     text: "TS常见类型",
-                    link: "/notes/ts/01quick-start/04TS常见类型.md",
+                    link: "/notes/ts/01快速入门/04TS常见类型.md",
                   },
                   {
                     text: "类型声明",
-                    link: "/notes/ts/01quick-start/05类型声明.md",
+                    link: "/notes/ts/01快速入门/05类型声明.md",
                   },
                 ],
               },
@@ -1104,22 +1136,6 @@ export default defineConfig({
               {
                 text: "Promise面试题汇总",
                 link: "/interview/promise/00Promise面试题汇总.md",
-              },
-              {
-                text: "Promise基础",
-                link: "/interview/promise/01Promise基础.md",
-              },
-              {
-                text: "Promise的链式调用",
-                link: "/interview/promise/02Promise的链式调用.md",
-              },
-              {
-                text: "Promise的静态方法",
-                link: "/interview/promise/03Promise的静态方法.md",
-              },
-              {
-                text: "async和await",
-                link: "/interview/promise/04async和await.md",
               },
             ],
           },
