@@ -133,7 +133,7 @@ const findCircleNum = function (isConnected) {
     visited[i] = true;
     // 遍历邻居节点
     for (let j = 0; j < graph[i].length; j++) {
-      if (graph[i][j] === 1 && i !== j) {
+      if (graph[i][j] === 1 && !visited[j]) {
         dfs(graph, j);
       }
     }
@@ -149,7 +149,7 @@ const findCircleNum = function (isConnected) {
  */
 const findCircleNum = function (isConnected) {
   const n = isConnected.length;
-  const visited = new Array(n).fill(0);
+  const visited = new Array(n).fill(false);
   let result = 0;
   // 遍历每一个城市
   for (let i = 0; i < n; i++) {
@@ -342,12 +342,11 @@ const minReorder = function (n, connections) {
   return ans;
 
   function dfs(graph, x) {
+    if (visited[next]) return;
     visited[x] = true;
     for (const [next, type] of graph[x]) {
-      if (!visited[next]) {
-        if (type === 1) ans++;
-        dfs(graph, next);
-      }
+      if (type === 1) ans++;
+      dfs(graph, next);
     }
   }
 };
@@ -687,24 +686,13 @@ const nearestExit = function (maze, entrance) {
       let [row, col] = q.shift();
 
       // 到达出口
-      if (
-        (row === 0 || row === m - 1 || col === 0 || col === n - 1) &&
-        (row !== entrance[0] || col !== entrance[1])
-      ) {
+      if ((row === 0 || row === m - 1 || col === 0 || col === n - 1) && (row !== entrance[0] || col !== entrance[1])) {
         return step;
       }
       for (const dir of directions) {
         const nextRow = row + dir[0];
         const nextCol = col + dir[1];
-        if (
-          nextRow >= m ||
-          nextRow < 0 ||
-          nextCol >= n ||
-          nextCol < 0 ||
-          visited[nextRow][nextCol] ||
-          maze[nextRow][nextCol] === "+"
-        )
-          continue;
+        if (nextRow >= m || nextRow < 0 || nextCol >= n || nextCol < 0 || visited[nextRow][nextCol] || maze[nextRow][nextCol] === '+') continue;
 
         visited[nextRow][nextCol] = true;
         q.push([nextRow, nextCol]);
@@ -733,7 +721,7 @@ const shortestPathBinaryMatrix = function (grid) {
   const n = grid.length;
   const visited = new Set();
   const q = [[0, 0]];
-  visited.add("00");
+  visited.add('00');
 
   const directions = [
     [-1, 0],
@@ -760,14 +748,7 @@ const shortestPathBinaryMatrix = function (grid) {
         const nextRow = row + dir[0];
         const nextCol = col + dir[1];
 
-        if (
-          nextRow >= n ||
-          nextRow < 0 ||
-          nextCol >= n ||
-          nextCol < 0 ||
-          visited.has(`${nextRow}${nextCol}`) ||
-          grid[nextRow][nextCol] === 1
-        ) {
+        if (nextRow >= n || nextRow < 0 || nextCol >= n || nextCol < 0 || visited.has(`${nextRow}${nextCol}`) || grid[nextRow][nextCol] === 1) {
           continue;
         }
         visited.add(`${nextRow}${nextCol}`);
@@ -822,7 +803,7 @@ const minMutation = function (startGene, endGene, bank) {
 const getNeighbor = (gene) => {
   const res = [];
   for (let i = 0; i < 8; i++) {
-    for (const g of ["A", "C", "G", "T"]) {
+    for (const g of ['A', 'C', 'G', 'T']) {
       if (g === gene[i]) continue;
       res.push(gene.slice(0, i) + g + gene.slice(i + 1));
     }
@@ -1006,14 +987,7 @@ const shortestBridge = function (grid) {
   // DFS: 标记第一座岛屿的所有节点，并将它们全部加入 BFS 队列作为起点
   function dfs(x, y) {
     // 边界检查 + 访问检查 + 是否为陆地检查
-    if (
-      x < 0 ||
-      x >= m ||
-      y < 0 ||
-      y >= n ||
-      visited[x][y] ||
-      grid[x][y] === 0
-    ) {
+    if (x < 0 || x >= m || y < 0 || y >= n || visited[x][y] || grid[x][y] === 0) {
       return;
     }
     visited[x][y] = true;
@@ -1032,14 +1006,7 @@ const shortestBridge = function (grid) {
       const nextY = curY + dir[1];
 
       // 越界或已访问过则跳过
-      if (
-        nextX < 0 ||
-        nextX >= m ||
-        nextY < 0 ||
-        nextY >= n ||
-        visited[nextX][nextY]
-      )
-        continue;
+      if (nextX < 0 || nextX >= m || nextY < 0 || nextY >= n || visited[nextX][nextY]) continue;
 
       visited[nextX][nextY] = true;
 
@@ -1110,7 +1077,7 @@ const ladderLength = function (beginWord, endWord, wordList) {
 
 // 辅助函数：生成所有可能的邻居节点（只改变一个字符）
 function getNeighbor(word) {
-  const chars = word.split("");
+  const chars = word.split('');
   const res = [];
   for (let i = 0; i < word.length; i++) {
     const originalChar = chars[i];
@@ -1119,7 +1086,7 @@ function getNeighbor(word) {
       if (char === originalChar) continue;
       // 拼接新单词
       chars[i] = char;
-      const newWord = chars.join("");
+      const newWord = chars.join('');
       res.push(newWord);
     }
     chars[i] = originalChar;
@@ -1158,7 +1125,7 @@ let numIslands = function (grid) {
 
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      if (grid[i][j] === "1") {
+      if (grid[i][j] === '1') {
         // 找到岛屿
         result += 1;
         dfs(grid, i, j);
@@ -1177,12 +1144,12 @@ function dfs(grid, i, j) {
     return;
   }
 
-  if (grid[i][j] === "0") {
+  if (grid[i][j] === '0') {
     // 已经是海水了
     return;
   }
   // 将grid[i][j]变成海水
-  grid[i][j] = "0";
+  grid[i][j] = '0';
   dfs(grid, i - 1, j); // 上
   dfs(grid, i + 1, j); // 下
   dfs(grid, i, j - 1); // 左
@@ -1979,11 +1946,11 @@ let equationsPossible = function (equations) {
 
   // 第一步：处理所有相等关系
   for (let equ of equations) {
-    if (equ[1] === "=") {
+    if (equ[1] === '=') {
       // 检查是否是相等关系
       // 将字母转换为0-25的索引
-      let x = equ.charCodeAt(0) - "a".charCodeAt(0);
-      let y = equ.charCodeAt(3) - "a".charCodeAt(0);
+      let x = equ.charCodeAt(0) - 'a'.charCodeAt(0);
+      let y = equ.charCodeAt(3) - 'a'.charCodeAt(0);
       // 将相等字母构成连通分量
       union.union(x, y);
     }
@@ -1991,10 +1958,10 @@ let equationsPossible = function (equations) {
 
   // 第二步：检查所有不等关系是否与已建立的相等关系冲突
   for (let equ of equations) {
-    if (equ[1] === "!") {
+    if (equ[1] === '!') {
       // 检查是否是不等关系
-      let x = equ.charCodeAt(0) - "a".charCodeAt(0);
-      let y = equ.charCodeAt(3) - "a".charCodeAt(0);
+      let x = equ.charCodeAt(0) - 'a'.charCodeAt(0);
+      let y = equ.charCodeAt(3) - 'a'.charCodeAt(0);
       // 如果不等关系的两个变量连通，说明产生矛盾
       if (union.connected(x, y)) {
         return false; // 发现矛盾，返回false
@@ -2190,22 +2157,22 @@ let solve = function (board) {
   // 将四个边界上的'O'都与 dummy 节点连通
   // 处理左右边界
   for (let i = 0; i < m; i++) {
-    if (board[i][0] === "O") {
+    if (board[i][0] === 'O') {
       // 左边界上的'O'
       union.union(getIndex(i, 0), dummy);
     }
-    if (board[i][n - 1] === "O") {
+    if (board[i][n - 1] === 'O') {
       // 右边界上的'O'
       union.union(getIndex(i, n - 1), dummy);
     }
   }
   // 处理上下边界
   for (let i = 0; i < n; i++) {
-    if (board[0][i] === "O") {
+    if (board[0][i] === 'O') {
       // 上边界上的'O'
       union.union(getIndex(0, i), dummy);
     }
-    if (board[m - 1][i] === "O") {
+    if (board[m - 1][i] === 'O') {
       // 下边界上的'O'
       union.union(getIndex(m - 1, i), dummy);
     }
@@ -2223,13 +2190,13 @@ let solve = function (board) {
   // 遍历除边界外的所有格子
   for (let i = 1; i < m - 1; i++) {
     for (let j = 1; j < n - 1; j++) {
-      if (board[i][j] === "O") {
+      if (board[i][j] === 'O') {
         // 对于每个'O'，检查其四个方向
         for (let dir of direction) {
           let x = i + dir[0];
           let y = j + dir[1];
           // 如果相邻位置也是'O'，则将两个位置连通
-          if (board[x][y] === "O") {
+          if (board[x][y] === 'O') {
             union.union(getIndex(i, j), getIndex(x, y));
           }
         }
@@ -2241,10 +2208,10 @@ let solve = function (board) {
   // 遍历除边界外的所有格子
   for (let i = 1; i < m - 1; i++) {
     for (let j = 1; j < n - 1; j++) {
-      if (board[i][j] === "O") {
+      if (board[i][j] === 'O') {
         // 如果一个'O'和 dummy 不连通，说明它被包围了
         if (!union.connected(getIndex(i, j), dummy)) {
-          board[i][j] = "X";
+          board[i][j] = 'X';
         }
       }
     }
@@ -2324,11 +2291,11 @@ let solve = function (board) {
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
       // 将可以捕获的区域标记为X
-      if (board[i][j] === "O") {
-        board[i][j] = "X";
+      if (board[i][j] === 'O') {
+        board[i][j] = 'X';
         // 将不能捕获E的区域标记为O
-      } else if (board[i][j] === "E") {
-        board[i][j] = "O";
+      } else if (board[i][j] === 'E') {
+        board[i][j] = 'O';
       }
     }
   }
@@ -2348,9 +2315,9 @@ let dfs = function (board, i, j) {
     return;
   }
 
-  if (board[i][j] !== "O") return;
+  if (board[i][j] !== 'O') return;
 
-  board[i][j] = "E"; // 标记为无法捕获的区域
+  board[i][j] = 'E'; // 标记为无法捕获的区域
 
   for (let dir of direction) {
     dfs(board, i + dir[0], j + dir[1]);
@@ -2519,14 +2486,14 @@ class PriorityQueue {
   // 查，返回堆顶元素，时间复杂度 O(1)
   peek() {
     if (this.isEmpty()) {
-      throw new Error("heap is empty");
+      throw new Error('heap is empty');
     }
     return this.heap[0];
   }
   // 删，删除堆顶元素，时间复杂度 O(logN)
   dequeue() {
     if (this.isEmpty()) {
-      throw new Error("heap is empty");
+      throw new Error('heap is empty');
     }
     let res = this.heap[0];
     // 把堆底元素放到堆顶
@@ -2553,18 +2520,12 @@ class PriorityQueue {
       let min = node;
       let left = this.left(node);
       let right = this.right(node);
-      if (
-        left < this.size &&
-        this.comparator(this.heap[left], this.heap[min]) < 0
-      ) {
+      if (left < this.size && this.comparator(this.heap[left], this.heap[min]) < 0) {
         // 左子节点较小
         min = left;
       }
 
-      if (
-        right < this.size &&
-        this.comparator(this.heap[right], this.heap[min]) < 0
-      ) {
+      if (right < this.size && this.comparator(this.heap[right], this.heap[min]) < 0) {
         // 右子节点较小
         min = right;
       }
@@ -2579,10 +2540,7 @@ class PriorityQueue {
   }
   // 上浮操作，时间复杂度是树高 O(logN)
   swim(node) {
-    while (
-      node > 0 &&
-      this.comparator(this.heap[this.parent(node)], this.heap[node]) > 0
-    ) {
+    while (node > 0 && this.comparator(this.heap[this.parent(node)], this.heap[node]) > 0) {
       this.swap(node, this.parent(node));
       node = this.parent(node);
     }
@@ -2729,10 +2687,7 @@ let minimumEffortPath = function (heights) {
     for (let [x, y] of getNeighbor(heights, row, col)) {
       if (distTo[x][y] !== Infinity) continue;
       // 路径最大体力消耗取决于当前路径和新边的最大值
-      let newFromStart = Math.max(
-        effortFromStart,
-        Math.abs(heights[x][y] - heights[row][col])
-      );
+      let newFromStart = Math.max(effortFromStart, Math.abs(heights[x][y] - heights[row][col]));
       pq.enqueue(new State(x, y, newFromStart));
     }
   }
