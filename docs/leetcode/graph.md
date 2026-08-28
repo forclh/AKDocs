@@ -301,12 +301,11 @@ const allPathsSourceTarget = function (graph) {
     if (s === n - 1) {
       // 到达终点
       paths.push([...path]);
-      path.pop(); // 弹出最终节点
-      return;
-    }
-    // 递归每个相邻节点
-    for (const next of graph[s]) {
-      dfs(next);
+    } else {
+      // 递归每个相邻节点
+      for (const next of graph[s]) {
+        dfs(next);
+      }
     }
     // 从路径移出节点 s
     path.pop();
